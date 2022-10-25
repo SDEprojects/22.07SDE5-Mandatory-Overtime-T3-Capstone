@@ -37,7 +37,7 @@ public class GUIController {
         frame.setVisible(true);
     }
 
-
+    //this will update view
     public void updateView() {
 
     }

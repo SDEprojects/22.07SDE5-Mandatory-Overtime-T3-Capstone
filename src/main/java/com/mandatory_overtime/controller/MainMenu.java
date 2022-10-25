@@ -18,11 +18,6 @@ public class MainMenu {
 
     public void buildMainMenu(){
         homeScreen = new JLayeredPane();
-        homeScreen.setSize(1000, 800);
-        // Settings Bar
-        JPanel settingsBar = new JPanel();
-        settingsBar.setBackground(Color.DARK_GRAY);
-        settingsBar.setBounds(0, 0, 1500, 40);
 
         // Settings BUTTON
         JButton settingsBtn = new JButton("Settings");
@@ -31,6 +26,10 @@ public class MainMenu {
         // Help BUTTON
         JButton helpBtn = new JButton("Help");
 
+        // Settings Bar
+        JPanel settingsBar = new JPanel();
+        settingsBar.setBackground(Color.DARK_GRAY);
+        settingsBar.setBounds(0, 0, 1500, 40);
         settingsBar.add(settingsBtn);
         settingsBar.add(helpBtn);
 

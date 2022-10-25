@@ -1,8 +1,6 @@
 package com.mandatory_overtime.controller;
 
 
-import com.mandatory_overtime.model.GameMusic;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
 import javax.swing.*;
@@ -13,13 +11,16 @@ public class GUIController {
 
     private JFrame frame;
     private final MainMenu mainMenu = new MainMenu();
+    private GamePlayScreen gamePlayScreen = new GamePlayScreen();
 
 
     public GUIController() throws IOException {
         frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        loadMainMenu();
+       // loadMainMenu();
+        loadGamePlayScreen();
+
     }
     public void loadMainMenu(){
         JLayeredPane menu = mainMenu.getHomeScreen();
@@ -29,8 +30,11 @@ public class GUIController {
     }
 
 
-    public void gamePlayScreen() {
-
+    public void loadGamePlayScreen() {
+        JLayeredPane gameScreen = gamePlayScreen.getGameScreen();
+        frame.add(gameScreen);
+        frame.pack();
+        frame.setVisible(true);
     }
 
 

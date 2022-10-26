@@ -8,19 +8,26 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 public class MainMenu {
+
     private final SettingsMenu settingsMenu = new SettingsMenu();
-    private JLayeredPane homeScreen;
+    private static JLayeredPane homeScreen;
 
-    private JButton startBtn;
-    private JButton loadBtn;
+    private static JLayeredPane loadingScreen;
 
-    public MainMenu(){
+    private static JButton startBtn;
+    private static JButton loadBtn;
+
+    private static JProgressBar progressBar;
+
+    public MainMenu() {
         buildMainMenu();
+        buildLoadingScreen();
     }
 
-    public void buildMainMenu(){
+    private void buildMainMenu() {
         homeScreen = new JLayeredPane();
 
         // Settings BUTTON
@@ -49,7 +56,6 @@ public class MainMenu {
         startBtn.setFocusPainted(false);
         startBtn.setContentAreaFilled(false);
 
-
         // Load Game Button
         Icon loadBtnIcon = new ImageIcon("loadgameBtn.png");
         loadBtn = new JButton(loadBtnIcon);
@@ -64,17 +70,58 @@ public class MainMenu {
 
     }
 
+    private void buildLoadingScreen() {
+        loadingScreen = new JLayeredPane();
 
-    public JLayeredPane getHomeScreen(){
+        // BackGroundImage
+        ImageIcon mainMenuImage = new ImageIcon("mainMenu.png");
+        JLabel imageSection = new JLabel(mainMenuImage);
+        imageSection.setSize(1500, 800);
+
+        // Progress Bar
+        progressBar = new JProgressBar();
+        progressBar.setValue(0);
+        progressBar.setBounds(300, 575, 900, 50);
+        progressBar.setStringPainted(true);
+
+        loadingScreen.add(progressBar, Integer.valueOf(1));
+        loadingScreen.add(imageSection, Integer.valueOf(0));
+
+    }
+
+    public static JLayeredPane getHomeScreen() {
         return homeScreen;
     }
 
-    public JButton getStartBtn(){
+    public static JLayeredPane getLoadingScreen() {
+        return loadingScreen;
+    }
+
+    public static JButton getStartBtn() {
         return startBtn;
     }
 
-    public JButton getLoadBtn(){
+    public static JButton getLoadBtn() {
         return loadBtn;
+    }
+
+    public static void loadProgressBar() {
+        int counter = 0;
+
+        while (counter <= 100) {
+            progressBar.setValue(counter);
+            System.out.println(counter);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                //Ignore
+            }
+            counter += 1;
+        }
+    }
+
+    public static JProgressBar getProgressBar(){
+        return progressBar;
     }
 
 }

@@ -96,7 +96,7 @@ public class SettingsMenu {
         settingsMenu.add(decreaseMusicBtn);
         settingsMenu.add(increaseMusicBtn);
 
-        // SOUND EFFECTS
+        // SOUND EFFECTS BUTTONS
 //        settingsMenu.add(soundControlLabel);
 //        settingsMenu.add(soundOnBtn);
 //        settingsMenu.add(soundOffBtn);

@@ -9,9 +9,16 @@ import javax.swing.*;
 
 public class GUIController {
 
-    private JFrame frame;
+    private final JFrame frame;
     private final MainMenu mainMenu = new MainMenu();
+
+    private final JButton startBtn = MainMenu.getStartBtn();
+    private final JButton loadBtn = MainMenu.getLoadBtn();
+
+
+
     private GamePlayScreen gamePlayScreen = new GamePlayScreen();
+
 
 
     public GUIController() {
@@ -22,24 +29,26 @@ public class GUIController {
     }
 
     public void loadMainMenu(){
-        JLayeredPane menu = mainMenu.getHomeScreen();
-        JButton startButton = mainMenu.getStartBtn();
-        JButton loadButton = mainMenu.getLoadBtn();
-        startButton.addActionListener(e -> loadGamePlayScreen());
-        loadButton.addActionListener(e -> loadGamePlayScreen());
+        displayLoadingScreen();
+        frame.getContentPane().removeAll();
+        JLayeredPane menu = MainMenu.getHomeScreen();
+        startBtn.addActionListener(e -> loadGamePlayScreen());
+        loadBtn.addActionListener(e -> loadGamePlayScreen());
         frame.add(menu);
         frame.pack();
         frame.setVisible(true);
+
     }
 
 
     public void loadGamePlayScreen() {
-        System.out.println("Loading");
+        displayLoadingScreen();
         frame.getContentPane().removeAll();
-        JLayeredPane gameScreen = gamePlayScreen.getGameScreen();
-        frame.add(gameScreen);
+        JLayeredPane screen = gamePlayScreen.getGameScreen();
+        frame.add(screen);
         frame.pack();
         frame.setVisible(true);
+
     }
 
     //this will update view
@@ -53,4 +62,19 @@ public class GUIController {
         helpDialog.setBounds(500, 100, 400, 300);
         helpDialog.setVisible(true);
     }
+
+    public void openInstructionsMenu(){
+
+    }
+
+    public void displayLoadingScreen(){
+        JLayeredPane menu = MainMenu.getLoadingScreen();
+        startBtn.addActionListener(e -> loadGamePlayScreen());
+        loadBtn.addActionListener(e -> loadGamePlayScreen());
+        frame.add(menu);
+        frame.pack();
+        frame.setVisible(true);
+        MainMenu.loadProgressBar();
+    }
+
 }

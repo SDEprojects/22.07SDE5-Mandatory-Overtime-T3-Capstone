@@ -28,6 +28,8 @@ public class MainMenu {
     private ImageIcon mainMenu;
     private ImageIcon startButtonImage;
     private ImageIcon loadButtonImage;
+
+    //----------CONSTRUCTOR ----------------------//
     public MainMenu(){
         loadImages();
         buildMainMenu();
@@ -138,8 +140,5 @@ public class MainMenu {
         }
     }
 
-    public static JProgressBar getProgressBar(){
-        return progressBar;
-    }
 
 }

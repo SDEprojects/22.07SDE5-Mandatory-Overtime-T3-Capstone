@@ -15,7 +15,9 @@ public class GameMusic {
   private static Clip clip;
   static Boolean musicOnOff = true;
   static Player player = new Player();
-//  static Building building;
+
+  private static String volume = "5";
+
 static Building building;
 
 
@@ -245,5 +247,13 @@ static Building building;
 
   public static void setMusicOnOff(Boolean musicOnOff) {
     GameMusic.musicOnOff = musicOnOff;
+  }
+
+  public static String getVolume(){
+     return volume;
+  }
+
+  public static void setVolume(String vol){
+      volume = vol;
   }
 }

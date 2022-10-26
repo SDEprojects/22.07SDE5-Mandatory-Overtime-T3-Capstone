@@ -14,9 +14,8 @@ public class Main {
         throws IOException, InterruptedException, URISyntaxException {
         GameMusic.startBackgroundMusic();
 
-        //GUIController gui = new GUIController();
-        GamePlay gamePlay = new GamePlay();
-
+        GUIController gui = new GUIController();
+        //GamePlay gamePlay = new GamePlay();
 
     }
 }

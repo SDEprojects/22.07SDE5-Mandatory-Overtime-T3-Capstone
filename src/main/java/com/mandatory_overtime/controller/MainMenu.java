@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -11,6 +12,9 @@ import javax.swing.JPanel;
 public class MainMenu {
     private final SettingsMenu settingsMenu = new SettingsMenu();
     private JLayeredPane homeScreen;
+
+    private JButton startBtn;
+    private JButton loadBtn;
 
     public MainMenu(){
         buildMainMenu();
@@ -34,33 +38,43 @@ public class MainMenu {
         settingsBar.add(helpBtn);
 
         // BackGroundImage
-        ImageIcon mainMenuImage = new ImageIcon("mainscreen.png");
+        ImageIcon mainMenuImage = new ImageIcon("mainMenu.png");
         JLabel imageSection = new JLabel(mainMenuImage);
         imageSection.setSize(1500, 800);
 
         // Start Button
         Icon icon = new ImageIcon("newgame.png");
-        JButton startButton = new JButton(icon);
-        startButton.setBounds(500, 575, 225, 75);
-        startButton.setFocusPainted(false);
-        startButton.setContentAreaFilled(false);
+        startBtn = new JButton(icon);
+        startBtn.setBounds(500, 575, 225, 75);
+        startBtn.setFocusPainted(false);
+        startBtn.setContentAreaFilled(false);
+
 
         // Load Game Button
         Icon loadBtnIcon = new ImageIcon("loadgameBtn.png");
-        JButton loadBtn = new JButton(loadBtnIcon);
+        loadBtn = new JButton(loadBtnIcon);
         loadBtn.setBounds(825, 575, 225, 75);
         loadBtn.setFocusPainted(false);
         loadBtn.setContentAreaFilled(false);
 
         homeScreen.add(settingsBar, Integer.valueOf(1));
         homeScreen.add(imageSection, Integer.valueOf(0));
-        homeScreen.add(startButton, Integer.valueOf(2));
+        homeScreen.add(startBtn, Integer.valueOf(2));
         homeScreen.add(loadBtn, Integer.valueOf(2));
 
     }
 
+
     public JLayeredPane getHomeScreen(){
         return homeScreen;
+    }
+
+    public JButton getStartBtn(){
+        return startBtn;
+    }
+
+    public JButton getLoadBtn(){
+        return loadBtn;
     }
 
 }

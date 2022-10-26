@@ -16,11 +16,13 @@ public class GameSave {
 
 
   private <T> T load(String resourceFile, Gson gson, Type type) throws IOException {
-    //noinspection ConstantConditions
+   // noinspection ConstantConditions
     try (Reader reader = new InputStreamReader(
         getClass().getClassLoader().getResourceAsStream(resourceFile))) {
       return gson.fromJson(reader, type);
     }
+
+
 
 
   }
@@ -32,6 +34,8 @@ public class GameSave {
       return gson.fromJson(reader, type);
 
     }
+
+
 
   }
 

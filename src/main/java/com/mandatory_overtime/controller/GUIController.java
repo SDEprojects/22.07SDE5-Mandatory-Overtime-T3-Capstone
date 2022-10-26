@@ -14,7 +14,7 @@ public class GUIController {
     private GamePlayScreen gamePlayScreen = new GamePlayScreen();
 
 
-    public GUIController() throws IOException {
+    public GUIController() {
         frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

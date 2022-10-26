@@ -1,4 +1,4 @@
-package com.mandatory_overtime.controller;
+package com.mandatory_overtime.view;
 
 import com.mandatory_overtime.model.GameMusic;
 import java.awt.Font;

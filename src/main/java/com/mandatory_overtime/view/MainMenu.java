@@ -1,10 +1,10 @@
-package com.mandatory_overtime.controller;
+package com.mandatory_overtime.view;
 
+import com.mandatory_overtime.view.SettingsMenu;
 import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;

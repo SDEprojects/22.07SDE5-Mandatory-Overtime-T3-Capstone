@@ -1,6 +1,6 @@
-package com.mandatory_overtime.controller;
+package com.mandatory_overtime.view;
 
-import java.awt.BasicStroke;
+import com.mandatory_overtime.view.SettingsMenu;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class GamePlayScreen {
 

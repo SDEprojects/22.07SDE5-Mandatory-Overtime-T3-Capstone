@@ -354,13 +354,17 @@ public class Building {
         ArrayList<String> currentItems = (ArrayList<String>) player.getInventory();
         Boolean roomFail = building.get(noun).getFailCondition();
         if (roomFail == true) {
-            if (currentItems.contains(preReqCondition)) {
+            if (noun.equals("home") && currentItems.contains(preReqCondition)) {
                 setGameState(GameState.WIN);
-            } else {
-                System.out.println(
-                    "You were found and assigned to overtime!!! Before entering this room you need "
-                        + preReqCondition.toUpperCase() + ".");
-                setGameState(GameState.LOSS);
+                if (currentItems.contains(preReqCondition)) {
+                    building.get(noun).setFailCondition(false);
+                    building.get(noun).setPreReq(null);
+                    return;
+                } else {
+                    System.out.println(
+                        "You were found and assigned to overtime!!! Before entering this room you need " + preReqCondition.toUpperCase() + ".");
+                    setGameState(GameState.LOSS);
+                }
             }
         }
     }

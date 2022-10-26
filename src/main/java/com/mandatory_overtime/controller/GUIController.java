@@ -18,8 +18,8 @@ public class GUIController {
         frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // loadMainMenu();
-        loadGamePlayScreen();
+        loadMainMenu();
+        //loadGamePlayScreen();
 
     }
     public void loadMainMenu(){
@@ -46,7 +46,6 @@ public class GUIController {
         JDialog helpDialog = new JDialog(new JFrame(), true);
         helpDialog.setTitle("Help");
         helpDialog.setBounds(500, 100, 400, 300);
-
         helpDialog.setVisible(true);
     }
 }

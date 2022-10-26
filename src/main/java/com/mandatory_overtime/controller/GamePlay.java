@@ -22,7 +22,7 @@ public class GamePlay {
   Building building;
   UserView userView = new UserView();
 
- Player player = new Player();
+  Player player = new Player();
   private String verb;
   private String noun;
 
@@ -41,7 +41,6 @@ public class GamePlay {
    */
   public void newGame() throws IOException, URISyntaxException {
     printGameIntroduction();
-    GameMusic.startBackgroundMusic();
     startMenu();
   }
 

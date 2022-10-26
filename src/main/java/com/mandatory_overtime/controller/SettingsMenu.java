@@ -1,5 +1,6 @@
 package com.mandatory_overtime.controller;
 
+import com.mandatory_overtime.model.GameMusic;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -11,29 +12,27 @@ public class SettingsMenu {
 
     private JDialog settingsDialog;
 
-    public SettingsMenu(){
+    public SettingsMenu() {
         buildSettingsMenu();
     }
 
 
-    public void openMenu(){
+    public void openMenu() {
         settingsDialog.setVisible(true);
     }
 
 
-
-    public JDialog getMenu(){
+    public JDialog getMenu() {
         return settingsDialog;
     }
 
-    public void buildSettingsMenu(){
+    public void buildSettingsMenu() {
         settingsDialog = new JDialog(new javax.swing.JFrame(), true);
         settingsDialog.setTitle("Settings");
         settingsDialog.setBounds(500, 100, 400, 300);
 
-
         // MUSIC CONTROL BUTTONS
-        JPanel settingsMenu = new JPanel(new GridLayout(4,3));
+        JPanel settingsMenu = new JPanel(new GridLayout(2, 3));
 
         JLabel musicControlLabel = new JLabel("  Music Control");
         JLabel soundControlLabel = new JLabel("  FX Control");
@@ -45,7 +44,6 @@ public class SettingsMenu {
         JButton soundOnBtn = new JButton("on");
         JButton soundOffBtn = new JButton("off");
 
-
         JButton increaseMusicBtn = new JButton("+");
         JButton decreaseMusicBtn = new JButton("-");
         JButton increaseSoundBtn = new JButton("+");
@@ -56,7 +54,6 @@ public class SettingsMenu {
         increaseMusicBtn.setFont(new Font("Arial", Font.BOLD, 25));
         decreaseSoundBtn.setFont(new Font("Arial", Font.BOLD, 25));
         increaseSoundBtn.setFont(new Font("Arial", Font.BOLD, 25));
-
 
         // EVENT LISTENERS ON BUTTONS
         increaseMusicBtn.addActionListener(e -> {
@@ -76,7 +73,7 @@ public class SettingsMenu {
         });
 
         musicOnBtn.addActionListener(e -> {
-           turnOnMusic();
+            turnOnMusic();
         });
 
         musicOffBtn.addActionListener(e -> {
@@ -91,7 +88,6 @@ public class SettingsMenu {
             turnOffSound();
         });
 
-
         settingsMenu.add(musicControlLabel);
         settingsMenu.add(musicOnBtn);
         settingsMenu.add(musicOffBtn);
@@ -100,46 +96,57 @@ public class SettingsMenu {
         settingsMenu.add(decreaseMusicBtn);
         settingsMenu.add(increaseMusicBtn);
 
-        settingsMenu.add(soundControlLabel);
-        settingsMenu.add(soundOnBtn);
-        settingsMenu.add(soundOffBtn);
-
-        settingsMenu.add(soundVolLabel);
-        settingsMenu.add(decreaseSoundBtn);
-        settingsMenu.add(increaseSoundBtn);
+        // SOUND EFFECTS
+//        settingsMenu.add(soundControlLabel);
+//        settingsMenu.add(soundOnBtn);
+//        settingsMenu.add(soundOffBtn);
+//
+//        settingsMenu.add(soundVolLabel);
+//        settingsMenu.add(decreaseSoundBtn);
+//        settingsMenu.add(increaseSoundBtn);
 
         settingsDialog.add(settingsMenu);
     }
 
-    public void lowerMusic(){
+    public void lowerMusic() {
+        int vol = Integer.parseInt(GameMusic.getVolume());
+        if (vol >= 0) {
+            vol -= 1;
+            GameMusic.setVolume(String.valueOf(vol));
+        }
+        GameMusic.volumeUpDown(String.valueOf(vol));
+    }
+
+    public void increaseMusic() {
+        int vol = Integer.parseInt(GameMusic.getVolume());
+        if (vol <= 10) {
+            vol += 1;
+            GameMusic.setVolume(String.valueOf(vol));
+        }
+        GameMusic.volumeUpDown(String.valueOf(vol));
+    }
+
+    public void lowerSoundEffects() {
 
     }
 
-    public void increaseMusic(){
+    public void increaseSoundEffects() {
 
     }
 
-    public void lowerSoundEffects(){
+    public void turnOffMusic() {
+        GameMusic.musicOnOff("off");
+    }
+
+    public void turnOnMusic() {
+        GameMusic.musicOnOff("on");
+    }
+
+    public void turnOffSound() {
 
     }
 
-    public void increaseSoundEffects(){
-
-    }
-
-    public void turnOffMusic(){
-
-    }
-
-    public void turnOnMusic(){
-
-    }
-
-    public void turnOffSound(){
-
-    }
-
-    public void turnOnSound(){
+    public void turnOnSound() {
 
     }
 

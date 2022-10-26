@@ -12,11 +12,11 @@ public class Main {
   public static void main(String[] args)
       throws IOException, InterruptedException, URISyntaxException {
 
-    GUIController gui = new GUIController();
+    //GUIController gui = new GUIController();
 
 
-   // GamePlay gamePlay = new GamePlay();
-//    gamePlay.startGame();
+       GamePlay gamePlay = new GamePlay();
+
 
   }
 }

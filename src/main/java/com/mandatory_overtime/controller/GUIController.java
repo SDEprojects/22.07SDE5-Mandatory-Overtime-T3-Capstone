@@ -19,11 +19,14 @@ public class GUIController {
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loadMainMenu();
-        //loadGamePlayScreen();
-
     }
+
     public void loadMainMenu(){
         JLayeredPane menu = mainMenu.getHomeScreen();
+        JButton startButton = mainMenu.getStartBtn();
+        JButton loadButton = mainMenu.getLoadBtn();
+        startButton.addActionListener(e -> loadGamePlayScreen());
+        loadButton.addActionListener(e -> loadGamePlayScreen());
         frame.add(menu);
         frame.pack();
         frame.setVisible(true);
@@ -31,6 +34,8 @@ public class GUIController {
 
 
     public void loadGamePlayScreen() {
+        System.out.println("Loading");
+        frame.getContentPane().removeAll();
         JLayeredPane gameScreen = gamePlayScreen.getGameScreen();
         frame.add(gameScreen);
         frame.pack();

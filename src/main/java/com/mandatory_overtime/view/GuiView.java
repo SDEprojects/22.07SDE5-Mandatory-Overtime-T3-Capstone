@@ -2,7 +2,9 @@ package com.mandatory_overtime.view;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -11,11 +13,13 @@ import javax.swing.JLayeredPane;
 public class GuiView {
 
     private final Container container;
-    private MainMenu mainMenu = new MainMenu();
+
+    private final MainMenu mainMenu = new MainMenu();
     private final GamePlayScreen gamePlayScreen = new GamePlayScreen();
 
-    private final LocationGUIPanel locationGUIPanel = new LocationGUIPanel();
-    public GuiView() {
+    public Map<String, JLayeredPane> LOCATION_GUI_PANELS;
+
+    public GuiView() throws IOException {
         JFrame frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,7 +68,8 @@ public class GuiView {
     }
 
     public void buildLocationGUI(HashMap locations){
-        locationGUIPanel.generateLocationPanels(locations);
+        LocationGUIPanel locationGUIPanel = new LocationGUIPanel(locations);
+        LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels();
     }
 
 }

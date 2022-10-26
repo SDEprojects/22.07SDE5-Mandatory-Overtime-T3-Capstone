@@ -47,6 +47,9 @@ public class Room {
   @SerializedName("phoneUnlockingSound")
   private String phoneUnlockingAudio;
 
+  @SerializedName("image")
+  private String image;
+
   public String getPhoneTypingAudio() {
     return phoneTypingAudio;
   }
@@ -192,6 +195,14 @@ public class Room {
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
+
+  public void setImage(String image){
+    this.image = image;
+  }
+  public String getImage(){
+     return image;
+  }
+
 
   public String getPreReq() {
     return preReq;

@@ -2,6 +2,9 @@ package com.mandatory_overtime.view;
 
 import com.mandatory_overtime.view.SettingsMenu;
 import java.awt.Color;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,12 +25,32 @@ public class MainMenu {
 
     private static JProgressBar progressBar;
 
-    public MainMenu() {
+    private ImageIcon mainMenu;
+    private ImageIcon startButtonImage;
+    private ImageIcon loadButtonImage;
+    public MainMenu(){
+        loadImages();
         buildMainMenu();
         buildLoadingScreen();
     }
 
-    private void buildMainMenu() {
+    private void loadImages(){
+        try {
+            InputStream stream = getClass().getResourceAsStream("/images/mainMenu.png");
+            mainMenu = new ImageIcon(ImageIO.read(stream));
+
+            InputStream stream2 = getClass().getResourceAsStream("/images/newgame.png");
+            startButtonImage = new ImageIcon(ImageIO.read(stream2));
+
+            InputStream stream3 = getClass().getResourceAsStream("/images/loadGameBtn.png");
+            loadButtonImage = new ImageIcon(ImageIO.read(stream3));
+        }catch(IOException e){
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+
+    }
+    private void buildMainMenu(){
         homeScreen = new JLayeredPane();
 
         // Settings BUTTON
@@ -45,20 +68,17 @@ public class MainMenu {
         settingsBar.add(helpBtn);
 
         // BackGroundImage
-        ImageIcon mainMenuImage = new ImageIcon("mainMenu.png");
-        JLabel imageSection = new JLabel(mainMenuImage);
+        JLabel imageSection = new JLabel(mainMenu);
         imageSection.setSize(1500, 800);
 
         // Start Button
-        Icon icon = new ImageIcon("newgame.png");
-        startBtn = new JButton(icon);
+        startBtn = new JButton(startButtonImage);
         startBtn.setBounds(500, 575, 225, 75);
         startBtn.setFocusPainted(false);
         startBtn.setContentAreaFilled(false);
 
         // Load Game Button
-        Icon loadBtnIcon = new ImageIcon("loadgameBtn.png");
-        loadBtn = new JButton(loadBtnIcon);
+        loadBtn = new JButton(loadButtonImage);
         loadBtn.setBounds(825, 575, 225, 75);
         loadBtn.setFocusPainted(false);
         loadBtn.setContentAreaFilled(false);
@@ -74,8 +94,7 @@ public class MainMenu {
         loadingScreen = new JLayeredPane();
 
         // BackGroundImage
-        ImageIcon mainMenuImage = new ImageIcon("mainMenu.png");
-        JLabel imageSection = new JLabel(mainMenuImage);
+        JLabel imageSection = new JLabel(mainMenu);
         imageSection.setSize(1500, 800);
 
         // Progress Bar

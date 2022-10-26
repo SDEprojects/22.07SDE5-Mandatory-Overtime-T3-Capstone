@@ -46,7 +46,8 @@ public class GamePlayScreen {
         gameTextSection.setBackground(Color.BLACK);
 
         // LOCATION SECTION
-        ImageIcon img = new ImageIcon("location_office.png");
+        ImageIcon img = new ImageIcon(
+            String.valueOf(getClass().getClassLoader().getResourceAsStream("office.png")));
         JLabel locationImage= new JLabel(img);
         JPanel locationPanel = new JPanel();
         locationPanel.add(locationImage);
@@ -84,6 +85,18 @@ public class GamePlayScreen {
         gameScreen.add(gameInfo);
 
     }
+
+    public void updateLocationSection(String imagePath){
+        // LOCATION SECTION
+        ImageIcon img = new ImageIcon(
+            String.valueOf(getClass().getClassLoader().getResourceAsStream(imagePath)));
+        JLabel locationImage= new JLabel(img);
+        JPanel locationPanel = new JPanel();
+        locationPanel.add(locationImage);
+        locationPanel.setBounds(0, 150, 1100, 700);
+    }
+
+
 
     public JLayeredPane getGameScreen(){
         return gameScreen;

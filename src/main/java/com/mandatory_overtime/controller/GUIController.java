@@ -9,9 +9,7 @@ import javax.swing.JButton;
 
 public class GUIController {
     private GuiView view;
-
     private final JButton startBtn;
-
     private final JButton loadBtn;
     Building building = new Building();
     public GUIController() throws IOException {

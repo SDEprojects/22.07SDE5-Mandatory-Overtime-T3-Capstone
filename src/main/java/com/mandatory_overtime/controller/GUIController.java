@@ -9,9 +9,7 @@ import javax.swing.JButton;
 
 public class GUIController {
     private GuiView view;
-
     private final JButton startBtn;
-
     private final JButton loadBtn;
     Building building = new Building();
     public GUIController() throws IOException {
@@ -29,6 +27,8 @@ public class GUIController {
     public void startGame(){
         view.presentGameScreen();
     }
+
+
 
     public void loadActionEvents(){
         startBtn.addActionListener( e -> startGame());

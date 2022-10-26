@@ -40,8 +40,7 @@ public class Building {
     private HashMap<String, Npc> npcs;
     private int npcCount = 0;
 
-// CONSTRUCTOR
-
+    // CONSTRUCTOR
     public Building() throws IOException {
 
     }

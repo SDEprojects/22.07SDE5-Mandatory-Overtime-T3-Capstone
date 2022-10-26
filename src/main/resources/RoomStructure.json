@@ -12,7 +12,8 @@
     "sound2": "Elevator_Door.wav",
     "sound3": "Elevator_Door.wav",
     "preReq": "laptop",
-    "fail": false
+    "fail": false,
+    "image": "elevator.png"
   },
 
   {
@@ -28,7 +29,8 @@
     "fail": false,
     "sound1": "Elevator_Button.wav",
     "sound2": "Level1.wav",
-    "sound3": "Elevator_Door.wav"
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "2",
@@ -43,7 +45,8 @@
     "fail": false,
     "sound1": "Elevator_Button.wav",
     "sound2": "Level2.wav",
-    "sound3": "Elevator_Door.wav"
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "3",
@@ -58,7 +61,8 @@
     "fail": false,
     "sound1": "Elevator_Button.wav",
     "sound2": "Level3.wav",
-    "sound3": "Elevator_Door.wav"
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "4",
@@ -73,7 +77,8 @@
     "fail": false,
     "sound1": "Elevator_Button.wav",
     "sound2": "Level4.wav",
-    "sound3": "Elevator_Door.wav"
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "5",
@@ -88,7 +93,8 @@
     "fail": false,
     "sound1": "Elevator_Button.wav",
     "sound2": "Level5.wav",
-    "sound3": "Elevator_Door.wav"
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "office",
@@ -104,7 +110,8 @@
     "description": "You're at the Office on the 5th floor and feel the darkness encroaching on you, or just the darkmode of your laptop.",
     "inventorySound": "Inventory_Stash_Item.wav",
     "typingSound": "Typing.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "office.png"
   },
   {
     "RoomName": "desk",
@@ -118,7 +125,8 @@
     "description": "You're at your messy desk.",
     "inventorySound": "Inventory_Stash_Item.wav",
     "drawerOpenSound": "Drawer_Open_Close.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "conference room",
@@ -136,7 +144,8 @@
     "footstepSound": "Footsteps.wav",
     "doorOpenSound": "Door_Open.wav",
     "phoneTypingSound": "Phone_Typing.wav",
-    "phoneUnlockingSound": "Phone_Unlock.wav"
+    "phoneUnlockingSound": "Phone_Unlock.wav",
+    "image": "conference_room.png"
   },
   {
     "RoomName": "dev floor",
@@ -150,7 +159,8 @@
     "fail": true,
     "description": "You're at the the Dev Floor. A wave of pressure washes over you as you see the professionals at work.",
     "inventorySound": "Inventory_Stash_Item.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "devfloor.png"
   },
   {
     "RoomName": "it closet",
@@ -166,7 +176,8 @@
     "accessGrantedSound": "Access_Granted_Beep.wav",
     "accessDeniedSound": "Access_Denied_Beep.wav",
     "footstepSound": "Footsteps.wav",
-    "doorOpenSound": "Door_Open.wav"
+    "doorOpenSound": "Door_Open.wav",
+    "image": "itCloset.png"
   },
   {
     "RoomName": "break room",
@@ -180,7 +191,8 @@
     "fail": false,
     "description": "You're at the break room full of rickety tables and chairs.",
     "inventorySound": "Inventory_Stash_Item.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "breakroom.png"
   },
   {
     "RoomName": "kitchen",
@@ -193,7 +205,8 @@
     "fail": true,
     "description": "You're in the kitchen. The smell of stale popcorn wafts through the air.",
     "inventorySound": "Inventory_Stash_Item.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "kitchen.png"
   },
   {
     "RoomName": "party floor",
@@ -207,7 +220,8 @@
     "fail": false,
     "description": "You're at the Party floor. People are crowded at the snack table.",
     "inventorySound": "Inventory_Stash_Item.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "partyroom.png"
   },
   {
     "RoomName": "table",
@@ -220,7 +234,8 @@
     "fail": false,
     "description": "You're at the table. It looks picked clean.",
     "inventorySound": "Inventory_Stash_Item.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "lobby",
@@ -235,7 +250,8 @@
     "fail": false,
     "description": "You're in the lobby. Freedom is so close.",
     "inventorySound": "Inventory_Stash_Item.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "lobby.png"
   },
   {
     "RoomName": "vending machine",
@@ -249,7 +265,8 @@
     "description": "You're at the vending machine. Its half empty already.",
     "inventorySound": "Inventory_Stash_Item.wav",
     "vendingMachineSound": "Vending_Machine.wav",
-    "footstepSound": "Footsteps.wav"
+    "footstepSound": "Footsteps.wav",
+    "image": "elevator.png"
   },
   {
     "RoomName": "home",
@@ -258,6 +275,7 @@
     "NPC": null,
     "preReq": "phone",
     "fail": true,
-    "description": "Congratulations, you have successfully avoided your boss."
+    "description": "Congratulations, you have successfully avoided your boss.",
+    "image": "elevator.png"
   }
 ]

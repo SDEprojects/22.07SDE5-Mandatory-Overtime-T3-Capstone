@@ -1,6 +1,8 @@
 package com.mandatory_overtime.view;
 
+import java.awt.Container;
 import java.awt.Dimension;
+import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -8,41 +10,49 @@ import javax.swing.JLayeredPane;
 
 public class GuiView {
 
-    private final JFrame frame;
+    private final Container container;
     private MainMenu mainMenu = new MainMenu();
     private final GamePlayScreen gamePlayScreen = new GamePlayScreen();
 
-
+    private final LocationGUIPanel locationGUIPanel = new LocationGUIPanel();
     public GuiView() {
-        frame = new JFrame("Mandatory Overtime");
+        JFrame frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.pack();
+
+        container = frame.getContentPane();
     }
 
     public void presentGameScreen(){
-        presentLoadingScreen();
-        frame.getContentPane().removeAll();
         JLayeredPane screen = gamePlayScreen.getGameScreen();
-        frame.add(screen);
-        frame.pack();
-        frame.setVisible(true);
+        presentLoadingScreen();
+        container.removeAll();
+        container.add(screen);
+        container.repaint();
+        container.revalidate();
 
     }
 
     public void presentMainMenu(){
-        presentLoadingScreen();
-        frame.getContentPane().removeAll();
         JLayeredPane menu = MainMenu.getHomeScreen();
-        frame.add(menu);
-        frame.pack();
-        frame.setVisible(true);
+        presentLoadingScreen();
+        container.removeAll();
+        container.add(menu);
+        container.repaint();
+        container.revalidate();
     }
     public void presentLoadingScreen(){
         JLayeredPane loadingScreen = MainMenu.getLoadingScreen();
-        frame.add(loadingScreen);
-        frame.pack();
-        frame.setVisible(true);
+        container.add(loadingScreen);
+        container.repaint();
+        container.revalidate();
         MainMenu.loadProgressBar();
+
+        container.removeAll();
+        container.repaint();
+        container.revalidate();
     }
 
     public JButton getNewGameButton(){
@@ -53,6 +63,8 @@ public class GuiView {
         return MainMenu.getLoadBtn();
     }
 
-
+    public void buildLocationGUI(HashMap locations){
+        locationGUIPanel.generateLocationPanels(locations);
+    }
 
 }

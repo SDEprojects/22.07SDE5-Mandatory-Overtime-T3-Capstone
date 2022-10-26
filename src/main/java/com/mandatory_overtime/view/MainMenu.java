@@ -110,7 +110,6 @@ public class MainMenu {
 
         while (counter <= 100) {
             progressBar.setValue(counter);
-            System.out.println(counter);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {

@@ -42,14 +42,6 @@ public class Building {
 
 // CONSTRUCTOR
 
-    // Constructor to create structures
-
-    /**
-     * Class Constructor. Responsible for creating the Java HashMaps from JSON classes. Utilizes
-     * load() method to do this.
-     *
-     * @throws IOException
-     */
     public Building() throws IOException {
 
     }
@@ -112,12 +104,6 @@ public class Building {
     }
 
 
-    /**
-     * GameSave method to convert current game structure back to JSON objects to load in next game.
-     * (incomplete.) Will run quit() once save is complete.
-     *
-     * @throws IOException
-     */
     public void gameSave() throws IOException {
         //save game
 
@@ -190,17 +176,6 @@ public class Building {
     }
 
 //  HELPER METHODS
-
-    /**
-     * Loads in JSON classes from original JSON files create Java structures
-     *
-     * @param resourceFile
-     * @param gson
-     * @param type
-     * @param <T>
-     * @return
-     * @throws IOException
-     */
     private <T> T load(String resourceFile, Gson gson, Type type) throws IOException {
 
         try (Reader reader = new InputStreamReader(
@@ -248,51 +223,6 @@ public class Building {
         System.exit(0); //Update to utilize state.
     }
 
-
-    //  public void moveRooms(String noun)
-//      throws IOException, IllegalMoveException, InterruptedException {
-//    String currentLoc = player.getCurrentLocation();
-//    String[] directions = building.get(currentLoc).getDirections();
-//    List<String> inventory = new ArrayList<>();
-//    inventory = player.getInventory();
-//    String nextRoomPreReq = building.get(noun).getPreReq();
-//    if (nextRoomPreReq == null || inventory.contains(nextRoomPreReq)) {
-//      int counter = 0;
-//      boolean loopStop = true;
-//      while (loopStop) {
-//        try {
-//          for (String direction : directions) {
-//            if (noun.equals(direction)) {
-//              player.setCurrentLocation(noun);
-//              winGameCheck(noun);
-//              GameMusic.playMoveSound(noun);
-//              GameMusic.playRoomSound(noun);
-//              getRoomDescriptionInfo();
-//              if (player.getInventory().contains(building.get(currentLoc).getPreReq())) {
-//                GameMusic.playAccessGrantedSound();
-//                GameMusic.playDoorOpenSound();
-//              }
-//              loopStop = false;
-//            } else {
-//              counter++;
-//            }
-//          }
-//          if (counter == directions.length) {
-//            loopStop = false;
-//            throw new IllegalMoveException(noun);
-//          }
-//        } catch (IllegalMoveException e) {
-//        }
-//      }
-//    } else {
-//      try {
-//        winGameCheck(noun);
-//        GameMusic.playAccessDeniedSound(noun);
-//        throw new MissingRequirementException(noun);
-//      } catch (MissingRequirementException e) {
-//      }
-//    }
-//  }
     public void moveRooms(String noun)
         throws IOException, IllegalMoveException, InterruptedException {
         String currentLoc = player.getCurrentLocation();
@@ -361,13 +291,12 @@ public class Building {
                     building.get(noun).setPreReq(null);
                     return;
                 } else {
-                    System.out.println(
-                        "You were found and assigned to overtime!!! Before entering this room you need " + preReqCondition.toUpperCase() + ".");
                     setGameState(GameState.LOSS);
                 }
             }
         }
     }
+
 
 
     public void getItem(String item) throws IOException, InterruptedException {
@@ -390,9 +319,6 @@ public class Building {
                     player.addToInventory(item);
                     GameMusic.playItemSound();
                     items.get(item).setAcquired(true);
-                    //remove item from list in rooms method
-                    System.out.println(items.get(item).getPurpose());
-                    System.out.println(player.getInventory().toString());
                 }
             } else {
                 checkItemPreReqIsFulfilled(item);
@@ -401,31 +327,6 @@ public class Building {
             System.out.printf("You cannot get %s.\n", item);
             System.out.print(">");
         }
-//
-//    if (!items.containsKey((item)) && !items.get(item).getLocation().equals(playerCurrentLocation)
-//        && !items.get(item).isNpc() == false) {
-////      throw new InvalidItemException(String.format("You can't get %s ", item));
-//      String.format("You can't get %s ", item);
-//    }
-//    if (items.get(item).getAcquired() == true) {
-////      throw new ItemAcquiredException(String.format("You've already acquired %s ", item));
-//      String.format("You've already acquired %s ", item);
-//    }
-//    if (items.get(item).getPreReq() == null) {
-//
-//      //conditional to check for challenge
-//      if (items.get(item).getChallenge() == true) {
-//        runItemChallenge(item);
-//      } else {
-//        player.addToInventory(item);
-//        items.get(item).setAcquired(true);
-//        //remove item from list in rooms method
-//        System.out.println(player.getInventory().toString());
-//      }
-//    } else {
-//      checkItemPreReqIsFulfilled(item);
-//    }
-
     }
 
     /**

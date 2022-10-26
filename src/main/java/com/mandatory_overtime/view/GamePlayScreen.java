@@ -1,5 +1,6 @@
 package com.mandatory_overtime.view;
 
+import com.mandatory_overtime.controller.GUIController;
 import com.mandatory_overtime.view.SettingsMenu;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -76,6 +77,9 @@ public class GamePlayScreen {
         inventoryView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         inventoryView.setBounds(1100, 300,400,475 );
 
+        // Button Controls
+        JPanel buttonSection = new JPanel();
+
 
 
         gameScreen.add(settingsBar);
@@ -86,15 +90,7 @@ public class GamePlayScreen {
 
     }
 
-    public void updateLocationSection(String imagePath){
-        // LOCATION SECTION
-        ImageIcon img = new ImageIcon(
-            String.valueOf(getClass().getClassLoader().getResourceAsStream(imagePath)));
-        JLabel locationImage= new JLabel(img);
-        JPanel locationPanel = new JPanel();
-        locationPanel.add(locationImage);
-        locationPanel.setBounds(0, 150, 1100, 700);
-    }
+
 
 
 

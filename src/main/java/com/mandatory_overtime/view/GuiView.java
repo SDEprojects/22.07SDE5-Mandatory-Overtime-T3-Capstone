@@ -17,7 +17,7 @@ public class GuiView {
     private final MainMenu mainMenu = new MainMenu();
     private final GamePlayScreen gamePlayScreen = new GamePlayScreen();
 
-    public Map<String, JLayeredPane> LOCATION_GUI_PANELS;
+    public static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
 
     public GuiView() throws IOException {
         JFrame frame = new JFrame("Mandatory Overtime");

@@ -23,6 +23,7 @@ import javax.swing.border.TitledBorder;
 public class GamePlayScreen {
 
     private static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
+    private static Map<String, JLayeredPane> ITEMS_GUI_PANELS;
     private final SettingsMenu settingsMenu = new SettingsMenu();
     private final HelpMenu helpMenu = new HelpMenu();
     private Consumer<String> moveListener;
@@ -134,17 +135,22 @@ public class GamePlayScreen {
         }
 
         // INVENTORY SECTION
-        // ITEMS
-        JLabel inventoryText = new JLabel(inventory.toString());
-        ImageIcon itemImage;
-        try (InputStream img1 = getClass().getResourceAsStream("/images/raisinets.png");){
-            itemImage = new ImageIcon(ImageIO.read(img1));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        // UPDATE INVENTORY VIEW
+        for (String item : inventory) {
+            ImageIcon itemImageIcon;
+            try (InputStream imgStream = getClass().getResourceAsStream("/thumbnails/" + item + ".png")) {
+                if (imgStream != null) {
+                    itemImageIcon = new ImageIcon(ImageIO.read(imgStream));
+                    JLabel itemImageLabel = new JLabel(itemImageIcon);
+                    inventoryView.add(itemImageLabel);
+                } else {
+                    JLabel inventoryText = new JLabel(item);
+                    inventoryView.add(inventoryText);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        JLabel raisinets = new JLabel(itemImage);
-        inventoryView.add(inventoryText);
-        inventoryView.add(raisinets);
     }
 
 

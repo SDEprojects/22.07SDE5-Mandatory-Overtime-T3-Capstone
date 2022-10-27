@@ -4,6 +4,47 @@ import com.google.gson.annotations.SerializedName;
 
 public class Npc {
 
+  //-------FIELDS ----------------//
+  @SerializedName("location")
+  private String location;//Can become array of rooms.
+  @SerializedName("initialDialogue")
+  private String initialDialogue;
+  @SerializedName("dialogueNoItem")
+  private String dialogueNoItem;
+  @SerializedName("dialogueWithItem")
+  private String dialogueWithItem;
+  @SerializedName("itemsDropped")
+  private String items;
+  @SerializedName("NpcName")
+  private String name;
+
+  @SerializedName("dialogueQuestDone")
+  private String dialogueQuestDone;
+
+
+  @SerializedName("prereq")
+  private String prereq;
+
+
+  @SerializedName("interactionCount")
+  private Integer npcCount;
+
+  //---------GETTERS/SETTERS-------------//
+  public String getItems() {
+    return items;
+  }
+
+  public void setItems(String items) {
+    this.items = items;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 
 
   public String getLocation() {
@@ -38,35 +79,6 @@ public class Npc {
     this.dialogueWithItem = dialogueWithItem;
   }
 
-  public String getItems() {
-    return items;
-  }
-
-  public void setItems(String items) {
-    this.items = items;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  @SerializedName("location")
-  private String location;//Can become array of rooms.
-  @SerializedName("initialDialogue")
-  private String initialDialogue;
-  @SerializedName("dialogueNoItem")
-  private String dialogueNoItem;
-  @SerializedName("dialogueWithItem")
-  private String dialogueWithItem;
-  @SerializedName("itemsDropped")
-  private String items;
-  @SerializedName("NpcName")
-  private String name;
-
   public String getDialogueQuestDone() {
     return dialogueQuestDone;
   }
@@ -74,9 +86,6 @@ public class Npc {
   public void setDialogueQuestDone(String dialogueQuestDone) {
     this.dialogueQuestDone = dialogueQuestDone;
   }
-
-  @SerializedName("dialogueQuestDone")
-  private String dialogueQuestDone;
 
   public String getPrereq() {
     return prereq;
@@ -86,9 +95,6 @@ public class Npc {
     this.prereq = prereq;
   }
 
-  @SerializedName("prereq")
-  private String prereq;
-
   public Integer getNpcCount() {
     return npcCount++;
   }
@@ -96,10 +102,5 @@ public class Npc {
   public void setNpcCount(Integer npcCount) {
     this.npcCount = npcCount;
   }
-
-  @SerializedName("interactionCount")
-  private Integer npcCount;
-
-
 
 }

@@ -5,11 +5,12 @@
     "purpose": "Phew, I couldn't leave the office without my laptop",
     "npc": false,
     "preReq": null,
-    "challenge": true,
+    "challenge": false,
     "challenge prompt" : "Which of these types of candy is the most popular in the USA during Halloween? (enter a letter)\na. M&Ms \nb. Milk Duds \nc. Reese’s \nd. Snickers",
     "challenge answer": "c",
     "acquired": false,
-    "sound1" : "Inventory_Stash_Item.wav"
+    "sound1" : "Inventory_Stash_Item.wav",
+    "image": "laptop.png"
   },
   {
     "item": "mask",
@@ -20,7 +21,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item": "sweater",
@@ -31,7 +33,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item": "cake",
@@ -42,7 +45,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item": "code",
@@ -53,7 +57,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item":"wallet",
@@ -64,7 +69,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item": "raisinets",
@@ -75,7 +81,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item": "keyfob",
@@ -86,7 +93,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item": "badge",
@@ -97,7 +105,8 @@
     "challenge": false,
     "challenge prompt" : null,
     "challenge answer": null,
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   },
   {
     "item": "phone",
@@ -108,6 +117,7 @@
     "challenge": true,
     "challenge prompt" : "Passcode Hint: What rattles when it walks?",
     "challenge answer": "skeleton",
-    "acquired": false
+    "acquired": false,
+    "image": "laptop.png"
   }
 ]

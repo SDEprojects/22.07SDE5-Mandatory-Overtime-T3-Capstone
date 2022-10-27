@@ -26,6 +26,9 @@ public class Item {
   @SerializedName("acquired")
   private Boolean acquired;
 
+  @SerializedName("image")
+  private String image;
+
 
   @SerializedName("sound1")
   private String audio1;
@@ -108,5 +111,13 @@ public class Item {
 
   public void setChallengeAnswer(String challengeAnswer) {
     this.challengeAnswer = challengeAnswer;
+  }
+
+  public String getImage(){
+    return image;
+  }
+
+  public void setImage(String image){
+    this.image = image;
   }
 }

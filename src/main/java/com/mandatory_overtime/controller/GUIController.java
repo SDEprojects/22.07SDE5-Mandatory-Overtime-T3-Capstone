@@ -28,15 +28,15 @@ public class GUIController {
         building.createGameStructureFromNew();
         view = new GuiView(building.getBuilding());
         view.presentMainMenu();
-        view.setMoveConsumer(new Consumer<String>() {
-            @Override
-            public void accept(String roomName) {
-                try {
-                    building.moveRooms2(roomName);
-                    // update view here
-                } catch (MissingRequirementException | InterruptedException e) {
-                    /// update message here
-                }
+        view.setMoveConsumer(roomName -> {
+            try {
+                System.out.println("Moving to: " + roomName);
+                building.moveRooms2(roomName);
+                // update view here
+                startGame();
+
+            } catch (MissingRequirementException | InterruptedException e) {
+                /// update message here
             }
         });
         loadBtn = view.getLoadGameButton();
@@ -46,15 +46,17 @@ public class GUIController {
     }
 
     public void startGame(){
-        //String currentLocation = player.getCurrentLocation();
-        String currentLocation = "lobby";
+        String currentLocation = player.getCurrentLocation();
+//        String currentLocation = "lobby";
         String[] directions = building.getBuilding().get(currentLocation).getDirections();
         System.out.println(Arrays.toString(directions));
         String message = "Whatever feedback we get from building methods";
+        player.addToInventory("laptop");
         List<String> inventory = player.getInventory();
         player.setName("PLAYER 1");
         view.updateGameScreen(currentLocation,inventory, message, directions );
         view.presentGameScreen();
+
     }
 
     public void loadActionEvents(){

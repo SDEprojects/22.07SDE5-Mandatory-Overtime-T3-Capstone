@@ -74,15 +74,10 @@ public class GuiView {
 
 
     public void updateGameScreen(String location, List<String> inventory,String message, String[] directions ){
-        gamePlayScreen.buildGamePlayScreen(location, inventory,message,directions);
+        gamePlayScreen.updateGamePlayScreen(location, inventory,message,directions);
     }
 
     public void setMoveConsumer(Consumer<String> listener) {
-        //TODO pass to gamescreen
-        //gamePlayScreen.setMoveListener listener
-        // button.addActionListener(e -> {
-        //     listener.apply(room name);
-        // })
-
+        gamePlayScreen.setMoveListener(roomName -> listener.accept(roomName));
     }
 }

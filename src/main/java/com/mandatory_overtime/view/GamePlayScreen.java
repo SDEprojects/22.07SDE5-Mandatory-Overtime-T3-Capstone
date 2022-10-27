@@ -1,26 +1,40 @@
 package com.mandatory_overtime.view;
 
-import com.mandatory_overtime.controller.GUIController;
-import com.mandatory_overtime.view.SettingsMenu;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 public class GamePlayScreen {
 
+    private static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
     private final SettingsMenu settingsMenu = new SettingsMenu();
     private JLayeredPane gameScreen;
 
-    public GamePlayScreen(){
-        buildGamePlayScreen();
+    public GamePlayScreen(HashMap locations){
+        buildLocationGUI(locations);
+
+    }
+    public JLayeredPane getGameScreen(){
+        return gameScreen;
     }
 
-    private void buildGamePlayScreen(){
+    public void buildGamePlayScreen(String location, List<String> inventory,String message,
+        String[] directions){
         gameScreen = new JLayeredPane();
 
         // Settings BUTTON
@@ -41,46 +55,73 @@ public class GamePlayScreen {
         settingsBar.add(helpBtn);
         settingsBar.add(saveBtn);
 
+        // GAME MESSAGE
+        JLabel gameMessage = new JLabel(message);
+        gameMessage.setFont(new Font("Arial", Font.BOLD, 25));
+        gameMessage.setBounds(10, 25, 1500, 125);
+
         // GAME TEXT SECTION
         JPanel gameTextSection = new JPanel();
-        gameTextSection.setBounds(0,25,1500, 125);
-        gameTextSection.setBackground(Color.BLACK);
+        gameTextSection.setLayout(null);
+        gameTextSection.setBounds(0,25,1500, 120);
+        gameTextSection.setBackground(Color.GRAY);
+        gameTextSection.add(gameMessage);
+
+
+
+
 
         // LOCATION SECTION
-        ImageIcon img = new ImageIcon(
-            String.valueOf(getClass().getClassLoader().getResourceAsStream("office.png")));
-        JLabel locationImage= new JLabel(img);
-        JPanel locationPanel = new JPanel();
-        locationPanel.add(locationImage);
-        locationPanel.setBounds(0, 150, 1100, 700);
+        JLayeredPane locationPanel = LOCATION_GUI_PANELS.get(location);
+        locationPanel.setBounds(0, 100, 1100, 700);
+
 
 
         // GAME INFO SECTION
+        JLabel gameInfoText = new JLabel("Current Location:\t    " +location.toUpperCase());
+        gameInfoText.setBounds(10, 20, 400, 20);
         JPanel gameInfo = new JPanel();
-        gameInfo.setBackground(Color.YELLOW);
-        gameInfo.setBounds(1100, 150,400,150 );
+        JPanel buttonPanel = new JPanel();
+        gameInfo.setLayout(null);
+       // gameInfo.setBackground(Color.GRAY);
+        gameInfo.setBounds(1100, 150,375,145 );
+        gameInfo.add(gameInfoText);
+        // DIRECTIONAL BUTTONS
+        for (int i = 0; i < directions.length; i++){
+            int x = i == 0? 10 : i*125;
+            JButton btn = new JButton(directions[i]);
+            btn.setBounds(x, 50, 100, 30);
+            gameInfo.add(btn);
+        }
+
+        // GAME INFO BORDER
+        // TitledBorder gameInfoBorder = BorderFactory.createTitledBorder("GAME INFORMATION");
+        // gameInfoBorder.setTitleJustification(TitledBorder.CENTER);
+        Border gameInfoBorder = BorderFactory.createStrokeBorder(new BasicStroke(5.0f));
+
+        gameInfo.setBorder(gameInfoBorder);
+
 
         // INVENTORY SECTION
-        JLabel inventoryLabel = new JLabel("INVENTORY");
-        JPanel inventoryHeader = new JPanel();
-
-        inventoryHeader.setBounds(0,0,400, 10);
-        inventoryHeader.add(inventoryLabel);
-        inventoryHeader.setBackground(Color.GRAY);
-
+        // ITEMS
+        JLabel inventoryText = new JLabel(inventory.toString());
         JLabel raisinets = new JLabel(new ImageIcon("raisinets.png"));
         JLabel mask = new JLabel(new ImageIcon("mask.png"));
-        JPanel inventoryView = new JPanel(new FlowLayout());
-        inventoryView.add(inventoryHeader);
+
+        JPanel inventoryView = new JPanel();
+
+        inventoryView.add(inventoryText);
         inventoryView.add(raisinets);
         inventoryView.add(mask);
-        inventoryView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        inventoryView.setBounds(1100, 300,400,475 );
+        // Border
+        TitledBorder inventoryBorder = BorderFactory.createTitledBorder("INVENTORY");
+        inventoryBorder.setTitleJustification(TitledBorder.CENTER);
+        inventoryView.setBorder(inventoryBorder);
+        inventoryView.setBackground(Color.LIGHT_GRAY);
+
+        inventoryView.setBounds(1100, 300,375,450 );
 
         // Button Controls
-        JPanel buttonSection = new JPanel();
-
-
 
         gameScreen.add(settingsBar);
         gameScreen.add(gameTextSection);
@@ -93,9 +134,10 @@ public class GamePlayScreen {
 
 
 
-
-    public JLayeredPane getGameScreen(){
-        return gameScreen;
+    public void buildLocationGUI(HashMap locations){
+        LocationGUIPanel locationGUIPanel = new LocationGUIPanel(locations);
+        LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels();
     }
+
 
 }

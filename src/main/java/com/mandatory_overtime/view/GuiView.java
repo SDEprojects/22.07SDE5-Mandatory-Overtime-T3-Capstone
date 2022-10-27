@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -75,4 +76,12 @@ public class GuiView {
         gamePlayScreen.buildGamePlayScreen(location, inventory,message,directions);
     }
 
+    public void setMoveConsumer(Consumer<String> listener) {
+        //TODO pass to gamescreen
+        //gamePlayScreen.setMoveListener listener
+        // button.addActionListener(e -> {
+        //     listener.apply(room name);
+        // })
+
+    }
 }

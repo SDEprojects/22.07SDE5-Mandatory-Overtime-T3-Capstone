@@ -63,6 +63,7 @@ public class Building {
         items = (HashMap<String, Item>) itemArray.stream()
             .collect(Collectors.toMap(Item::getName, item -> item));
 
+
         npcs = (HashMap<String, Npc>) npcsArray.stream()
             .collect(Collectors.toMap(Npc::getName, npc -> npc));
     }
@@ -178,7 +179,7 @@ public class Building {
     private <T> T load(String resourceFile, Gson gson, Type type) throws IOException {
 
         try (Reader reader = new InputStreamReader(
-            getClass().getClassLoader().getResourceAsStream(resourceFile))) {
+            getClass().getClassLoader().getResourceAsStream (resourceFile))) {
             return gson.fromJson(reader, type);
         }
     }
@@ -562,6 +563,10 @@ public class Building {
 
     public HashMap<String, Room> getBuilding() {
         return building;
+    }
+
+    public HashMap<String, Item> getGameItems(){
+        return items;
     }
 
     public class CantGetItemException extends Throwable {

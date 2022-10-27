@@ -26,7 +26,7 @@ public class GUIController {
 
     public GUIController() throws IOException {
         building.createGameStructureFromNew();
-        view = new GuiView(building.getBuilding());
+        view = new GuiView(building.getBuilding(), building.getGameItems());
         view.presentMainMenu();
         view.setMoveConsumer(roomName -> {
             try {

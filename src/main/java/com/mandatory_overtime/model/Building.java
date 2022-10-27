@@ -175,7 +175,7 @@ public class Building {
         this.gameState = gameState;
     }
 
-//  HELPER METHODS
+    //  HELPER METHODS
     private <T> T load(String resourceFile, Gson gson, Type type) throws IOException {
 
         try (Reader reader = new InputStreamReader(
@@ -225,12 +225,19 @@ public class Building {
 
     public void moveRooms(String noun)
         throws IOException, IllegalMoveException, InterruptedException {
+
         String currentLoc = player.getCurrentLocation();
+
         String[] directions = building.get(currentLoc).getDirections();
+
         List<String> directionsList = new ArrayList<>(Arrays.asList(directions));
+
         List<String> inventory = new ArrayList<>();
+
         inventory = player.getInventory();
+
         String nextRoomPreReq = "";
+
         try {
             if (!directionsList.contains(noun)) {
                 throw new IllegalMoveException(noun);
@@ -278,18 +285,61 @@ public class Building {
         }
     }
 
+    public void moveRooms2(String newLocation)
+        throws InterruptedException, MissingRequirementException, IllegalMoveException {
+        String currentLoc = player.getCurrentLocation();
+
+        String[] directions = building.get(currentLoc).getDirections();
+
+        List<String> directionsList = new ArrayList<>(Arrays.asList(directions));
+
+        List<String> inventory = player.getInventory();
+
+        String nextRoomPreReq = "";
+
+        boolean validLocation = false;
+
+        if (!directionsList.contains(newLocation)) {
+            throw new IllegalMoveException(newLocation);
+        } else {
+            // updates current location
+            nextRoomPreReq = building.get(newLocation).getPreReq();
+
+            if (nextRoomPreReq == null || inventory.contains(nextRoomPreReq)) {
+                for (String direction : directions) {
+                    if (newLocation.equals(direction)) {
+                        validLocation = true;
+                        player.setCurrentLocation(newLocation);
+                        winGameCheck(newLocation);
+                        GameMusic.playMoveSound(newLocation);
+                        GameMusic.playRoomSound(newLocation);
+                        // TODO: DELETE THIS METHOD
+                        getRoomDescriptionInfo();
+                        break;
+                    }
+                }
+            } else {
+                winGameCheck(newLocation);
+                GameMusic.playAccessDeniedSound(newLocation);
+                throw new MissingRequirementException(newLocation);
+            }
+        }
+
+
+    }
+
+
     private void winGameCheck(String noun) {
         boolean wonGame = false;
         String preReqCondition = building.get(noun).getPreReq();
         ArrayList<String> currentItems = (ArrayList<String>) player.getInventory();
         Boolean roomFail = building.get(noun).getFailCondition();
-        if (roomFail == true) {
+        if (roomFail) {
             if (noun.equals("home") && currentItems.contains(preReqCondition)) {
                 setGameState(GameState.WIN);
                 if (currentItems.contains(preReqCondition)) {
                     building.get(noun).setFailCondition(false);
                     building.get(noun).setPreReq(null);
-                    return;
                 } else {
                     setGameState(GameState.LOSS);
                 }
@@ -298,35 +348,47 @@ public class Building {
     }
 
 
-
-    public void getItem(String item) throws IOException, InterruptedException {
+    public boolean getItem(String item)
+        throws IOException, InterruptedException, CantGetItemException {
         getRoomDescriptionInfo();
         String playerCurrentLocation = player.getCurrentLocation();
+        boolean startChallenge = false;
+
+        boolean isValidItem = items.containsKey(item);
 
         //conditional to check if item is in array //check if location correct // check if npc doesn't have it
+//        items.containsKey(item) && !items.get(item).getAcquired() && items.get(item)
+//            .getLocation().equals(playerCurrentLocation)
+//            && !items.get(item).isNpc()
+        if (isValidItem) {
+            boolean itemAlreadyAcquired = items.get(item).getAcquired();
+            boolean itemIsAtTheLocation = items.get(item).getLocation()
+                .equals(playerCurrentLocation);
+            boolean npcHasItem = items.get(item).isNpc();
+            if (!itemAlreadyAcquired && itemIsAtTheLocation && !npcHasItem) {
+                //conditionals to check it item has prerequisite
+                if (items.get(item).getPreReq() == null) {
 
-        if (items.containsKey(item) && items.get(item).getAcquired() == false && items.get(item)
-            .getLocation().equals(playerCurrentLocation)
-            && items.get(item).isNpc() == false) {
-
-            //conditionals to check it item has prerequisite
-            if (items.get(item).getPreReq() == null) {
-
-                //conditional to check for challenge
-                if (items.get(item).getChallenge() == true) {
-                    runItemChallenge(item);
+                    //conditional to check for challenge
+                    if (items.get(item).getChallenge() == true) {
+                        startChallenge = true;
+                        runItemChallenge(item);
+                    } else {
+                        player.addToInventory(item);
+                        GameMusic.playItemSound();
+                        items.get(item).setAcquired(true);
+                    }
                 } else {
-                    player.addToInventory(item);
-                    GameMusic.playItemSound();
-                    items.get(item).setAcquired(true);
+                    checkItemPreReqIsFulfilled(item);
                 }
             } else {
-                checkItemPreReqIsFulfilled(item);
+                throw new CantGetItemException();
             }
         } else {
-            System.out.printf("You cannot get %s.\n", item);
-            System.out.print(">");
+            throw new CantGetItemException();
         }
+
+        return startChallenge;
     }
 
     /**
@@ -413,12 +475,16 @@ public class Building {
     }
 
 
-    public void inspectItem(String item) {
+    public String inspectItem(String item) throws CantGetItemException {
         //checks if item exists, if location is correct, if item is held by NPC
+
         if (items.containsKey(item) && items.get(item).getLocation()
             .equals(player.getCurrentLocation())
-            && items.get(item).isNpc() == false) {
-            System.out.println(items.get(item).getPurpose());
+            && !items.get(item).isNpc()) {
+
+            return items.get(item).getPurpose();
+        } else {
+            throw new CantGetItemException();
         }
     }
 
@@ -499,6 +565,9 @@ public class Building {
         return building;
     }
 
+    public class CantGetItemException extends Throwable {
+
+    }
 }
 
 

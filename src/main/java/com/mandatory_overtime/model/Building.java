@@ -179,7 +179,7 @@ public class Building {
     private <T> T load(String resourceFile, Gson gson, Type type) throws IOException {
 
         try (Reader reader = new InputStreamReader(
-            getClass().getClassLoader().getResourceAsStream(resourceFile))) {
+            getClass().getClassLoader().getResourceAsStream (resourceFile))) {
             return gson.fromJson(reader, type);
         }
     }

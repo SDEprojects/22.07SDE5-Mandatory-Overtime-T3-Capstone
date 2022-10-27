@@ -36,8 +36,8 @@ public class GamePlayScreen {
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
 
-    public GamePlayScreen(HashMap locations) {
-        buildLocationGUI(locations);
+    public GamePlayScreen(HashMap locations, HashMap items) {
+        buildLocationGUI(locations, items);
         buildGamePLayScreen();
     }
 
@@ -147,8 +147,8 @@ public class GamePlayScreen {
     }
 
 
-    public void buildLocationGUI(HashMap locations) {
-        LocationGUIPanel locationGUIPanel = new LocationGUIPanel(locations);
+    public void buildLocationGUI(HashMap locations, HashMap items) {
+        LocationGUIPanel locationGUIPanel = new LocationGUIPanel(locations,items );
         LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels();
     }
 

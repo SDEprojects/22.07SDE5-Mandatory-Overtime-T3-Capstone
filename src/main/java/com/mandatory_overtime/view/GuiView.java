@@ -22,8 +22,9 @@ public class GuiView {
 
     public static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
 
-    public GuiView(HashMap locations) throws IOException {
-        gamePlayScreen =new GamePlayScreen(locations);
+    public GuiView(HashMap locations, HashMap items) throws IOException {
+
+        gamePlayScreen =new GamePlayScreen(locations, items);
         JFrame frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

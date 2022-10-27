@@ -63,6 +63,7 @@ public class Building {
         items = (HashMap<String, Item>) itemArray.stream()
             .collect(Collectors.toMap(Item::getName, item -> item));
 
+
         npcs = (HashMap<String, Npc>) npcsArray.stream()
             .collect(Collectors.toMap(Npc::getName, npc -> npc));
     }
@@ -562,6 +563,10 @@ public class Building {
 
     public HashMap<String, Room> getBuilding() {
         return building;
+    }
+
+    public HashMap<String, Item> getGameItems(){
+        return items;
     }
 
     public class CantGetItemException extends Throwable {

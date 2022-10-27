@@ -26,7 +26,7 @@ public class GUIController {
 
     public GUIController() throws IOException {
         building.createGameStructureFromNew();
-        view = new GuiView(building.getBuilding());
+        view = new GuiView(building.getBuilding(), building.getGameItems());
         view.presentMainMenu();
         view.setMoveConsumer(new Consumer<String>() {
             @Override
@@ -47,7 +47,7 @@ public class GUIController {
 
     public void startGame(){
         //String currentLocation = player.getCurrentLocation();
-        String currentLocation = "3";
+        String currentLocation = "office";
         String[] directions = building.getBuilding().get(currentLocation).getDirections();
         System.out.println(Arrays.toString(directions));
         String message = "Whatever feedback we get from building methods";

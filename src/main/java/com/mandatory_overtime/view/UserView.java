@@ -4,18 +4,23 @@ public class UserView {
 
   public String startUpInfo(String name) {
 
-    return "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-        + "\nHello " + name + ", \n"
-        + "You are a developer for Amazon and it's Halloween night\n"
-        + "You have had a long week at the office, but you are diving head first into the weekend\n"
-        + "because there's a rooftop Halloween Party tonight!\n\n"
-        + "You wake up from slobbering on your desk. You wipe off the cheetos dust from your cheek.\n"
-        + "While you're looking at the same error in your code from the last 2 weeks,\n"
-        + "your coworker Pete tells you that he has been hearing rumors of Mandatory Overtime.\n\n"
-        + "You know that it's your turn to be On-Call this weekend.\n"
-        + "Finish your work and escape the building with your things\n"
-        + "before your manager, Scott, finds you and you miss the party tonight.";
+    String gameInfo =
+
+        "Hello " + name + ", \n"
+            + "You are a developer for Amazon and it's Halloween night\n"
+            + "You have had a long week at the office, but you are diving head first into the weekend\n"
+            + "because there's a rooftop Halloween Party tonight!\n\n"
+            + "You wake up from slobbering on your desk. You wipe off the cheetos dust from your cheek.\n"
+            + "While you're looking at the same error in your code from the last 2 weeks,\n"
+            + "your coworker Pete tells you that he has been hearing rumors of Mandatory Overtime.\n\n"
+            + "You know that it's your turn to be On-Call this weekend.\n"
+            + "Finish your work and escape the building with your things\n"
+            + "before your manager, Scott, finds you and you miss the party tonight.";
+
+    return gameInfo;
   }
+
+
 
   public String startUpTitle() {
     String pumpkin = "\t\t\t\t\t\t\t\t\t\t\t────────────────████\n\t\t\t\t\t\t\t\t\t\t\t───────────────█░░███\n\t\t\t\t\t\t\t\t\t\t\t───────────────█░░████\n\t\t\t\t\t\t\t\t\t\t\t────────────────███▒██─────████████\n\t\t\t\t\t\t\t\t\t\t\t──────████████─────█▒█──████▒▒▒▒▒▒████\n\t\t\t\t\t\t\t\t\t\t\t────███▒▒▒▒▒▒████████████░░████▒▒▒▒▒███\n\t\t\t\t\t\t\t\t\t\t\t──██▒▒▒▒░▒▒████░░██░░░░██░░░░░█▒▒▒▒▒▒▒███\n\t\t\t\t\t\t\t\t\t\t\t─██▒▒░░░░▒██░░░░░█▒░░░░░██▒░░░░░░░▒▒▒▒▒▒█\n\t\t\t\t\t\t\t\t\t\t\t██▒░░░░░▒░░░░░░░░░▒░░░░░░░▒▒░░░░░░░▒▒▒▒▒██\n\t\t\t\t\t\t\t\t\t\t\t█░░░░░░▒░░░██░░░░░░░░░░░░░██░░░░░░░░▒▒▒▒▒█\n\t\t\t\t\t\t\t\t\t\t\t█░░░░░░░░█▒▒███░░░░░░░░░█▒▒███░░░░░░░▒▒▒▒█\n\t\t\t\t\t\t\t\t\t\t\t█░░░░░░░████████░░░░░░░████████░░░░░░▒▒▒▒█\n\t\t\t\t\t\t\t\t\t\t\t█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒█\n\t\t\t\t\t\t\t\t\t\t\t─█░░░░██░█░░░░░░░░░░░░░░░░░░░░░░░███▒▒▒▒▒█\n\t\t\t\t\t\t\t\t\t\t\t─█▒▒░░░░█████░░░█░░░░██░░░██░░████░▒▒▒▒▒▒█\n\t\t\t\t\t\t\t\t\t\t\t─██▒▒░░░░░█████████████████████░░░▒▒▒▒▒▒██\n\t\t\t\t\t\t\t\t\t\t\t──██▒▒▒▒░░░░░██░░░███░░░██░░░█░░░▒▒▒▒▒▒██\n\t\t\t\t\t\t\t\t\t\t\t───███▒▒▒░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒█████\n\t\t\t\t\t\t\t\t\t\t\t─────███▒▒▒▒▒▒░░░░░░░░░░░░░▒▒▒▒▒▒████\n\t\t\t\t\t\t\t\t\t\t\t────────██████████████████████████\n";
@@ -26,18 +31,17 @@ public class UserView {
 
   public String showHelp() {
     String help =
-        "\n========================================================================================================\n"
-            + "                                              Game Commands\n"
-            + "========================================================================================================\n"
-            + "                                    Go <location>  i.e. 'Go Elevator'\n"
-            + "                                    Get <item>     i.e. 'Get Phone'\n"
-            + "                                    Interact <NPC> i.e. 'Interact Roy'\n"
-            + "                                    Inspect <item> i.e. 'Inspect Sweater'\n"
-            + "                                    Volume <0-10>  i.e. 'Volume 3'\n"
-            + "                                   'Music On' (turns music on)\n"
-            + "                                   'Music Off' (turns music off)\n"
-            + "                                   'Look Around' (display room description)\n"
-            + "                                   'Quit' (to quit the game at any time)";
+
+        "\t\tGame Commands\n\n"
+            + "                                    Go [location]\texample: 'Go Elevator' \n\n"
+            + "                                    Get [item]\texample: 'Get Phone'   \n\n"
+            + "                                    Interact [NPC]\texample: 'Interact Roy'\n\n"
+            + "                                    Inspect [item]\texample:'Inspect Sweater'\n\n"
+            + "                                    Volume [0-10]\texample:'Volume 3'\n\n"
+            + "                                   'Music On'\t[turns music on] \n\n"
+            + "                                   'Music Off'\t[turns music off]\n\n"
+            + "                                   'Look Around'\t[display room description]\n\n"
+            + "                                   'Quit'\t[to quit the game at any time]";
     return help;
   }
 

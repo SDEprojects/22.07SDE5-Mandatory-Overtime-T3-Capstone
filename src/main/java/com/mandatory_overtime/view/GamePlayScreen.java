@@ -138,7 +138,7 @@ public class GamePlayScreen {
         // UPDATE INVENTORY VIEW
         for (String item : inventory) {
             ImageIcon itemImageIcon;
-            try (InputStream imgStream = getClass().getResourceAsStream("/thumbnails/" + item + ".png")) {
+            try (InputStream imgStream = getClass().getResourceAsStream("/images/thumbnails/" + item + ".png")) {
                 if (imgStream != null) {
                     itemImageIcon = new ImageIcon(ImageIO.read(imgStream));
                     JLabel itemImageLabel = new JLabel(itemImageIcon);

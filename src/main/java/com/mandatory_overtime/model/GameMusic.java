@@ -52,7 +52,7 @@ static Building building;
   public static void playAudioMusic(String soundFile) {
 
     try {
-      URL audio = GameMusic.class.getResource("/music/" + soundFile);
+      URL audio = GameMusic.class.getResource("/" + soundFile);
       AudioInputStream audioInput = AudioSystem.getAudioInputStream(audio);
       clip = AudioSystem.getClip();
       clip.open(audioInput);

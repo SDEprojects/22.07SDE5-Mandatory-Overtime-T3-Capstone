@@ -48,7 +48,7 @@ public class MainMenu {
             InputStream stream2 = getClass().getResourceAsStream("/images/newgame.png");
             startButtonImage = new ImageIcon(ImageIO.read(stream2));
 
-            InputStream stream3 = getClass().getResourceAsStream("/images/loadGameBtn.png");
+            InputStream stream3 = getClass().getResourceAsStream("/images/loadgameBtn.png");
             loadButtonImage = new ImageIcon(ImageIO.read(stream3));
         }catch(IOException e){
             e.printStackTrace();

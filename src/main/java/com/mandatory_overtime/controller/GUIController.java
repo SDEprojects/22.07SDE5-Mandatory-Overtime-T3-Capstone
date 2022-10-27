@@ -33,8 +33,6 @@ public class GUIController {
                 System.out.println("Moving to: " + roomName);
                 building.moveRooms2(roomName);
                 // update view here
-                startGame();
-
             } catch (MissingRequirementException | InterruptedException e) {
                 /// update message here
             }

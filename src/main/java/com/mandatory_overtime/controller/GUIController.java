@@ -47,7 +47,7 @@ public class GUIController {
 
     public void startGame(){
         //String currentLocation = player.getCurrentLocation();
-        String currentLocation = "lobby";
+        String currentLocation = "3";
         String[] directions = building.getBuilding().get(currentLocation).getDirections();
         System.out.println(Arrays.toString(directions));
         String message = "Whatever feedback we get from building methods";

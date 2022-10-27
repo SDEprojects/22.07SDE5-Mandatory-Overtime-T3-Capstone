@@ -15,7 +15,11 @@ import javax.swing.JProgressBar;
 
 public class MainMenu {
 
+
+
     private final SettingsMenu settingsMenu = new SettingsMenu();
+
+    private final GameInfo gameInfo = new GameInfo();
     private static JLayeredPane homeScreen;
 
     private static JLayeredPane loadingScreen;
@@ -60,7 +64,9 @@ public class MainMenu {
         settingsBtn.addActionListener(e -> settingsMenu.openMenu());
 
         // Help BUTTON
-        JButton helpBtn = new JButton("Help");
+        JButton helpBtn = new JButton("Game Info");
+        helpBtn.setToolTipText("Click for game info");
+        helpBtn.addActionListener(e -> gameInfo.openGameInfoMenu());
 
         // Settings Bar
         JPanel settingsBar = new JPanel();

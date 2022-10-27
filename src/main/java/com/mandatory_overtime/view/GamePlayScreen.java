@@ -49,7 +49,8 @@ public class GamePlayScreen {
         // Help BUTTON
         JButton helpBtn = new JButton("Help");
         helpBtn.setToolTipText("Enter Prompt");
-//        helpBtn.addActionListener(e->helpMenu.openHelpMenu());
+        helpBtn.addActionListener(e->helpMenu.openHelpMenu());
+
 
         // Save BUTTON
         JButton saveBtn = new JButton("Save Game");

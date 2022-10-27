@@ -11,7 +11,7 @@
     "sound1": "Elevator_Ding.wav",
     "sound2": "Elevator_Door.wav",
     "sound3": "Elevator_Door.wav",
-    "preReq": "laptop",
+    "preReq": null,
     "fail": false,
     "image": "elevator.png"
   },

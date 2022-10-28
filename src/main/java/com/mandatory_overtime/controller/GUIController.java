@@ -69,6 +69,15 @@ public class GUIController {
                 }
             });
 
+        view.getGamePlayScreen().getLocationGUIPanel().setNpcListener(npcName -> {
+            System.out.println("npc test");
+            System.out.println(npcName);
+                message = building.interactWithNpc(npcName);
+
+                updateGameView();
+            }
+        );
+
         // Prompt Player for Name
         building.setName("Player 1");
         building.getPlayer().addToInventory("sweater");

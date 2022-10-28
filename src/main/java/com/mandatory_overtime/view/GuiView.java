@@ -37,7 +37,7 @@ public class GuiView {
 
     public void presentGameScreen(){
         JLayeredPane screen = gamePlayScreen.getGameScreen();
-        presentLoadingScreen();
+      //  presentLoadingScreen();
         container.removeAll();
         container.add(screen);
         container.repaint();

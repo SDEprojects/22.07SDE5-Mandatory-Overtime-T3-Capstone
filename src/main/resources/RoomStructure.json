@@ -192,7 +192,9 @@
     "description": "You're at the break room full of rickety tables and chairs.",
     "inventorySound": "Inventory_Stash_Item.wav",
     "footstepSound": "Footsteps.wav",
-    "image": "breakroom.png"
+    "image": "breakroom.png",
+    "npcImage": "roy.png",
+    "npcCoord": [300,150,275,500]
   },
   {
     "RoomName": "kitchen",
@@ -221,7 +223,9 @@
     "description": "You're at the Party floor. People are crowded at the snack table.",
     "inventorySound": "Inventory_Stash_Item.wav",
     "footstepSound": "Footsteps.wav",
-    "image": "partyroom.png"
+    "image": "partyroom.png",
+    "npcImage": "brenda.png",
+    "npcCoord": [175,150,300,500]
   },
   {
     "RoomName": "table",

@@ -223,67 +223,6 @@ public class Building {
         System.exit(0); //Update to utilize state.
     }
 
-    public void moveRooms(String noun)
-        throws IOException, IllegalMoveException, InterruptedException {
-
-        String currentLoc = player.getCurrentLocation();
-
-        String[] directions = building.get(currentLoc).getDirections();
-
-        List<String> directionsList = new ArrayList<>(Arrays.asList(directions));
-
-        List<String> inventory = new ArrayList<>();
-
-        inventory = player.getInventory();
-
-        String nextRoomPreReq = "";
-
-        try {
-            if (!directionsList.contains(noun)) {
-                throw new IllegalMoveException(noun);
-            } else {
-                nextRoomPreReq = building.get(noun).getPreReq();
-                if (nextRoomPreReq == null || inventory.contains(nextRoomPreReq)) {
-                    int counter = 0;
-                    boolean loopStop = true;
-                    while (loopStop) {
-                        try {
-                            for (String direction : directions) {
-                                if (noun.equals(direction)) {
-                                    player.setCurrentLocation(noun);
-                                    winGameCheck(noun);
-                                    GameMusic.playMoveSound(noun);
-                                    GameMusic.playRoomSound(noun);
-                                    getRoomDescriptionInfo();
-                                    if (player.getInventory()
-                                        .contains(building.get(currentLoc).getPreReq())) {
-                                        GameMusic.playAccessGrantedSound();
-                                        GameMusic.playDoorOpenSound();
-                                    }
-                                    loopStop = false;
-                                } else {
-                                    counter++;
-                                }
-                            }
-                            if (counter == directions.length) {
-                                loopStop = false;
-                                throw new IllegalMoveException(noun);
-                            }
-                        } catch (IllegalMoveException e) {
-                        }
-                    }
-                } else {
-                    try {
-                        winGameCheck(noun);
-                        GameMusic.playAccessDeniedSound(noun);
-                        throw new MissingRequirementException(noun);
-                    } catch (MissingRequirementException e) {
-                    }
-                }
-            }
-        } catch (IllegalArgumentException e) {
-        }
-    }
 
     public void moveRooms2(String newLocation)
         throws InterruptedException, MissingRequirementException, IllegalMoveException {
@@ -531,27 +470,30 @@ public class Building {
         System.out.print(">");
     }
 
-    public void interactWithNpc(String noun) {
+    public String interactWithNpc(String npcName) {
+        String response = null;
         for (String npc : npcs.keySet()) {
-            if (npc.equals(noun) && player.getCurrentLocation()
+            if (npc.equals(npcName) && player.getCurrentLocation()
                 .equals(npcs.get(npc).getLocation())) {
                 if (!player.getInventory().contains(npcs.get(npc).getPrereq())
                     && npcs.get(npc).getNpcCount() == 0) {
-                    System.out.printf(npcs.get(npc).getInitialDialogue(), player.getName());
+                    response = String.format(npcs.get(npc).getInitialDialogue(), player.getName());
                     npcs.get(npc).getNpcCount();
                 } else if (player.getInventory().contains((npcs.get(npc).getPrereq()))) {
-                    System.out.printf((npcs.get(npc).getDialogueWithItem()), player.getName());
+
+                    response = String.format((npcs.get(npc).getDialogueWithItem()), player.getName());
                     player.removeFromInventory((npcs.get(npc).getPrereq()));
                     player.addToInventory((npcs.get(npc).getItems()));
                     npcs.get(npc).setItems(null);
                 } else if ((npcs.get(npc).getItems()) == null) {
-                    System.out.printf((npcs.get(npc).getDialogueQuestDone()), player.getName());
+                    response = String.format((npcs.get(npc).getDialogueQuestDone()), player.getName());
                 } else if (!player.getInventory().contains((npcs.get(npc).getPrereq()))
                     && npcs.get(npc).getNpcCount() >= 1) {
-                    System.out.printf(npcs.get(npc).getDialogueNoItem(), player.getName());
+                    response = String.format(npcs.get(npc).getDialogueNoItem(), player.getName());
                 }
             }
         }
+        return response;
     }
 
     public void setName(String name) {

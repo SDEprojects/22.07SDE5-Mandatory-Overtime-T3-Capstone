@@ -1,8 +1,11 @@
 package com.mandatory_overtime.view;
 
 import com.mandatory_overtime.model.Building;
+import com.mandatory_overtime.model.Item;
+import com.mandatory_overtime.model.Room;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
@@ -119,7 +122,19 @@ public class GamePlayScreen {
     }
 
     public void updateGamePlayScreen(String location, List<String> inventory, String message,
-        String[] directions) {
+        String[] directions,String removedItem) {
+
+
+        Component[] comp = LOCATION_GUI_PANELS.get(location).getComponents();
+
+        for(int i = 0; i < comp.length; i++){
+            if(comp[i] instanceof JButton && ((JButton) comp[i]).getActionCommand().equals(removedItem)){
+                LOCATION_GUI_PANELS.get(location).remove(i);
+                break;
+            }
+        }
+
+
         gameTextContainer.removeAll();
         gameInfoContainer.removeAll();
         inventoryContainer.removeAll();
@@ -198,5 +213,6 @@ public class GamePlayScreen {
 
     public void setMoveListener(Consumer<String> listener) {
         moveListener = listener;
+        locationGUIPanel.setMoveLocationListener(listener);
     }
 }

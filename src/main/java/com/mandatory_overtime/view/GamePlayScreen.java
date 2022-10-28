@@ -1,5 +1,6 @@
 package com.mandatory_overtime.view;
 
+
 import com.mandatory_overtime.controller.GamePlay;
 import com.mandatory_overtime.model.Building;
 import java.awt.BasicStroke;
@@ -26,6 +27,8 @@ import javax.swing.border.TitledBorder;
 public class GamePlayScreen {
 
     private static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
+    private LocationGUIPanel locationGUIPanel;
+
 
     private final SettingsMenu settingsMenu = new SettingsMenu();
     private final HelpMenu helpMenu = new HelpMenu();
@@ -35,7 +38,7 @@ public class GamePlayScreen {
 
 
     private Consumer<String> moveListener;
-    private final  JLayeredPane gameScreen = new JLayeredPane();
+    private final JLayeredPane gameScreen = new JLayeredPane();
     private final JPanel settingsBar = new JPanel();
     private final JPanel gameTextContainer = new JPanel();
 
@@ -104,7 +107,6 @@ public class GamePlayScreen {
         locationContainer.setBounds(0, 100, 1100, 700);
         locationContainer.setLayout(null);
 
-
         // GAME INFO SECTION
         gameInfoText.setBounds(10, 20, 400, 20);
         JPanel buttonPanel = new JPanel();
@@ -138,9 +140,9 @@ public class GamePlayScreen {
         gameScreen.add(settingsBar);
 
         gameScreen.setLayer(gameTextContainer, 2);
-        gameScreen.setLayer(inventoryContainer,0);
-        gameScreen.setLayer(locationContainer,1);
-        gameScreen.setLayer(settingsBar,3);
+        gameScreen.setLayer(inventoryContainer, 0);
+        gameScreen.setLayer(locationContainer, 1);
+        gameScreen.setLayer(settingsBar, 3);
 
     }
 
@@ -150,12 +152,10 @@ public class GamePlayScreen {
 
     public void updateGamePlayScreen(String location, List<String> inventory, String message,
         String[] directions) {
-
         gameTextContainer.removeAll();
         gameInfoContainer.removeAll();
         inventoryContainer.removeAll();
         locationContainer.removeAll();
-
 
         // UPDATE GAME TEXT
         gameMessage.setText(message);
@@ -167,8 +167,6 @@ public class GamePlayScreen {
         locationContainer.add(LOCATION_GUI_PANELS.get(location));
         locationContainer.revalidate();
         locationContainer.repaint();
-
-
 
         // UPDATE GAME INFO SECTION
         gameInfoText.setText("Current Location:\t    " + location.toUpperCase());
@@ -212,17 +210,22 @@ public class GamePlayScreen {
         inventoryContainer.repaint();
 
         gameScreen.setLayer(gameTextContainer, 2);
-        gameScreen.setLayer(inventoryContainer,0);
-        gameScreen.setLayer(locationContainer,1);
-        gameScreen.setLayer(settingsBar,3);
+        gameScreen.setLayer(inventoryContainer, 0);
+        gameScreen.setLayer(locationContainer, 1);
+        gameScreen.setLayer(settingsBar, 3);
 
 
     }
 
 
     public void buildLocationGUI(HashMap locations, HashMap items) {
-        LocationGUIPanel locationGUIPanel = new LocationGUIPanel(locations, items);
+        locationGUIPanel = new LocationGUIPanel(locations, items);
         LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels();
+    }
+
+
+    public LocationGUIPanel getLocationGUIPanel() {
+        return locationGUIPanel;
     }
 
     public void setMoveListener(Consumer<String> listener) {

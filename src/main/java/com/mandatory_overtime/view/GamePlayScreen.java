@@ -173,7 +173,7 @@ public class GamePlayScreen {
         locationContainer.removeAll();
 
         // UPDATE GAME TEXT
-        gameMessage.setText(message);
+        gameMessage.setText("<html>" + message + "</html>");
         gameTextContainer.add(gameMessage);
         gameTextContainer.revalidate();
         gameTextContainer.repaint();

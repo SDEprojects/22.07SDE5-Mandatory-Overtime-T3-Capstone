@@ -25,6 +25,8 @@ public class LocationGUIPanel {
 
     private Consumer<String> moveLocationListener;
 
+    private Consumer<String> npcListener;
+
     private final String[] elevatorButtonNames = new String[]{"1", "2", "3", "4", "5"};
     private final String[] elevator_1_ButtonNames = new String[]{"2", "3", "4", "5"};
     private final String[] elevator_2_ButtonNames = new String[]{"1", "3", "4", "5"};
@@ -248,11 +250,10 @@ public class LocationGUIPanel {
             btn.setContentAreaFilled(false);
             btn.setBounds(coords[0], coords[1], coords[2], coords[3]);
             btn.setToolTipText(room.getNPC());
-//            btn.addActionListener(e -> {
-//                String itemName = e.getActionCommand();
-//                itemPickupListener.accept(itemName);
-//                // pane.remove(itemButton);
-//            });
+            btn.addActionListener(e -> {
+                npcListener.accept(room.getNPC());
+
+           });
 
 
         } catch (IOException e) {
@@ -269,4 +270,7 @@ public class LocationGUIPanel {
         this.moveLocationListener = moveLocationListener;
     }
 
+    public void setNpcListener(Consumer<String> npcListener) {
+        this.npcListener = npcListener;
+    }
 }

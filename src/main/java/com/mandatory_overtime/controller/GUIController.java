@@ -13,6 +13,7 @@ import javax.swing.JButton;
 
 
 public class GUIController {
+
     private GuiView view;
 
     private final JButton startBtn;
@@ -20,49 +21,68 @@ public class GUIController {
     private final JButton loadBtn;
     Building building = new Building();
 
+    private String message = "";
 
-
-    Player player = new Player();
 
     public GUIController() throws IOException {
-        building.createGameStructureFromNew();
-        view = new GuiView(building.getBuilding(), building.getGameItems());
+        view = new GuiView();
         view.presentMainMenu();
+        loadBtn = view.getLoadGameButton();
+        startBtn = view.getNewGameButton();
+        loadActionEvents();
+    }
+
+    public void startNewGame() throws IOException {
+        // Create New Building
+        building.createGameStructureFromNew();
+
+        // Set up Game Screen
+        view.setUpGamePlay(building.getBuilding(), building.getGameItems());
+
+        // Set up Move Consumers for Game
         view.setMoveConsumer(roomName -> {
             try {
                 System.out.println("Moving to: " + roomName);
                 building.moveRooms2(roomName);
-                // update view here
+                message = "room updated";
+                updateGameView();
             } catch (MissingRequirementException | InterruptedException e) {
-                /// update message here
+                message = "Couldn't move to that location";
             }
         });
-        loadBtn = view.getLoadGameButton();
-        startBtn = view.getNewGameButton();
 
-        loadActionEvents();
-    }
+        // Prompt Player for Name
+        building.setName("Player 1");
+        building.getPlayer().addToInventory("laptop");
 
-    public void startGame(){
-        String currentLocation = player.getCurrentLocation();
-//        String currentLocation = "lobby";
-        String[] directions = building.getBuilding().get(currentLocation).getDirections();
-        System.out.println(Arrays.toString(directions));
-        String message = "Whatever feedback we get from building methods";
-        player.addToInventory("laptop");
-        List<String> inventory = player.getInventory();
-        player.setName("PLAYER 1");
-        view.updateGameScreen(currentLocation,inventory, message, directions );
+        // Set Message TO Intro Story
+        message = "Starting in the Office";
+
+        // Update View
+        updateGameView();
+
+        // Present View
         view.presentGameScreen();
+    }
+
+    public void updateGameView() {
+        String currentLocation = building.getPlayer().getCurrentLocation();
+        String[] directions = building.getBuilding().get(currentLocation).getDirections();
+        List<String> inventory = building.getPlayer().getInventory();
+        view.updateGameScreen(currentLocation, inventory, message, directions);
 
     }
 
-    public void loadActionEvents(){
-        startBtn.addActionListener( e -> startGame());
-        loadBtn.addActionListener( e -> startGame());
+    public void loadActionEvents() {
+        startBtn.addActionListener(e -> {
+            try {
+                startNewGame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
     }
-
 
 
 }

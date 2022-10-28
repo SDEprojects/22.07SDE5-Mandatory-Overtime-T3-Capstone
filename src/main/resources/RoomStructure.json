@@ -126,7 +126,7 @@
     "inventorySound": "Inventory_Stash_Item.wav",
     "drawerOpenSound": "Drawer_Open_Close.wav",
     "footstepSound": "Footsteps.wav",
-    "image": "elevator.png"
+    "image": "desk.png"
   },
   {
     "RoomName": "conference room",
@@ -160,7 +160,7 @@
     "description": "You're at the the Dev Floor. A wave of pressure washes over you as you see the professionals at work.",
     "inventorySound": "Inventory_Stash_Item.wav",
     "footstepSound": "Footsteps.wav",
-    "image": "devfloor.png"
+    "image": "devroom.png"
   },
   {
     "RoomName": "it closet",
@@ -235,7 +235,7 @@
     "description": "You're at the table. It looks picked clean.",
     "inventorySound": "Inventory_Stash_Item.wav",
     "footstepSound": "Footsteps.wav",
-    "image": "elevator.png"
+    "image": "table.png"
   },
   {
     "RoomName": "lobby",
@@ -266,7 +266,7 @@
     "inventorySound": "Inventory_Stash_Item.wav",
     "vendingMachineSound": "Vending_Machine.wav",
     "footstepSound": "Footsteps.wav",
-    "image": "elevator.png"
+    "image": "vending.png"
   },
   {
     "RoomName": "home",
@@ -276,6 +276,6 @@
     "preReq": "phone",
     "fail": true,
     "description": "Congratulations, you have successfully avoided your boss.",
-    "image": "elevator.png"
+    "image": "home.png"
   }
 ]

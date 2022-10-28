@@ -130,5 +130,13 @@ public class UserView {
 
   }
 
+  public String missingSomethingFromInventory(String location){
+    return String.format("Looks like you're missing something in inventory. You won't be able to proceed to %s until you do", location);
+  }
+
+  public String gameStatus(String locationDescription, String coworker, String item){
+    return String.format("%s %nCoworkers in the room:%s%nYou see the item:%s", locationDescription, coworker, item);
+  }
+
 }
 

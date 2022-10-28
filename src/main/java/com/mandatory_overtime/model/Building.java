@@ -377,6 +377,7 @@ public class Building {
                         player.addToInventory(item);
                         GameMusic.playItemSound();
                         items.get(item).setAcquired(true);
+                        building.get(playerCurrentLocation).setItem(null);
                     }
                 } else {
                     checkItemPreReqIsFulfilled(item);

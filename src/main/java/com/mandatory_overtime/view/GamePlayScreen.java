@@ -26,10 +26,11 @@ public class GamePlayScreen {
     private final SettingsMenu settingsMenu = new SettingsMenu();
     private final HelpMenu helpMenu = new HelpMenu();
     private Consumer<String> moveListener;
-    private final JLayeredPane gameScreen = new JLayeredPane();
+    private final  JLayeredPane gameScreen = new JLayeredPane();
     private final JPanel settingsBar = new JPanel();
     private final JPanel gameTextContainer = new JPanel();
-    private JLayeredPane locationContainer;
+
+    private final JPanel locationContainer = new JPanel();
     private final JPanel gameInfoContainer = new JPanel();
     private final JPanel inventoryContainer = new JPanel();
 
@@ -71,9 +72,10 @@ public class GamePlayScreen {
         gameTextContainer.setBackground(Color.GRAY);
         gameTextContainer.add(gameMessage);
 
-        // LOCATION SETTING
-        locationContainer = LOCATION_GUI_PANELS.get("office");
+        // LOCATION SECTION
         locationContainer.setBounds(0, 100, 1100, 700);
+        locationContainer.setLayout(null);
+
 
         // GAME INFO SECTION
         gameInfoText.setBounds(10, 20, 400, 20);
@@ -97,11 +99,15 @@ public class GamePlayScreen {
         inventoryContainer.setBounds(1100, 300, 375, 450);
 
         // ADD ALL TO GAMESCREEN
-        gameScreen.add(settingsBar);
-        gameScreen.add(gameTextContainer);
-        gameScreen.add(locationContainer);
-        gameScreen.add(inventoryContainer);
-        gameScreen.add(gameInfoContainer);
+        gameScreen.add(locationContainer,4);
+        gameScreen.add(inventoryContainer,3);
+        gameScreen.add(gameInfoContainer,2);
+        gameScreen.add(gameTextContainer,1);
+        gameScreen.add(settingsBar,0);
+
+
+
+
     }
 
     public JLayeredPane getGameScreen() {
@@ -114,25 +120,23 @@ public class GamePlayScreen {
         gameTextContainer.removeAll();
         gameInfoContainer.removeAll();
         inventoryContainer.removeAll();
+        locationContainer.removeAll();
 
 
         // UPDATE GAME TEXT
-
         gameMessage.setText(message);
         gameTextContainer.add(gameMessage);
         gameTextContainer.revalidate();
         gameTextContainer.repaint();
 
         // UPDATE LOCATION
-
-        locationContainer = LOCATION_GUI_PANELS.get(location);
-        locationContainer.setBounds(0, 100, 1100, 700);
+        locationContainer.add(LOCATION_GUI_PANELS.get(location));
         locationContainer.revalidate();
         locationContainer.repaint();
 
 
-        // UPDATE GAME INFO SECTION
 
+        // UPDATE GAME INFO SECTION
         gameInfoText.setText("Current Location:\t    " + location.toUpperCase());
         gameInfoContainer.add(gameInfoText);
         gameInfoContainer.revalidate();
@@ -172,7 +176,6 @@ public class GamePlayScreen {
         }
         inventoryContainer.revalidate();
         inventoryContainer.repaint();
-
 
     }
 

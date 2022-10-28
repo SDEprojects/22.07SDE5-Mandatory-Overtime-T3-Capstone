@@ -100,11 +100,12 @@ public class LocationGUIPanel {
 
 
             pane.add(locationImage);
-           // pane.add(inventoryItem);
+            pane.setBounds(0, 0, 1100, 700);
 
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
+
 
         return pane;
     }

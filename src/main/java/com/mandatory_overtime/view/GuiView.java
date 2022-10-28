@@ -1,5 +1,6 @@
 package com.mandatory_overtime.view;
 
+import com.mandatory_overtime.model.Building;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -19,6 +20,7 @@ public class GuiView {
 
     private final MainMenu mainMenu = new MainMenu();
     private GamePlayScreen gamePlayScreen;
+
 
     public static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
 
@@ -83,4 +85,9 @@ public class GuiView {
     public void setMoveConsumer(Consumer<String> listener) {
         gamePlayScreen.setMoveListener(roomName -> listener.accept(roomName));
     }
+
+    public GamePlayScreen getGamePlayScreen() {
+        return gamePlayScreen;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.mandatory_overtime.controller;
 
 
 import com.mandatory_overtime.model.Building;
+import com.mandatory_overtime.model.Building.CantGetItemException;
 import com.mandatory_overtime.model.Player;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
@@ -51,9 +52,26 @@ public class GUIController {
             }
         });
 
+        //Set up Item pickup consumer
+        view.getGamePlayScreen().getLocationGUIPanel().setItemPickupListener(
+            itemName -> {
+                try {
+                    building.getItem(itemName);
+                    //TODO remove button if we ever get here
+                    updateGameView();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } catch (CantGetItemException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
         // Prompt Player for Name
         building.setName("Player 1");
-        building.getPlayer().addToInventory("laptop");
+        building.getPlayer().addToInventory("sweater");
+
 
         // Set Message TO Intro Story
         message = "Starting in the Office";

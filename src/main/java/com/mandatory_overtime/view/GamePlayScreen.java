@@ -1,10 +1,14 @@
 package com.mandatory_overtime.view;
 
+import com.mandatory_overtime.controller.GamePlay;
+import com.mandatory_overtime.model.Building;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +29,16 @@ public class GamePlayScreen {
 
     private final SettingsMenu settingsMenu = new SettingsMenu();
     private final HelpMenu helpMenu = new HelpMenu();
+    private final Building building = new Building();
+
+
+
+
     private Consumer<String> moveListener;
     private final  JLayeredPane gameScreen = new JLayeredPane();
     private final JPanel settingsBar = new JPanel();
     private final JPanel gameTextContainer = new JPanel();
+
 
     private final JPanel locationContainer = new JPanel();
     private final JPanel gameInfoContainer = new JPanel();
@@ -37,12 +47,12 @@ public class GamePlayScreen {
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
 
-    public GamePlayScreen(HashMap locations, HashMap items) {
+    public GamePlayScreen(HashMap locations, HashMap items) throws IOException {
         buildLocationGUI(locations, items);
         buildGamePLayScreen();
     }
 
-    private void buildGamePLayScreen() {
+    private void buildGamePLayScreen() throws IOException {
         // Settings BUTTON
         JButton settingsBtn = new JButton("Settings");
         settingsBtn.addActionListener(e -> settingsMenu.openMenu());
@@ -53,7 +63,24 @@ public class GamePlayScreen {
         helpBtn.addActionListener(e -> helpMenu.openHelpMenu());
 
         // Save BUTTON
+
+        //TODO: Fix error( throws an exception in line 112 (Building.java))
         JButton saveBtn = new JButton("Save Game");
+        saveBtn.setToolTipText("Click to save game");
+//        saveBtn.addActionListener(e -> {
+//            try {
+//                building.gameSave();
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//        });
+
+        //Quit BUTTON
+
+        JButton quitBtn = new JButton("Quit Game");
+        quitBtn.setToolTipText("Click to quit game");
+        quitBtn.addActionListener(e ->building.quit() );
+
 
         // SETTINGS BAR
         settingsBar.setBackground(Color.DARK_GRAY);
@@ -61,9 +88,10 @@ public class GamePlayScreen {
         settingsBar.add(settingsBtn);
         settingsBar.add(helpBtn);
         settingsBar.add(saveBtn);
+        settingsBar.add(quitBtn);
 
         // GAME MESSAGE
-        gameMessage.setFont(new Font("Arial", Font.BOLD, 25));
+        gameMessage.setFont(new Font("Arial", Font.ITALIC, 25));
         gameMessage.setBounds(10, 25, 1500, 125);
 
         // GAME TEXT SECTION
@@ -82,14 +110,18 @@ public class GamePlayScreen {
         JPanel buttonPanel = new JPanel();
         gameInfoContainer.setLayout(null);
         // gameInfo.setBackground(Color.GRAY);
+
         gameInfoContainer.setBounds(1100, 150, 375, 145);
+
         gameInfoContainer.add(gameInfoText);
+
 
         // GAME INFO BORDER
         // TitledBorder gameInfoBorder = BorderFactory.createTitledBorder("GAME INFORMATION");
         // gameInfoBorder.setTitleJustification(TitledBorder.CENTER);
         Border gameInfoBorder = BorderFactory.createStrokeBorder(new BasicStroke(5.0f));
         gameInfoContainer.setBorder(gameInfoBorder);
+
 
         // Border
         TitledBorder inventoryBorder = BorderFactory.createTitledBorder("INVENTORY");

@@ -160,13 +160,21 @@ public class GamePlayScreen {
         // DIRECTIONAL BUTTONS
         for (int i = 0; i < directions.length; i++) {
             int x = i == 0 ? 10 : i * 125;
-            JButton btn = new JButton(directions[i]);
-            btn.addActionListener(e -> {
-                String roomName = e.getActionCommand();
-                moveListener.accept(roomName);
-            });
-            btn.setBounds(x, 50, 100, 30);
-            gameInfoContainer.add(btn);
+            if(  !directions[i].equals("1") &&
+                !directions[i].equals("2")&&
+                !directions[i].equals("3") &&
+                !directions[i].equals("4")&&
+                !directions[i].equals("5")){
+
+                JButton btn = new JButton(directions[i]);
+                btn.addActionListener(e -> {
+                    String roomName = e.getActionCommand();
+                    moveListener.accept(roomName);
+                });
+                btn.setBounds(x, 50, 100, 30);
+                gameInfoContainer.add(btn);
+            }
+
         }
         gameInfoContainer.revalidate();
         gameInfoContainer.repaint();

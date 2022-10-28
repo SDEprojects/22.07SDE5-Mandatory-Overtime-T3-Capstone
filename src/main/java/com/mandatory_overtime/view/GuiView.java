@@ -64,7 +64,7 @@ public class GuiView {
         container.revalidate();
     }
 
-    public void setUpGamePlay(HashMap locations, HashMap items){
+    public void setUpGamePlay(HashMap locations, HashMap items) throws IOException {
         gamePlayScreen =new GamePlayScreen(locations, items);
 
     }

@@ -99,14 +99,16 @@ public class GamePlayScreen {
         inventoryContainer.setBounds(1100, 300, 375, 450);
 
         // ADD ALL TO GAMESCREEN
-        gameScreen.add(locationContainer,4);
-        gameScreen.add(inventoryContainer,3);
-        gameScreen.add(gameInfoContainer,2);
-        gameScreen.add(gameTextContainer,1);
-        gameScreen.add(settingsBar,0);
+        gameScreen.add(locationContainer);
+        gameScreen.add(inventoryContainer);
+        gameScreen.add(gameInfoContainer);
+        gameScreen.add(gameTextContainer);
+        gameScreen.add(settingsBar);
 
-
-
+        gameScreen.setLayer(gameTextContainer, 2);
+        gameScreen.setLayer(inventoryContainer,0);
+        gameScreen.setLayer(locationContainer,1);
+        gameScreen.setLayer(settingsBar,3);
 
     }
 
@@ -176,6 +178,12 @@ public class GamePlayScreen {
         }
         inventoryContainer.revalidate();
         inventoryContainer.repaint();
+
+        gameScreen.setLayer(gameTextContainer, 2);
+        gameScreen.setLayer(inventoryContainer,0);
+        gameScreen.setLayer(locationContainer,1);
+        gameScreen.setLayer(settingsBar,3);
+
 
     }
 

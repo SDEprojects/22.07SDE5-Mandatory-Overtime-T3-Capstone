@@ -100,7 +100,7 @@ public class LocationGUIPanel {
 
 
             pane.add(locationImage);
-            pane.setBounds(0, 0, 1100, 700);
+            pane.setBounds(10, 10, 1080, 640);
 
         }catch (IOException e) {
             throw new RuntimeException(e);

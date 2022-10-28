@@ -51,6 +51,7 @@ public class GUIController {
     public void startGame(){
         building.setName("Player 1");
         building.getPlayer().addToInventory("laptop");
+        message = "Starting in the Office";
         updateGameView();
         view.presentGameScreen();
     }

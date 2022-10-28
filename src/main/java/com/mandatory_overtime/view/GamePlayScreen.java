@@ -192,7 +192,7 @@ public class GamePlayScreen {
         // DIRECTIONAL BUTTONS
         for (int i = 0; i < directions.length; i++) {
             int x = i == 0 ? 10 : i * 125;
-            if(  !directions[i].equals("1") &&
+            if( !directions[i].equals("1") &&
                 !directions[i].equals("2")&&
                 !directions[i].equals("3") &&
                 !directions[i].equals("4")&&

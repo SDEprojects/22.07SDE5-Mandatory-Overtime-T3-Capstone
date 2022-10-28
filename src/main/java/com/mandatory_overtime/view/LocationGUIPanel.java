@@ -19,7 +19,7 @@ public class LocationGUIPanel {
 
     private Map<String, JLayeredPane> locationsGuiPanels;
     private final Map<String, Item> gameItems;
-    private JButton itemButton;
+
 
     private Consumer<String> itemPickupListener;
 
@@ -46,29 +46,36 @@ public class LocationGUIPanel {
         locationsGuiPanels = new HashMap<>();
         for (Entry<String, Room> entry : map.entrySet()) {
             JLayeredPane pane = createPane(entry.getValue().getImage(), entry.getKey(),
-                entry.getValue()
-                    .getItem());
+                entry.getValue().getItem(), entry.getValue());
             locationsGuiPanels.put(entry.getKey(), pane);
         }
         return locationsGuiPanels;
     }
 
-    private JLayeredPane createPane(String imageUrl, String locationName, String itemName) {
+    private JLayeredPane createPane(String imageUrl, String locationName, String itemName, Room room) {
         JLayeredPane pane = new JLayeredPane();
 
         // GET IMAGE FOR LOCATION
         try {
             InputStream stream = getClass().getResourceAsStream("/images/" + imageUrl);
             ImageIcon img = new ImageIcon(ImageIO.read(stream));
+
             // CREATES LOCATION IMAGE
             JLabel locationImage = new JLabel(img);
             locationImage.setSize(1100, 700);
 
             // ADDS LOCATION ITEM BUTTON
             if (gameItems.get(itemName) != null) {
-                itemButton = createItemButton(gameItems.get(itemName));
+                JButton itemButton = createItemButton(gameItems.get(itemName));
                 pane.add(itemButton);
             }
+
+            // ADDS NPC BUTTON
+            if(room.getNPC() != null){
+                JButton npcButton = createNPCButton(room);
+                pane.add(npcButton);
+            }
+
 
             // IF THE LOCATION IS Elevator add the elevator buttons
             switch (locationName) {
@@ -220,13 +227,38 @@ public class LocationGUIPanel {
             itemButton.addActionListener(e -> {
                 String itemName = e.getActionCommand();
                 itemPickupListener.accept(itemName);
-                // pane.remove(itemButton);
             });
             return itemButton;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private JButton createNPCButton(Room room){
+        JButton btn;
+        int[] coords = room.getNpcCoord();
+        InputStream img = getClass().getResourceAsStream("/images/" + room.getNpcImage());
+        try {
+            ImageIcon npcImg = new ImageIcon(ImageIO.read(img));
+            // ITEM BUTTON CREATED
+            btn = new JButton(npcImg);
+            btn.setActionCommand(room.getNPC());
+            btn.setFocusPainted(false);
+            btn.setContentAreaFilled(false);
+            btn.setBounds(coords[0], coords[1], coords[2], coords[3]);
+            btn.setToolTipText(room.getNPC());
+//            btn.addActionListener(e -> {
+//                String itemName = e.getActionCommand();
+//                itemPickupListener.accept(itemName);
+//                // pane.remove(itemButton);
+//            });
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return btn;
     }
 
     public void setItemPickupListener(Consumer<String> itemPickupListener) {

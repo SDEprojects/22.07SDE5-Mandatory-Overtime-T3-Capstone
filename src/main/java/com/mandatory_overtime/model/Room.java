@@ -50,6 +50,12 @@ public class Room {
   @SerializedName("image")
   private String image;
 
+  @SerializedName("npcImage")
+  private String npcImage;
+
+  @SerializedName("npcCoord")
+  private int[] npcCoord;
+
   public String getPhoneTypingAudio() {
     return phoneTypingAudio;
   }
@@ -218,5 +224,21 @@ public class Room {
 
   public void setFailCondition(Boolean failCondition) {
     this.failCondition = failCondition;
+  }
+
+  public String getNpcImage() {
+    return npcImage;
+  }
+
+  public void setNpcImage(String npcImage) {
+    this.npcImage = npcImage;
+  }
+
+  public int[] getNpcCoord() {
+    return npcCoord;
+  }
+
+  public void setNpcCoord(int[] npcCoord) {
+    this.npcCoord = npcCoord;
   }
 }

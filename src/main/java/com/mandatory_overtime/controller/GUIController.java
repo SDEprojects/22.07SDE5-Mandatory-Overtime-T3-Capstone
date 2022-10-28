@@ -23,7 +23,6 @@ public class GUIController {
 
     private String message = "";
 
-    Player player = new Player();
 
     public GUIController() throws IOException {
         view = new GuiView();
@@ -39,6 +38,8 @@ public class GUIController {
 
         // Set up Game Screen
         view.setUpGamePlay(building.getBuilding(), building.getGameItems());
+
+        // Set up Move Consumers for Game
         view.setMoveConsumer(roomName -> {
             try {
                 System.out.println("Moving to: " + roomName);

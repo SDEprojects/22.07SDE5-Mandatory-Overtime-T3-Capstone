@@ -26,9 +26,19 @@ public class GUIController {
     Player player = new Player();
 
     public GUIController() throws IOException {
-        building.createGameStructureFromNew();
-        view = new GuiView(building.getBuilding(), building.getGameItems());
+        view = new GuiView();
         view.presentMainMenu();
+        loadBtn = view.getLoadGameButton();
+        startBtn = view.getNewGameButton();
+        loadActionEvents();
+    }
+
+    public void startNewGame() throws IOException {
+        // Create New Building
+        building.createGameStructureFromNew();
+
+        // Set up Game Screen
+        view.setUpGamePlay(building.getBuilding(), building.getGameItems());
         view.setMoveConsumer(roomName -> {
             try {
                 System.out.println("Moving to: " + roomName);
@@ -42,17 +52,18 @@ public class GUIController {
                 message = "Couldn't move to that location";
             }
         });
-        loadBtn = view.getLoadGameButton();
-        startBtn = view.getNewGameButton();
 
-        loadActionEvents();
-    }
-
-    public void startGame(){
+        // Prompt Player for Name
         building.setName("Player 1");
         building.getPlayer().addToInventory("laptop");
+
+        // Set Message TO Intro Story
         message = "Starting in the Office";
+
+        // Update View
         updateGameView();
+
+        // Present View
         view.presentGameScreen();
     }
 
@@ -65,7 +76,13 @@ public class GUIController {
     }
 
     public void loadActionEvents() {
-        startBtn.addActionListener(e -> startGame());
+        startBtn.addActionListener(e -> {
+            try {
+                startNewGame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
     }
 

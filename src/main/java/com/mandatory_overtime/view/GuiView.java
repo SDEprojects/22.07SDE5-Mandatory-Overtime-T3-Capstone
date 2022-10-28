@@ -22,7 +22,7 @@ public class GuiView {
 
     public static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
 
-    public GuiView() throws IOException {
+    public GuiView(){
         JFrame frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

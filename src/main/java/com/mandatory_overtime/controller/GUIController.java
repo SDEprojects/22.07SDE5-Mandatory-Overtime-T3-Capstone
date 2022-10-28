@@ -45,9 +45,6 @@ public class GUIController {
                 System.out.println("Moving to: " + roomName);
                 building.moveRooms2(roomName);
                 message = "room updated";
-                building.getPlayer().addToInventory("phone");
-                building.getPlayer().addToInventory("wallet");
-                building.getPlayer().addToInventory("sweater");
                 updateGameView();
             } catch (MissingRequirementException | InterruptedException e) {
                 message = "Couldn't move to that location";

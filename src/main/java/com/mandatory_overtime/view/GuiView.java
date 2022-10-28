@@ -1,10 +1,10 @@
 package com.mandatory_overtime.view;
 
-import com.mandatory_overtime.model.Building;
+import com.mandatory_overtime.model.Item;
+import com.mandatory_overtime.model.Room;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,8 +78,9 @@ public class GuiView {
     }
 
 
-    public void updateGameScreen(String location, List<String> inventory,String message, String[] directions ){
-        gamePlayScreen.updateGamePlayScreen(location, inventory,message,directions);
+    public void updateGameScreen(String location, List<String> inventory,String message, String[] directions,
+         String removedItem){
+        gamePlayScreen.updateGamePlayScreen(location, inventory,message,directions, removedItem);
     }
 
     public void setMoveConsumer(Consumer<String> listener) {

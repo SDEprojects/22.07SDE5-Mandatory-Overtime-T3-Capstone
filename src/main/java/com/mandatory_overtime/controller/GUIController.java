@@ -24,6 +24,8 @@ public class GUIController {
 
     private String message = "";
 
+    private String removedItem;
+
 
     public GUIController() throws IOException {
         view = new GuiView();
@@ -57,14 +59,13 @@ public class GUIController {
             itemName -> {
                 try {
                     building.getItem(itemName);
-                    //TODO remove button if we ever get here
+                    removedItem = itemName;
+                    message = "You picked up " + itemName;
                     updateGameView();
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (CantGetItemException e) {
-                    throw new RuntimeException(e);
+                } catch (MissingRequirementException | CantGetItemException e){
+                    message = e.getMessage();
                 }
             });
 
@@ -87,8 +88,7 @@ public class GUIController {
         String currentLocation = building.getPlayer().getCurrentLocation();
         String[] directions = building.getBuilding().get(currentLocation).getDirections();
         List<String> inventory = building.getPlayer().getInventory();
-        view.updateGameScreen(currentLocation, inventory, message, directions);
-
+        view.updateGameScreen(currentLocation, inventory, message, directions, removedItem);
     }
 
     public void loadActionEvents() {

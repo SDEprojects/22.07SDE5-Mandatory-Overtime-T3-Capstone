@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 public class LocationGUIPanel {
 
@@ -21,6 +22,8 @@ public class LocationGUIPanel {
     private JButton itemButton;
 
     private Consumer<String> itemPickupListener;
+
+    private Consumer<String> moveLocationListener;
 
     private final String[] elevatorButtonNames = new String[]{"1", "2", "3", "4", "5"};
     private final String[] elevator_1_ButtonNames = new String[]{"2", "3", "4", "5"};
@@ -63,7 +66,7 @@ public class LocationGUIPanel {
 
             // ADDS LOCATION ITEM BUTTON
             if (gameItems.get(itemName) != null) {
-                itemButton = createItemButton(gameItems.get(itemName), pane);
+                itemButton = createItemButton(gameItems.get(itemName));
                 pane.add(itemButton);
             }
 
@@ -129,6 +132,9 @@ public class LocationGUIPanel {
             elevatorBtn_1.setContentAreaFilled(false);
             elevatorBtn_1.setBorder(null);
             elevatorBtn_1.setToolTipText("Click to go To level 1");
+            elevatorBtn_1.addActionListener(e -> {
+                moveLocationListener.accept(buttonSelection);
+            });
 
             InputStream img2 = getClass().getResourceAsStream("/images/elevatorBtn2.png");
             ImageIcon elevatorBtn2Image = new ImageIcon(ImageIO.read(img2));
@@ -138,6 +144,9 @@ public class LocationGUIPanel {
             elevatorBtn_2.setContentAreaFilled(false);
             elevatorBtn_2.setBorder(null);
             elevatorBtn_2.setToolTipText("Click to go To level 2");
+            elevatorBtn_2.addActionListener(e -> {
+                moveLocationListener.accept(buttonSelection);
+            });
 
             InputStream img3 = getClass().getResourceAsStream("/images/elevatorBtn3.png");
             ImageIcon elevatorBtn3Image = new ImageIcon(ImageIO.read(img3));
@@ -147,6 +156,9 @@ public class LocationGUIPanel {
             elevatorBtn_3.setContentAreaFilled(false);
             elevatorBtn_3.setBorder(null);
             elevatorBtn_3.setToolTipText("Click to go To level 3");
+            elevatorBtn_3.addActionListener(e -> {
+                moveLocationListener.accept(buttonSelection);
+            });
 
             InputStream img4 = getClass().getResourceAsStream("/images/elevatorBtn4.png");
             ImageIcon elevatorBtn4Image = new ImageIcon(ImageIO.read(img4));
@@ -156,6 +168,9 @@ public class LocationGUIPanel {
             elevatorBtn_4.setContentAreaFilled(false);
             elevatorBtn_4.setBorder(null);
             elevatorBtn_4.setToolTipText("Click to go To level 4");
+            elevatorBtn_4.addActionListener(e -> {
+                moveLocationListener.accept(buttonSelection);
+            });
 
             InputStream img5 = getClass().getResourceAsStream("/images/elevatorBtn5.png");
             ImageIcon elevatorBtn5Image = new ImageIcon(ImageIO.read(img5));
@@ -165,6 +180,9 @@ public class LocationGUIPanel {
             elevatorBtn_5.setContentAreaFilled(false);
             elevatorBtn_5.setBorder(null);
             elevatorBtn_5.setToolTipText("Click to go To level 5");
+            elevatorBtn_5.addActionListener(e -> {
+                moveLocationListener.accept(buttonSelection);
+            });
 
             switch (buttonSelection) {
                 case "1":
@@ -186,7 +204,7 @@ public class LocationGUIPanel {
         return new JButton();
     }
 
-    private JButton createItemButton(Item item, JLayeredPane pane) {
+    private JButton createItemButton(Item item) {
         JButton itemButton;
         int[] cords = item.getImgCord();
         try {
@@ -202,7 +220,7 @@ public class LocationGUIPanel {
             itemButton.addActionListener(e -> {
                 String itemName = e.getActionCommand();
                 itemPickupListener.accept(itemName);
-                pane.remove(itemButton);
+                // pane.remove(itemButton);
             });
             return itemButton;
         } catch (IOException e) {
@@ -214,4 +232,9 @@ public class LocationGUIPanel {
     public void setItemPickupListener(Consumer<String> itemPickupListener) {
         this.itemPickupListener = itemPickupListener;
     }
+
+    public void setMoveLocationListener(Consumer<String> moveLocationListener){
+        this.moveLocationListener = moveLocationListener;
+    }
+
 }

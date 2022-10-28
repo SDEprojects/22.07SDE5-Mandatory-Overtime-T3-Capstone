@@ -7,117 +7,128 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Item {
 
-  @SerializedName("item")
-  private String name;
-  @SerializedName("location")
-  private String location;
-  @SerializedName("purpose")
-  private String purpose;
-  @SerializedName("npc")
-  private boolean npc;
-  @SerializedName("preReq")
-  private String preReq;
-  @SerializedName("challenge")
-  private Boolean challenge;
-  @SerializedName("challenge prompt")
-  private String challengePrompt;
-  @SerializedName("challenge answer")
-  private String challengeAnswer;
-  @SerializedName("acquired")
-  private Boolean acquired;
+    @SerializedName("item")
+    private String name;
+    @SerializedName("location")
+    private String location;
+    @SerializedName("purpose")
+    private String purpose;
+    @SerializedName("npc")
+    private boolean npc;
+    @SerializedName("preReq")
+    private String preReq;
+    @SerializedName("challenge")
+    private Boolean challenge;
+    @SerializedName("challenge prompt")
+    private String challengePrompt;
+    @SerializedName("challenge answer")
+    private String challengeAnswer;
+    @SerializedName("acquired")
+    private Boolean acquired;
 
-  @SerializedName("image")
-  private String image;
+    @SerializedName("image")
+    private String image;
+
+    @SerializedName("imgCord")
+    private int[] imgCord;
+
+    @SerializedName("sound1")
+    private String audio1;
+
+    public String getAudio1() {
+        return audio1;
+    }
+
+    public void setAudio1(String audio1) {
+        this.audio1 = audio1;
+    }
 
 
-  @SerializedName("sound1")
-  private String audio1;
-  public String getAudio1() {
-    return audio1;
-  }
+    public Boolean getAcquired() {
+        return acquired;
+    }
 
-  public void setAudio1(String audio1) {
-    this.audio1 = audio1;
-  }
+    public void setAcquired(Boolean acquired) {
+        this.acquired = acquired;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public Boolean getAcquired() {
-    return acquired;
-  }
+    public String getLocation() {
+        return location;
+    }
 
-  public void setAcquired(Boolean acquired) {
-    this.acquired = acquired;
-  }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-  public String getName() {
-    return name;
-  }
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getPurpose() {
+        return purpose;
+    }
 
-  public String getLocation() {
-    return location;
-  }
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
 
-  public void setLocation(String location) {
-    this.location = location;
-  }
+    public boolean isNpc() {
+        return npc;
+    }
 
-  public String getPurpose() {
-    return purpose;
-  }
+    public void setNpc(boolean npc) {
+        this.npc = npc;
+    }
 
-  public void setPurpose(String purpose) {
-    this.purpose = purpose;
-  }
+    public String getPreReq() {
+        return preReq;
+    }
 
-  public boolean isNpc() {
-    return npc;
-  }
+    public void setPreReq(String preReq) {
+        this.preReq = preReq;
+    }
 
-  public void setNpc(boolean npc) {
-    this.npc = npc;
-  }
+    public Boolean getChallenge() {
+        return challenge;
+    }
 
-  public String getPreReq() {
-    return preReq;
-  }
+    public void setChallenge(Boolean challenge) {
+        this.challenge = challenge;
+    }
 
-  public void setPreReq(String preReq) {
-    this.preReq = preReq;
-  }
+    public String getChallengePrompt() {
+        return challengePrompt;
+    }
 
-  public Boolean getChallenge() {
-    return challenge;
-  }
+    public void setChallengePrompt(String challengePrompt) {
+        this.challengePrompt = challengePrompt;
+    }
 
-  public void setChallenge(Boolean challenge) {
-    this.challenge = challenge;
-  }
+    public String getChallengeAnswer() {
+        return challengeAnswer;
+    }
 
-  public String getChallengePrompt() {
-    return challengePrompt;
-  }
+    public void setChallengeAnswer(String challengeAnswer) {
+        this.challengeAnswer = challengeAnswer;
+    }
 
-  public void setChallengePrompt(String challengePrompt) {
-    this.challengePrompt = challengePrompt;
-  }
+    public String getImage() {
+        return image;
+    }
 
-  public String getChallengeAnswer() {
-    return challengeAnswer;
-  }
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-  public void setChallengeAnswer(String challengeAnswer) {
-    this.challengeAnswer = challengeAnswer;
-  }
+    public int[] getImgCord() {
+        return imgCord;
+    }
 
-  public String getImage(){
-    return image;
-  }
-
-  public void setImage(String image){
-    this.image = image;
-  }
+    public void setImgCord(int[] imgCord) {
+        this.imgCord = imgCord;
+    }
 }

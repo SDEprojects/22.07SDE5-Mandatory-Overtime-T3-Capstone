@@ -57,9 +57,6 @@ public class LocationGUIPanel {
             locationImage.setSize(1100, 700);
 
         // ADDS LOCATION ITEM BUTTON
-            //TODO get the item for the location and add image as a button
-            // set coords for the item on the image
-            // save into JSON as x, y coords
             if(gameItems.get(itemName) != null){
                 pane.add(createItemButton(gameItems.get(itemName)));
             }
@@ -187,6 +184,7 @@ public class LocationGUIPanel {
 
     private JButton createItemButton(Item item){
             JButton itemButton;
+            int[] cords = item.getImgCord();
         try{
             InputStream img1 = getClass().getResourceAsStream("/images/"+ item.getImage());
             ImageIcon itemImage = new ImageIcon(ImageIO.read(img1));
@@ -194,7 +192,7 @@ public class LocationGUIPanel {
             itemButton = new JButton(itemImage);
             itemButton.setFocusPainted(false);
             itemButton.setContentAreaFilled(false);
-            itemButton.setBounds(200,375,350, 300);
+            itemButton.setBounds(cords[0],cords[1],cords[2], cords[3]);
             itemButton.setToolTipText(item.getPurpose());
             return itemButton;
         } catch (IOException e) {

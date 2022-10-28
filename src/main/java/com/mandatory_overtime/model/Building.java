@@ -561,6 +561,10 @@ public class Building {
         return player.getName();
     }
 
+    public Player getPlayer(){
+        return player;
+    }
+
     public HashMap<String, Room> getBuilding() {
         return building;
     }

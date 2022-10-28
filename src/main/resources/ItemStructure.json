@@ -10,7 +10,8 @@
     "challenge answer": "c",
     "acquired": false,
     "sound1" : "Inventory_Stash_Item.wav",
-    "image": "laptop.png"
+    "image": "laptop.png",
+    "imgCord": [200,375,350,300]
   },
   {
     "item": "mask",
@@ -22,7 +23,8 @@
     "challenge prompt" : null,
     "challenge answer": null,
     "acquired": false,
-    "image": "laptop.png"
+    "image": "mask.png",
+    "imgCord": [200,350, 250, 275]
   },
   {
     "item": "sweater",
@@ -34,7 +36,8 @@
     "challenge prompt" : null,
     "challenge answer": null,
     "acquired": false,
-    "image": "laptop.png"
+    "image": "sweater.png",
+    "imgCord": [725,15,250,300]
   },
   {
     "item": "cake",
@@ -46,7 +49,8 @@
     "challenge prompt" : null,
     "challenge answer": null,
     "acquired": false,
-    "image": "laptop.png"
+    "image": "cake.png",
+    "imgCord": [335,325,275,325]
   },
   {
     "item": "code",
@@ -70,7 +74,8 @@
     "challenge prompt" : null,
     "challenge answer": null,
     "acquired": false,
-    "image": "laptop.png"
+    "image": "wallet.png",
+    "imgCord": [125,375,175,150]
   },
   {
     "item": "raisinets",
@@ -82,7 +87,8 @@
     "challenge prompt" : null,
     "challenge answer": null,
     "acquired": false,
-    "image": "laptop.png"
+    "image": "raisinets.png",
+    "imgCord": [335,265,75,125]
   },
   {
     "item": "keyfob",
@@ -106,7 +112,8 @@
     "challenge prompt" : null,
     "challenge answer": null,
     "acquired": false,
-    "image": "laptop.png"
+    "image": "badge.png",
+    "imgCord": [55,500,175,150]
   },
   {
     "item": "phone",
@@ -118,6 +125,7 @@
     "challenge prompt" : "Passcode Hint: What rattles when it walks?",
     "challenge answer": "skeleton",
     "acquired": false,
-    "image": "laptop.png"
+    "image": "phone.png",
+    "imgCord": [325,400,175,225]
   }
 ]

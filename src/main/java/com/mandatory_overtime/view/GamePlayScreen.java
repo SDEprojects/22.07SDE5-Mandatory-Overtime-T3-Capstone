@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -23,16 +22,16 @@ import javax.swing.border.TitledBorder;
 public class GamePlayScreen {
 
     private static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
-    private static Map<String, JLayeredPane> ITEMS_GUI_PANELS;
+
     private final SettingsMenu settingsMenu = new SettingsMenu();
     private final HelpMenu helpMenu = new HelpMenu();
     private Consumer<String> moveListener;
-    private JLayeredPane gameScreen = new JLayeredPane();
-    private JPanel settingsBar = new JPanel();
-    private JPanel gameTextSection = new JPanel();
-    private JLayeredPane locationPanel;
-    private JPanel gameInfo = new JPanel();
-    private JPanel inventoryView = new JPanel();
+    private final JLayeredPane gameScreen = new JLayeredPane();
+    private final JPanel settingsBar = new JPanel();
+    private final JPanel gameTextContainer = new JPanel();
+    private JLayeredPane locationContainer;
+    private final JPanel gameInfoContainer = new JPanel();
+    private final JPanel inventoryContainer = new JPanel();
 
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
@@ -50,8 +49,7 @@ public class GamePlayScreen {
         // Help BUTTON
         JButton helpBtn = new JButton("Help");
         helpBtn.setToolTipText("Enter Prompt");
-        helpBtn.addActionListener(e->helpMenu.openHelpMenu());
-
+        helpBtn.addActionListener(e -> helpMenu.openHelpMenu());
 
         // Save BUTTON
         JButton saveBtn = new JButton("Save Game");
@@ -68,42 +66,42 @@ public class GamePlayScreen {
         gameMessage.setBounds(10, 25, 1500, 125);
 
         // GAME TEXT SECTION
-        gameTextSection.setLayout(null);
-        gameTextSection.setBounds(0, 25, 1500, 120);
-        gameTextSection.setBackground(Color.GRAY);
-        gameTextSection.add(gameMessage);
+        gameTextContainer.setLayout(null);
+        gameTextContainer.setBounds(0, 25, 1500, 120);
+        gameTextContainer.setBackground(Color.GRAY);
+        gameTextContainer.add(gameMessage);
 
         // LOCATION SETTING
-        locationPanel = LOCATION_GUI_PANELS.get("office");
-        locationPanel.setBounds(0, 100, 1100, 700);
+        locationContainer = LOCATION_GUI_PANELS.get("office");
+        locationContainer.setBounds(0, 100, 1100, 700);
 
         // GAME INFO SECTION
         gameInfoText.setBounds(10, 20, 400, 20);
         JPanel buttonPanel = new JPanel();
-        gameInfo.setLayout(null);
+        gameInfoContainer.setLayout(null);
         // gameInfo.setBackground(Color.GRAY);
-        gameInfo.setBounds(1100, 150, 375, 145);
-        gameInfo.add(gameInfoText);
+        gameInfoContainer.setBounds(1100, 150, 375, 145);
+        gameInfoContainer.add(gameInfoText);
 
         // GAME INFO BORDER
         // TitledBorder gameInfoBorder = BorderFactory.createTitledBorder("GAME INFORMATION");
         // gameInfoBorder.setTitleJustification(TitledBorder.CENTER);
         Border gameInfoBorder = BorderFactory.createStrokeBorder(new BasicStroke(5.0f));
-        gameInfo.setBorder(gameInfoBorder);
+        gameInfoContainer.setBorder(gameInfoBorder);
 
         // Border
         TitledBorder inventoryBorder = BorderFactory.createTitledBorder("INVENTORY");
         inventoryBorder.setTitleJustification(TitledBorder.CENTER);
-        inventoryView.setBorder(inventoryBorder);
-        inventoryView.setBackground(Color.LIGHT_GRAY);
-        inventoryView.setBounds(1100, 300, 375, 450);
+        inventoryContainer.setBorder(inventoryBorder);
+        inventoryContainer.setBackground(Color.LIGHT_GRAY);
+        inventoryContainer.setBounds(1100, 300, 375, 450);
 
         // ADD ALL TO GAMESCREEN
         gameScreen.add(settingsBar);
-        gameScreen.add(gameTextSection);
-        gameScreen.add(locationPanel);
-        gameScreen.add(inventoryView);
-        gameScreen.add(gameInfo);
+        gameScreen.add(gameTextContainer);
+        gameScreen.add(locationContainer);
+        gameScreen.add(inventoryContainer);
+        gameScreen.add(gameInfoContainer);
     }
 
     public JLayeredPane getGameScreen() {
@@ -113,14 +111,32 @@ public class GamePlayScreen {
     public void updateGamePlayScreen(String location, List<String> inventory, String message,
         String[] directions) {
 
+        gameTextContainer.removeAll();
+        gameInfoContainer.removeAll();
+        inventoryContainer.removeAll();
+
+
         // UPDATE GAME TEXT
+
         gameMessage.setText(message);
+        gameTextContainer.add(gameMessage);
+        gameTextContainer.revalidate();
+        gameTextContainer.repaint();
 
         // UPDATE LOCATION
-        locationPanel = LOCATION_GUI_PANELS.get(location);
+
+        locationContainer = LOCATION_GUI_PANELS.get(location);
+        locationContainer.setBounds(0, 100, 1100, 700);
+        locationContainer.revalidate();
+        locationContainer.repaint();
+
 
         // UPDATE GAME INFO SECTION
+
         gameInfoText.setText("Current Location:\t    " + location.toUpperCase());
+        gameInfoContainer.add(gameInfoText);
+        gameInfoContainer.revalidate();
+        gameInfoContainer.repaint();
 
         // DIRECTIONAL BUTTONS
         for (int i = 0; i < directions.length; i++) {
@@ -131,31 +147,38 @@ public class GamePlayScreen {
                 moveListener.accept(roomName);
             });
             btn.setBounds(x, 50, 100, 30);
-            gameInfo.add(btn);
+            gameInfoContainer.add(btn);
         }
+        gameInfoContainer.revalidate();
+        gameInfoContainer.repaint();
 
         // INVENTORY SECTION
         // UPDATE INVENTORY VIEW
         for (String item : inventory) {
             ImageIcon itemImageIcon;
-            try (InputStream imgStream = getClass().getResourceAsStream("/images/thumbnails/" + item + ".png")) {
+            try (InputStream imgStream = getClass().getResourceAsStream(
+                "/images/thumbnails/" + item + ".png")) {
                 if (imgStream != null) {
                     itemImageIcon = new ImageIcon(ImageIO.read(imgStream));
                     JLabel itemImageLabel = new JLabel(itemImageIcon);
-                    inventoryView.add(itemImageLabel);
+                    inventoryContainer.add(itemImageLabel);
                 } else {
                     JLabel inventoryText = new JLabel(item);
-                    inventoryView.add(inventoryText);
+                    inventoryContainer.add(inventoryText);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+        inventoryContainer.revalidate();
+        inventoryContainer.repaint();
+
+
     }
 
 
     public void buildLocationGUI(HashMap locations, HashMap items) {
-        LocationGUIPanel locationGUIPanel = new LocationGUIPanel(locations,items );
+        LocationGUIPanel locationGUIPanel = new LocationGUIPanel(locations, items);
         LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels();
     }
 

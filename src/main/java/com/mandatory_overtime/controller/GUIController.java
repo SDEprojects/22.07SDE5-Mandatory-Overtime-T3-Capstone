@@ -6,11 +6,13 @@ import com.mandatory_overtime.model.Building.CantGetItemException;
 import com.mandatory_overtime.model.Player;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
+import com.mandatory_overtime.view.UserView;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 
 public class GUIController {
@@ -26,6 +28,8 @@ public class GUIController {
 
     private String removedItem;
 
+    private UserView stringMessages = new UserView();
+
 
     public GUIController() throws IOException {
         view = new GuiView();
@@ -39,15 +43,20 @@ public class GUIController {
         // Create New Building
         building.createGameStructureFromNew();
 
+        String playerName;
+        playerName =  JOptionPane.showInputDialog("What is you name? ");
+        building.setName(playerName);
         // Set up Game Screen
         view.setUpGamePlay(building.getBuilding(), building.getGameItems());
 
         // Set up Move Consumers for Game
         view.setMoveConsumer(roomName -> {
             try {
-                System.out.println("Moving to: " + roomName);
                 building.moveRooms2(roomName);
-                message = "room updated";
+                String currentLocation = building.getPlayer().getCurrentLocation();
+                String description = building.getBuilding().get(currentLocation).getDescription();
+                String item = building.getBuilding().get(currentLocation).getItem();
+                message = stringMessages.gameStatus(currentLocation,description,item );
                 updateGameView();
             } catch (MissingRequirementException | InterruptedException e) {
                 message = "Couldn't move to that location";
@@ -70,17 +79,10 @@ public class GUIController {
             });
 
         view.getGamePlayScreen().getLocationGUIPanel().setNpcListener(npcName -> {
-            System.out.println("npc test");
-            System.out.println(npcName);
                 message = building.interactWithNpc(npcName);
-
                 updateGameView();
             }
         );
-
-        // Prompt Player for Name
-        building.setName("Player 1");
-        building.getPlayer().addToInventory("sweater");
 
 
         // Set Message TO Intro Story

@@ -267,7 +267,7 @@ public class Building {
             } else {
                 winGameCheck(newLocation);
                 GameMusic.playAccessDeniedSound(newLocation);
-                throw new MissingRequirementException(newLocation);
+                throw new MissingRequirementException(newLocation, nextRoomPreReq);
             }
         }
 

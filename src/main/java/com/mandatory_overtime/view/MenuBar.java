@@ -2,6 +2,7 @@ package com.mandatory_overtime.view;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
+import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -30,24 +31,36 @@ public final class MenuBar extends JMenuBar {
         settings.setContentAreaFilled(false);
         settings.setFocusPainted(false);
         settings.setOpaque(false);
+        settings.setFont(new Font("arial narrow", Font.BOLD, 17));
+        //sets font color
+        settings.setForeground(Color.white);
         settings.addActionListener(e -> settingsDialog.openMenu());
 
         help.setBorderPainted(false);
         help.setContentAreaFilled(false);
         help.setFocusPainted(false);
         help.setOpaque(false);
+        help.setFont(new Font("arial narrow", Font.BOLD, 17));
+        //sets font color
+        help.setForeground(Color.white);
         help.addActionListener(e -> helpDialog.openHelpMenu());
 
         gameInfo.setBorderPainted(false);
         gameInfo.setContentAreaFilled(false);
         gameInfo.setFocusPainted(false);
         gameInfo.setOpaque(false);
+        gameInfo.setFont(new Font("arial narrow", Font.BOLD, 17));
+        //sets font color
+        gameInfo.setForeground(Color.white);
         gameInfo.addActionListener(e -> gameInfoDialog.openGameInfoMenu());
 
         save.setBorderPainted(false);
         save.setContentAreaFilled(false);
         save.setFocusPainted(false);
         save.setOpaque(false);
+        save.setFont(new Font("arial narrow", Font.BOLD, 17));
+        //sets font color
+        save.setForeground(Color.white);
         save.addActionListener(e -> {
             saveAction.run();
         });
@@ -56,6 +69,9 @@ public final class MenuBar extends JMenuBar {
         quit.setContentAreaFilled(false);
         quit.setFocusPainted(false);
         quit.setOpaque(false);
+        quit.setFont(new Font("arial narrow", Font.BOLD, 17));
+        //sets font color
+        quit.setForeground(Color.white);
         quit.addActionListener(e ->{
             quitAction.run();
         });
@@ -64,7 +80,7 @@ public final class MenuBar extends JMenuBar {
 
         MENU_BAR = new JMenuBar();
         MENU_BAR.setBounds(0, 0, 1490, 40);
-        MENU_BAR.setBackground(Color.LIGHT_GRAY);
+        MENU_BAR.setBackground(Color.DARK_GRAY);
         MENU_BAR.add(settings);
         MENU_BAR.add(new JMenu("|")).setEnabled(false);
         MENU_BAR.add(help);

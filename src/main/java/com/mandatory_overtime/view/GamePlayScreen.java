@@ -51,12 +51,12 @@ public class GamePlayScreen {
         MenuBar.showGameBtn();
         // GAME MESSAGE
         gameMessage.setFont(new Font("Arial", Font.ITALIC, 25));
-        gameMessage.setBounds(10, 25, 1500, 125);
+        gameMessage.setBounds(10, 15, 1450, 125);
 
         // GAME TEXT SECTION
         gameTextContainer.setLayout(null);
         gameTextContainer.setBounds(0, 25, 1500, 120);
-        gameTextContainer.setBackground(Color.GRAY);
+        gameTextContainer.setBackground(Color.BLACK);
         gameTextContainer.add(gameMessage);
 
         // LOCATION SECTION
@@ -123,6 +123,9 @@ public class GamePlayScreen {
 
         // UPDATE GAME TEXT
         gameMessage.setText("<html>" + message + "</html>");
+        gameMessage.setFont(new Font("Serif", Font.ITALIC, 22));
+        gameMessage.setForeground(Color.white);
+
         gameTextContainer.add(gameMessage);
         gameTextContainer.revalidate();
         gameTextContainer.repaint();

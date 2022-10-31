@@ -44,6 +44,7 @@ public class GamePlayScreen {
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
 
+
     public GamePlayScreen(HashMap locations, HashMap items) throws IOException {
         buildLocationGUI(locations, items);
         buildGamePLayScreen();

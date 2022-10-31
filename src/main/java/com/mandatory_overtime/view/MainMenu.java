@@ -20,7 +20,7 @@ import javax.swing.JProgressBar;
 
 public class MainMenu {
 
-    private final JMenuBar menuBar = MenuBar.getMenuBar();
+    private static final JMenuBar menuBar = MenuBar.getMenuBar();
     private static JLayeredPane homeScreen;
     private static JLayeredPane loadingScreen;
 
@@ -100,6 +100,9 @@ public class MainMenu {
     }
 
     public static JLayeredPane getHomeScreen() {
+        homeScreen.add(menuBar);
+        homeScreen.setLayer(menuBar, 2);
+        MenuBar.hideGameBtns();
         return homeScreen;
     }
 

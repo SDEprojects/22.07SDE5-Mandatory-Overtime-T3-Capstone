@@ -17,13 +17,12 @@ import javax.swing.JLayeredPane;
 
 public class GuiView {
 
+    private final MenuBar menuBar = new MenuBar();
     private final Container container;
 
     private final MainMenu mainMenu = new MainMenu();
     private GamePlayScreen gamePlayScreen;
 
-
-    public static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
 
     public GuiView(){
         JFrame frame = new JFrame("Mandatory Overtime");

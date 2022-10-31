@@ -30,6 +30,7 @@ public class MapDialog extends JDialog {
         map.setBounds(200, 50, 1000,700);
         updateMap(currentLocation);
         map.add(imageContainer);
+
     }
 
     public void loadImages(){

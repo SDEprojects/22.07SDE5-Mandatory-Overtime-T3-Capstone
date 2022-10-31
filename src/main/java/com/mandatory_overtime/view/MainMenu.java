@@ -56,7 +56,7 @@ public class MainMenu {
     }
     private void buildMainMenu(){
         homeScreen = new JLayeredPane();
-
+        MenuBar.hideGameBtns();
 
         // BackGroundImage
         JLabel imageSection = new JLabel(mainMenu);

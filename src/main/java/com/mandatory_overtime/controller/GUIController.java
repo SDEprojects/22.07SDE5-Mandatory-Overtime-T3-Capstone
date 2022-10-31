@@ -146,6 +146,19 @@ public class GUIController {
             }
         });
 
+        view.setQuitListener(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    building.gameSave();
+                    JOptionPane.showMessageDialog(null,"Game Saved!");
+                    view.presentMainMenu();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
 
         // Set Message TO Intro Story
        // message = "Starting in the Office";

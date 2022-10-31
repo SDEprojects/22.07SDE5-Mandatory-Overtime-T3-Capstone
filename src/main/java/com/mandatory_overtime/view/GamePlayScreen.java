@@ -50,7 +50,7 @@ public class GamePlayScreen {
     }
 
     private void buildGamePLayScreen() throws IOException {
-
+        MenuBar.showGameBtn();
         // GAME MESSAGE
         gameMessage.setFont(new Font("Arial", Font.ITALIC, 25));
         gameMessage.setBounds(10, 25, 1500, 125);

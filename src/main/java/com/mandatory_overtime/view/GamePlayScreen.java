@@ -121,6 +121,9 @@ public class GamePlayScreen {
         inventoryContainer.removeAll();
         locationContainer.removeAll();
 
+        // UPDATE MAP
+        MapDialog.updateMap(location);
+
         // UPDATE GAME TEXT
         gameMessage.setText("<html>" + message + "</html>");
         gameMessage.setFont(new Font("Serif", Font.ITALIC, 22));

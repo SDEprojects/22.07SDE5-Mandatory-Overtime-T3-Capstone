@@ -5,6 +5,7 @@ import com.mandatory_overtime.model.Building;
 import com.mandatory_overtime.model.Building.CantGetItemException;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
+import com.mandatory_overtime.view.MapDialog;
 import com.mandatory_overtime.view.UserView;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class GUIController {
     private String removedItem;
 
     private UserView stringMessages = new UserView();
-
+    private MapDialog map;
 
     public GUIController() throws IOException {
         UIManager.put("OptionPane.minimumSize", new Dimension(200,150));
@@ -94,6 +95,7 @@ public class GUIController {
     }
 
     public void setUpGamePlayHandlers() throws IOException {
+        map = new MapDialog(building.getPlayer().getCurrentLocation());
         // Set up Game Screen
         view.setUpGamePlay(building.getBuilding(), building.getGameItems());
         String currentLocationStart = building.getPlayer().getCurrentLocation();

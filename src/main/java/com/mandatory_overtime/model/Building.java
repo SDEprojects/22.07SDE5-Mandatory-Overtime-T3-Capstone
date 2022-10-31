@@ -67,7 +67,7 @@ public class Building {
             .collect(Collectors.toMap(Npc::getName, npc -> npc));
     }
 
-    public void createGameStructureFromSave() throws IOException, URISyntaxException {
+    public void createGameStructureFromSave() throws IOException, URISyntaxException, NoSavedGame, FileNotFoundException {
         Gson gson = new Gson();
         setGameState(GameState.IN_PROGRESS);
         List<Room> rooms = loadSave("RoomStructureSave.json", gson,
@@ -119,10 +119,6 @@ public class Building {
         //Write Player obj to Json file
         convertSavedPlayerToJson(player, "PlayerSave.json");
 
-        //move created files to resources
-        System.out.println("Game saved!");
-        //Will save game then run quit.
-        quit();
     }
 
     public void convertSavedPlayerToJson(Player currentPlayer, String filename) throws IOException {
@@ -194,23 +190,35 @@ public class Building {
      * @throws IOException
      */
     private <T> T loadSave(String resourceFile, Gson gson, Type type)
-        throws IOException, URISyntaxException {
+        throws IOException, URISyntaxException, NoSavedGame, FileNotFoundException {
 
         File f = new File(resourceFile);
 
-        try {
-            if (f.exists()) {
+        if (f.exists()){
+            try{
                 Reader reader = new InputStreamReader(new FileInputStream(f));
                 return gson.fromJson(reader, type);
-            } else {
-                throw new NoSavedGame();
+            }catch (Exception e){
+                throw  new NoSavedGame();
             }
+        }else{
 
-        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
         }
 
-        new GamePlay().startGameFromNew();
-        return null; //Start new game method here?
+//        try {
+//            if (f.exists()) {
+//                Reader reader = new InputStreamReader(new FileInputStream(f));
+//                return gson.fromJson(reader, type);
+//            } else {
+//                //  new GamePlay().startGameFromNew();
+//                throw new NoSavedGame();
+//            }
+//
+//        } catch (FileNotFoundException e) {
+//        }
+
+//        return null; //Start new game method here?
     }
 
 //  BUSINESS METHODS

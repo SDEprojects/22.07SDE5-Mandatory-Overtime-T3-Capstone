@@ -14,15 +14,18 @@ public final class MenuBar extends JMenuBar {
     private final SettingsMenu settingsDialog = new SettingsMenu();
     private final GameInfo gameInfoDialog = new GameInfo();
     private final HelpMenu helpDialog = new HelpMenu();
-    private final JButton settings = new JButton("Settings");
+    private static final JButton settings = new JButton("Settings");
     private final JButton help = new JButton("   Help   ");
-    private final JButton quit = new JButton("Quit To Main    ");
+    private static final JButton quit = new JButton("Quit To Main    ");
 
-    private final JButton save = new JButton("Save");
+    private static final JButton save = new JButton("Save");
     private final JButton gameInfo = new JButton("Game Info");
 
-    public MenuBar() {
+    private Runnable saveAction;
 
+    private Runnable quitAction;
+
+    public MenuBar() {
         settings.setBorderPainted(false);
         settings.setContentAreaFilled(false);
         settings.setFocusPainted(false);
@@ -45,11 +48,17 @@ public final class MenuBar extends JMenuBar {
         save.setContentAreaFilled(false);
         save.setFocusPainted(false);
         save.setOpaque(false);
+        save.addActionListener(e -> {
+            saveAction.run();
+        });
 
         quit.setBorderPainted(false);
         quit.setContentAreaFilled(false);
         quit.setFocusPainted(false);
         quit.setOpaque(false);
+        quit.addActionListener(e ->{
+            quitAction.run();
+        });
 
         quit.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
@@ -59,6 +68,8 @@ public final class MenuBar extends JMenuBar {
         MENU_BAR.add(settings);
         MENU_BAR.add(new JMenu("|")).setEnabled(false);
         MENU_BAR.add(help);
+        MENU_BAR.add(new JMenu("|")).setEnabled(false);
+        MENU_BAR.add(gameInfo);
         MENU_BAR.add(new JMenu("|")).setEnabled(false);
         MENU_BAR.add(save);
         MENU_BAR.add(Box.createHorizontalGlue());
@@ -71,5 +82,21 @@ public final class MenuBar extends JMenuBar {
         return MENU_BAR;
     }
 
+    public void setSaveAction(Runnable runnable){
+        saveAction = runnable;
+    }
+
+    public void setQuitListener(Runnable runnable) {
+        quitAction = runnable;
+    }
+
+    public static void hideGameBtns(){
+        save.setVisible(false);
+        quit.setVisible(false);
+    }
+    public static void showGameBtn(){
+        save.setVisible(true);
+        quit.setVisible(true);
+    }
 
 }

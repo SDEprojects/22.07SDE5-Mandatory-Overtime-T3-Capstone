@@ -44,13 +44,14 @@ public class GamePlayScreen {
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
 
+
     public GamePlayScreen(HashMap locations, HashMap items) throws IOException {
         buildLocationGUI(locations, items);
         buildGamePLayScreen();
     }
 
     private void buildGamePLayScreen() throws IOException {
-
+        MenuBar.showGameBtn();
         // GAME MESSAGE
         gameMessage.setFont(new Font("Arial", Font.ITALIC, 25));
         gameMessage.setBounds(10, 25, 1500, 125);

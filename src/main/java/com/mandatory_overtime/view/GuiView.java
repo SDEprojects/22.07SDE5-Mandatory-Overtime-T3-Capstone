@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 
 public class GuiView {
@@ -22,6 +24,8 @@ public class GuiView {
 
     private final MainMenu mainMenu = new MainMenu();
     private GamePlayScreen gamePlayScreen;
+
+    private JPanel panel = new JPanel();
 
 
     public GuiView(){
@@ -35,8 +39,9 @@ public class GuiView {
     }
 
     public void presentGameScreen(){
+     //   presentLoadingScreen();
+
         JLayeredPane screen = gamePlayScreen.getGameScreen();
-      //  presentLoadingScreen();
         container.removeAll();
         container.add(screen);
         container.repaint();
@@ -54,14 +59,12 @@ public class GuiView {
     }
     public void presentLoadingScreen(){
         JLayeredPane loadingScreen = MainMenu.getLoadingScreen();
+        container.removeAll();
         container.add(loadingScreen);
         container.repaint();
         container.revalidate();
         MainMenu.loadProgressBar();
 
-        container.removeAll();
-        container.repaint();
-        container.revalidate();
     }
 
     public void setUpGamePlay(HashMap locations, HashMap items) throws IOException {
@@ -89,6 +92,14 @@ public class GuiView {
 
     public GamePlayScreen getGamePlayScreen() {
         return gamePlayScreen;
+    }
+
+    public void setSaveListener(Runnable runnable){
+      menuBar.setSaveAction(runnable);
+    }
+
+    public void setQuitListener(Runnable runnable){
+        menuBar.setQuitListener(runnable);
     }
 
 }

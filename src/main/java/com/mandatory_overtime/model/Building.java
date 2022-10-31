@@ -288,6 +288,7 @@ public class Building {
                     building.get(noun).setPreReq(null);
                 } else {
                     setGameState(GameState.LOSS);
+                    System.out.println("you lose");
                 }
             }
         }

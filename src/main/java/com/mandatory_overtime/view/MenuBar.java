@@ -16,7 +16,7 @@ public final class MenuBar extends JMenuBar {
     private final HelpMenu helpDialog = new HelpMenu();
     private static final JButton settings = new JButton("Settings");
     private final JButton help = new JButton("   Help   ");
-    private static final JButton quit = new JButton("Quit To Main    ");
+    private static final JButton quit = new JButton("Quit   ");
 
     private static final JButton save = new JButton("Save");
     private final JButton gameInfo = new JButton("Game Info");

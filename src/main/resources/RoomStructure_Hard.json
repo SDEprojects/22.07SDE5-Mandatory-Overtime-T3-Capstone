@@ -1,0 +1,285 @@
+[
+  {
+    "RoomName": "elevator",
+    "directions": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "sound1": "Elevator_Ding.wav",
+    "sound2": "Elevator_Door.wav",
+    "sound3": "Elevator_Door.wav",
+    "preReq": null,
+    "fail": false,
+    "image": "elevator.png"
+  },
+
+  {
+    "RoomName": "1",
+    "directions": [
+      "lobby",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "preReq": null,
+    "fail": false,
+    "sound1": "Elevator_Button.wav",
+    "sound2": "Level1.wav",
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator-1.png"
+  },
+  {
+    "RoomName": "2",
+    "directions": [
+      "party floor",
+      "1",
+      "3",
+      "4",
+      "5"
+    ],
+    "preReq": null,
+    "fail": false,
+    "sound1": "Elevator_Button.wav",
+    "sound2": "Level2.wav",
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator-2.png"
+  },
+  {
+    "RoomName": "3",
+    "directions": [
+      "break room",
+      "1",
+      "2",
+      "4",
+      "5"
+    ],
+    "preReq": null,
+    "fail": false,
+    "sound1": "Elevator_Button.wav",
+    "sound2": "Level3.wav",
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator-3.png"
+  },
+  {
+    "RoomName": "4",
+    "directions": [
+      "dev floor",
+      "1",
+      "2",
+      "3",
+      "5"
+    ],
+    "preReq": null,
+    "fail": false,
+    "sound1": "Elevator_Button.wav",
+    "sound2": "Level4.wav",
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator-4.png"
+  },
+  {
+    "RoomName": "5",
+    "directions": [
+      "office",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "preReq": null,
+    "fail": false,
+    "sound1": "Elevator_Button.wav",
+    "sound2": "Level5.wav",
+    "sound3": "Elevator_Door.wav",
+    "image": "elevator-5.png"
+  },
+  {
+    "RoomName": "office",
+    "directions": [
+      "elevator",
+      "conference room",
+      "desk"
+    ],
+    "items": "laptop",
+    "NPC": null,
+    "preReq": null,
+    "fail": false,
+    "description": "You're at the Office on the 5th floor and feel the darkness encroaching on you, or just the darkmode of your laptop.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "typingSound": "Typing.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "office.png"
+  },
+  {
+    "RoomName": "desk",
+    "directions": [
+      "office"
+    ],
+    "items": "wallet",
+    "NPC": null,
+    "preReq": "code",
+    "fail": false,
+    "description": "You're at your messy desk.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "drawerOpenSound": "Drawer_Open_Close.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "desk.png"
+  },
+  {
+    "RoomName": "conference room",
+    "directions": [
+      "office"
+    ],
+    "items": "phone",
+    "NPC": null,
+    "preReq": "badge",
+    "fail": false,
+    "description": "You're at the Conference Room, it's only you here at the moment.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "accessGrantedSound": "Access_Granted_Beep.wav",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
+    "footstepSound": "Footsteps.wav",
+    "doorOpenSound": "Door_Open.wav",
+    "phoneTypingSound": "Phone_Typing.wav",
+    "phoneUnlockingSound": "Phone_Unlock.wav",
+    "image": "conference_room.png"
+  },
+  {
+    "RoomName": "dev floor",
+    "directions": [
+      "elevator",
+      "it closet"
+    ],
+    "items": "sweater",
+    "NPC": null,
+    "preReq": "mask",
+    "fail": true,
+    "description": "You're at the the Dev Floor. A wave of pressure washes over you as you see the professionals at work.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "devroom.png"
+  },
+  {
+    "RoomName": "it closet",
+    "directions": [
+      "dev floor"
+    ],
+    "items": "badge",
+    "NPC": null,
+    "preReq": "keyfob",
+    "fail": false,
+    "description": "You're at the IT Closet. It's hot as you enter the windowless room.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "accessGrantedSound": "Access_Granted_Beep.wav",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
+    "footstepSound": "Footsteps.wav",
+    "doorOpenSound": "Door_Open.wav",
+    "image": "itCloset.png"
+  },
+  {
+    "RoomName": "break room",
+    "directions": [
+      "elevator",
+      "kitchen"
+    ],
+    "items": null,
+    "NPC": "roy",
+    "preReq": null,
+    "fail": false,
+    "description": "You're at the break room full of rickety tables and chairs.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "breakroom.png",
+    "npcImage": "roy.png",
+    "npcCoord": [300,150,275,500]
+  },
+  {
+    "RoomName": "kitchen",
+    "directions": [
+      "break room"
+    ],
+    "items": "cake",
+    "NPC": null,
+    "preReq": "sweater",
+    "fail": true,
+    "description": "You're in the kitchen. The smell of stale popcorn wafts through the air.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "kitchen.png"
+  },
+  {
+    "RoomName": "party floor",
+    "directions": [
+      "elevator",
+      "table"
+    ],
+    "items": null,
+    "NPC": "brenda",
+    "preReq": null,
+    "fail": false,
+    "description": "You're at the Party floor. People are crowded at the snack table.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "partyroom.png",
+    "npcImage": "brenda.png",
+    "npcCoord": [175,150,300,500]
+  },
+  {
+    "RoomName": "table",
+    "directions": [
+      "party floor"
+    ],
+    "items": "mask",
+    "NPC": null,
+    "preReq": null,
+    "fail": false,
+    "description": "You're at the table. It looks picked clean.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "table.png"
+  },
+  {
+    "RoomName": "lobby",
+    "directions": [
+      "elevator",
+      "vending machine",
+      "home"
+    ],
+    "items": null,
+    "NPC": null,
+    "preReq": null,
+    "fail": false,
+    "description": "You're in the lobby. Freedom is so close.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "lobby.png"
+  },
+  {
+    "RoomName": "vending machine",
+    "directions": [
+      "lobby"
+    ],
+    "items": "raisinets",
+    "NPC": null,
+    "preReq": "wallet",
+    "fail": false,
+    "description": "You're at the vending machine. Its half empty already.",
+    "inventorySound": "Inventory_Stash_Item.wav",
+    "vendingMachineSound": "Vending_Machine.wav",
+    "footstepSound": "Footsteps.wav",
+    "image": "vending.png"
+  },
+  {
+    "RoomName": "home",
+    "directions": null,
+    "items": null,
+    "NPC": null,
+    "preReq": "phone",
+    "fail": true,
+    "description": "Congratulations, you have successfully avoided your boss.",
+    "image": "home.png"
+  }
+]

@@ -151,8 +151,8 @@ public class GUIController {
             public void run() {
                 try {
                     building.gameSave();
-                    JOptionPane.showMessageDialog(null,"Game Saved!");
-                    view.presentMainMenu();
+                    JOptionPane.showMessageDialog(null,"Game Saved!...Closing Window");
+                    System.exit(0);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

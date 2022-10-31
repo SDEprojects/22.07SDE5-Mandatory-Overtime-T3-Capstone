@@ -12,10 +12,12 @@ public class Main {
 
     public static void main(String[] args)
         throws IOException, URISyntaxException {
-//       GameMusic.startBackgroundMusic();
+       GameMusic.startBackgroundMusic();
 
         GUIController gui = new GUIController();
 //        GamePlay gamePlay = new GamePlay();
+
+
 
     }
 }

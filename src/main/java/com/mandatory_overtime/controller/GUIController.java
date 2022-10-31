@@ -96,6 +96,8 @@ public class GUIController {
     public void setUpGamePlayHandlers() throws IOException {
         // Set up Game Screen
         view.setUpGamePlay(building.getBuilding(), building.getGameItems());
+        String currentLocationStart = building.getPlayer().getCurrentLocation();
+        message = building.getBuilding().get(currentLocationStart).getDescription();
 
         // Set up Move Consumers for Game
         view.setMoveConsumer(roomName -> {
@@ -107,7 +109,8 @@ public class GUIController {
                 message = stringMessages.gameStatus(currentLocation,description,item );
                 updateGameView();
             } catch (MissingRequirementException | InterruptedException e) {
-                message = "Couldn't move to that location";
+                message = e.getMessage();
+                updateGameView();
             }
         });
 

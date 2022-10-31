@@ -1,19 +1,16 @@
 package com.mandatory_overtime.view;
 
 
-import com.mandatory_overtime.model.Building;
-import com.mandatory_overtime.model.GameMusic;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.channels.SeekableByteChannel;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -44,13 +41,14 @@ public class GamePlayScreen {
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
 
+
     public GamePlayScreen(HashMap locations, HashMap items) throws IOException {
         buildLocationGUI(locations, items);
         buildGamePLayScreen();
     }
 
     private void buildGamePLayScreen() throws IOException {
-
+        MenuBar.showGameBtn();
         // GAME MESSAGE
         gameMessage.setFont(new Font("Arial", Font.ITALIC, 25));
         gameMessage.setBounds(10, 25, 1500, 125);
@@ -92,7 +90,6 @@ public class GamePlayScreen {
         gameScreen.add(inventoryContainer);
         gameScreen.add(gameInfoContainer);
         gameScreen.add(gameTextContainer);
-        //gameScreen.add(settingsBar);
         gameScreen.add(menu);
 
         gameScreen.setLayer(gameTextContainer, 2);

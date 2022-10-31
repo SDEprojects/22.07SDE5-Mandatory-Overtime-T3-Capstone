@@ -1,21 +1,26 @@
 package com.mandatory_overtime.view;
 
+import com.mandatory_overtime.model.Building;
 import com.mandatory_overtime.view.SettingsMenu;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class MainMenu {
 
-    private final MenuBar menuBar = new MenuBar();
+    private static final JMenuBar menuBar = MenuBar.getMenuBar();
     private static JLayeredPane homeScreen;
     private static JLayeredPane loadingScreen;
 
@@ -51,7 +56,7 @@ public class MainMenu {
     }
     private void buildMainMenu(){
         homeScreen = new JLayeredPane();
-
+        MenuBar.hideGameBtns();
 
         // BackGroundImage
         JLabel imageSection = new JLabel(mainMenu);
@@ -95,6 +100,9 @@ public class MainMenu {
     }
 
     public static JLayeredPane getHomeScreen() {
+        homeScreen.add(menuBar);
+        homeScreen.setLayer(menuBar, 2);
+        MenuBar.hideGameBtns();
         return homeScreen;
     }
 
@@ -123,6 +131,7 @@ public class MainMenu {
             counter += 1;
         }
     }
+
 
 
 }

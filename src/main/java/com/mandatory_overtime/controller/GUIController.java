@@ -3,16 +3,17 @@ package com.mandatory_overtime.controller;
 
 import com.mandatory_overtime.model.Building;
 import com.mandatory_overtime.model.Building.CantGetItemException;
-import com.mandatory_overtime.model.Player;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
 import com.mandatory_overtime.view.UserView;
+import java.awt.Dimension;
 import java.io.IOException;
-import java.util.Arrays;
+import java.net.URISyntaxException;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
 
 
 public class GUIController {
@@ -32,6 +33,7 @@ public class GUIController {
 
 
     public GUIController() throws IOException {
+        UIManager.put("OptionPane.minimumSize", new Dimension(200,150));
         view = new GuiView();
         view.presentMainMenu();
         loadBtn = view.getLoadGameButton();
@@ -42,10 +44,56 @@ public class GUIController {
     public void startNewGame() throws IOException {
         // Create New Building
         building.createGameStructureFromNew();
+        String playerName =  JOptionPane.showInputDialog("What is you name? ");
 
-        String playerName;
-        playerName =  JOptionPane.showInputDialog("What is you name? ");
+        if(playerName == null){
+            return;
+        } else if (playerName.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Please enter a valid name to start game");
+            return;
+        }
         building.setName(playerName);
+        setUpGamePlayHandlers();
+    }
+
+    public void loadGame() throws IOException {
+        try {
+            building.createGameStructureFromSave();
+            message = "Game Loaded";
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(null,"No saved game found. Starting a new game");
+            startNewGame();
+
+        }finally {
+            setUpGamePlayHandlers();
+        }
+    }
+    public void updateGameView() {
+        String currentLocation = building.getPlayer().getCurrentLocation();
+        String[] directions = building.getBuilding().get(currentLocation).getDirections();
+        List<String> inventory = building.getPlayer().getInventory();
+        view.updateGameScreen(currentLocation, inventory, message, directions, removedItem);
+    }
+
+    public void loadActionEvents() {
+        startBtn.addActionListener(e -> {
+            try {
+                startNewGame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        loadBtn.addActionListener(e -> {
+            try {
+                loadGame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+    }
+
+    public void setUpGamePlayHandlers() throws IOException {
         // Set up Game Screen
         view.setUpGamePlay(building.getBuilding(), building.getGameItems());
 
@@ -84,9 +132,36 @@ public class GUIController {
             }
         );
 
+        view.setSaveListener(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    building.gameSave();
+                    message = "Game Saved";
+                    updateGameView();
+                } catch (IOException e) {
+                    message = "An error occurred trying to save the game";
+                    updateGameView();
+                }
+            }
+        });
+
+        view.setQuitListener(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    building.gameSave();
+                    JOptionPane.showMessageDialog(null,"Game Saved!");
+                    view.presentMainMenu();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
 
         // Set Message TO Intro Story
-        message = "Starting in the Office";
+       // message = "Starting in the Office";
 
         // Update View
         updateGameView();
@@ -94,23 +169,4 @@ public class GUIController {
         // Present View
         view.presentGameScreen();
     }
-
-    public void updateGameView() {
-        String currentLocation = building.getPlayer().getCurrentLocation();
-        String[] directions = building.getBuilding().get(currentLocation).getDirections();
-        List<String> inventory = building.getPlayer().getInventory();
-        view.updateGameScreen(currentLocation, inventory, message, directions, removedItem);
-    }
-
-    public void loadActionEvents() {
-        startBtn.addActionListener(e -> {
-            try {
-                startNewGame();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-    }
-
 }

@@ -16,6 +16,7 @@ public class MapDialog extends JDialog {
     private static ImageIcon breakroom;
     private static ImageIcon kitchen;
     private static ImageIcon partyfloor;
+    private static ImageIcon elevator;
     private static ImageIcon table;
     private static ImageIcon lobby;
     private static ImageIcon vending;
@@ -65,6 +66,9 @@ public class MapDialog extends JDialog {
 
             InputStream stream11 = getClass().getResourceAsStream("/images/map/vending.png");
             vending = new ImageIcon(ImageIO.read(stream11));
+
+            InputStream stream12 = getClass().getResourceAsStream("/images/map/elevator.png");
+            elevator = new ImageIcon(ImageIO.read(stream12));
         }catch(IOException e){
             e.printStackTrace();
             throw new RuntimeException();
@@ -120,7 +124,7 @@ public class MapDialog extends JDialog {
             }
 
             default:
-                imageContainer.setIcon(lobby);
+                imageContainer.setIcon(elevator);
                 break;
 
         }

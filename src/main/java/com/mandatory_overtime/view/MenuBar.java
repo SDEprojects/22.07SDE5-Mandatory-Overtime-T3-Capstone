@@ -19,7 +19,7 @@ public final class MenuBar extends JMenuBar {
     private static final JButton settings = new JButton("Settings");
     private final JButton help = new JButton("   Help   ");
     private static final JButton quit = new JButton("Quit   ");
-
+    private static final JMenu spacer = new JMenu("|");
     private static final JButton save = new JButton("Save");
 
     private static final JButton map = new JButton("Map");
@@ -62,9 +62,10 @@ public final class MenuBar extends JMenuBar {
         map.setContentAreaFilled(false);
         map.setFocusPainted(false);
         map.setOpaque(false);
-        map.addActionListener(e -> {
-                MapDialog.displayMap();
-        });
+        map.setFont(new Font("arial narrow", Font.BOLD, 17));
+        //sets font color
+        map.setForeground(Color.white);
+        map.addActionListener(e -> {MapDialog.displayMap();});
 
         save.setBorderPainted(false);
         save.setContentAreaFilled(false);
@@ -100,7 +101,7 @@ public final class MenuBar extends JMenuBar {
         MENU_BAR.add(gameInfo);
         MENU_BAR.add(new JMenu("|")).setEnabled(false);
         MENU_BAR.add(map);
-        MENU_BAR.add(new JMenu("|")).setEnabled(false);
+        MENU_BAR.add(spacer).setEnabled(false);
         MENU_BAR.add(save);
         MENU_BAR.add(Box.createHorizontalGlue());
         MENU_BAR.add(quit);
@@ -123,10 +124,14 @@ public final class MenuBar extends JMenuBar {
     public static void hideGameBtns(){
         save.setVisible(false);
         quit.setVisible(false);
+        map.setVisible(false);
+        spacer.setVisible(false);
     }
     public static void showGameBtn(){
         save.setVisible(true);
         quit.setVisible(true);
+        map.setVisible(true);
+        spacer.setVisible(true);
     }
 
 }

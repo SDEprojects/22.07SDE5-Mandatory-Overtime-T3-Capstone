@@ -21,8 +21,9 @@ public final class MenuBar extends JMenuBar {
     private final JButton save = new JButton("Save");
     private final JButton gameInfo = new JButton("Game Info");
 
-    public MenuBar() {
+    private Runnable saveAction;
 
+    public MenuBar() {
         settings.setBorderPainted(false);
         settings.setContentAreaFilled(false);
         settings.setFocusPainted(false);
@@ -45,6 +46,9 @@ public final class MenuBar extends JMenuBar {
         save.setContentAreaFilled(false);
         save.setFocusPainted(false);
         save.setOpaque(false);
+        save.addActionListener(e -> {
+            saveAction.run();
+        });
 
         quit.setBorderPainted(false);
         quit.setContentAreaFilled(false);
@@ -71,5 +75,8 @@ public final class MenuBar extends JMenuBar {
         return MENU_BAR;
     }
 
+    public void setSaveAction(Runnable runnable){
+        saveAction = runnable;
+    }
 
 }

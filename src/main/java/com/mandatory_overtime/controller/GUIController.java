@@ -3,14 +3,11 @@ package com.mandatory_overtime.controller;
 
 import com.mandatory_overtime.model.Building;
 import com.mandatory_overtime.model.Building.CantGetItemException;
-import com.mandatory_overtime.model.Player;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
 import com.mandatory_overtime.view.UserView;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -83,6 +80,20 @@ public class GUIController {
                 updateGameView();
             }
         );
+
+        view.setSaveListener(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    building.gameSave();
+                    message = "Game Saved";
+                    updateGameView();
+                } catch (IOException e) {
+                    message = "An error occurred trying to save the game";
+                    updateGameView();
+                }
+            }
+        });
 
 
         // Set Message TO Intro Story

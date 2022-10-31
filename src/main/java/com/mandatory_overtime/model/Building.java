@@ -119,10 +119,6 @@ public class Building {
         //Write Player obj to Json file
         convertSavedPlayerToJson(player, "PlayerSave.json");
 
-        //move created files to resources
-        System.out.println("Game saved!");
-        //Will save game then run quit.
-        quit();
     }
 
     public void convertSavedPlayerToJson(Player currentPlayer, String filename) throws IOException {

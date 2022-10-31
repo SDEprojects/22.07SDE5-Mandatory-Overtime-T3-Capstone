@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +23,8 @@ public class GuiView {
 
     private final MainMenu mainMenu = new MainMenu();
     private GamePlayScreen gamePlayScreen;
+
+
 
 
     public GuiView(){
@@ -89,6 +92,10 @@ public class GuiView {
 
     public GamePlayScreen getGamePlayScreen() {
         return gamePlayScreen;
+    }
+
+    public void setSaveListener(Runnable runnable){
+      menuBar.setSaveAction(runnable);
     }
 
 }

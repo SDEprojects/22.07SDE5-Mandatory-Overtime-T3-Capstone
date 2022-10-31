@@ -22,7 +22,7 @@ public class GUIController {
     private final JButton startBtn;
 
     private final JButton loadBtn;
-    Building building = new Building();
+    private Building building = new Building();
 
     private String message = "";
 
@@ -112,6 +112,5 @@ public class GUIController {
         });
 
     }
-
 
 }

@@ -13,13 +13,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class GameMusic {
 
     private static Clip clip;
-    static Boolean musicOnOff = true;
     static Player player = new Player();
 
     private static String volume = "5";
 
     static Building building;
-
 
     static {
         try {
@@ -33,17 +31,14 @@ public class GameMusic {
 
     }
 
-
     public static void playAudioFX(String soundFile) {
 
         try {
             URL audio = GameMusic.class.getResource("/" + soundFile);
-
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(audio);
-            clip = AudioSystem.getClip();
-            clip.open(audioInput);
-            startAudio();
-
+            Clip soundClip = AudioSystem.getClip();
+            soundClip.open(audioInput);
+            soundClip.start();
         } catch (UnsupportedAudioFileException e) {
         } catch (Exception e) {
         }
@@ -65,20 +60,11 @@ public class GameMusic {
     public static void musicOnOff(String noun) {
         if (noun.equals("off")) {
             clip.stop();
-            clip.flush();
         }
         if (noun.equals("on")) {
-            clip.stop();
-            clip.flush();
-            startBackgroundMusic();
+            System.out.println("turning on music");
+            clip.start();
         }
-    }
-
-
-    public static void startAudio() throws InterruptedException {
-        clip.start();
-        clip.loop(0);
-        clip.wait();
     }
 
     public static void startBackgroundAudio() throws InterruptedException {
@@ -87,26 +73,12 @@ public class GameMusic {
         clip.wait();
     }
 
-
     public static void startBackgroundMusic() {
-        if (musicOnOff == false) {
-            clip.stop();
-            playAudioMusic("Spooky_Music.wav");
-            setMusicOnOff(true);
-            FloatControl gainControl =
-                (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-9.0f);
-        } else {
-            playAudioMusic("Spooky_Music.wav");
-            setMusicOnOff(false);
-            FloatControl gainControl =
-                (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-9.0f);
-        }
-
-
+        playAudioMusic("Spooky_Music.wav");
+        FloatControl gainControl =
+            (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-9.0f);
     }
-
 
     public static void volumeUpDown(String noun) {
         if (noun.equals("0")) {
@@ -167,7 +139,6 @@ public class GameMusic {
         }
     }
 
-
     public static void playRoomSound(String noun) throws InterruptedException {
         playAudioFX(building.getBuilding().get(noun).getAudio1());
         Thread.sleep(500);
@@ -200,7 +171,6 @@ public class GameMusic {
         Thread.sleep(1000);
     }
 
-
     public static void playAccessGrantedSound() throws InterruptedException {
         String currentLoc = player.getCurrentLocation();
         playAudioFX(building.getBuilding().get(currentLoc).getAccessGrantedAudio());
@@ -229,7 +199,6 @@ public class GameMusic {
         String currentLoc = player.getCurrentLocation();
         playAudioFX(building.getBuilding().get(currentLoc).getPhoneTypingAudio());
         Thread.sleep(1000);
-
     }
 
     public static void playPhoneUnlockingSound() throws InterruptedException {
@@ -238,15 +207,6 @@ public class GameMusic {
             playAudioFX(building.getBuilding().get(currentLoc).getPhoneUnlockingAudio());
             Thread.sleep(1000);
         }
-    }
-
-
-    public static Boolean getMusicOnOff() {
-        return musicOnOff;
-    }
-
-    public static void setMusicOnOff(Boolean musicOnOff) {
-        GameMusic.musicOnOff = musicOnOff;
     }
 
     public static String getVolume() {

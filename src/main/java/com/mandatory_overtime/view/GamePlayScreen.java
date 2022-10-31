@@ -1,21 +1,19 @@
 package com.mandatory_overtime.view;
 
 
-import com.mandatory_overtime.controller.GamePlay;
 import com.mandatory_overtime.model.Building;
-import com.mandatory_overtime.model.Item;
-import com.mandatory_overtime.model.Room;
+import com.mandatory_overtime.model.GameMusic;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
+import java.nio.channels.SeekableByteChannel;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -23,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -32,23 +31,15 @@ public class GamePlayScreen {
     private static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
     private LocationGUIPanel locationGUIPanel;
 
-
-    private final SettingsMenu settingsMenu = new SettingsMenu();
-    private final HelpMenu helpMenu = new HelpMenu();
-    private final Building building = new Building();
-
-
-
-
     private Consumer<String> moveListener;
     private final JLayeredPane gameScreen = new JLayeredPane();
-    private final JPanel settingsBar = new JPanel();
     private final JPanel gameTextContainer = new JPanel();
-
 
     private final JPanel locationContainer = new JPanel();
     private final JPanel gameInfoContainer = new JPanel();
     private final JPanel inventoryContainer = new JPanel();
+
+    private final JMenuBar menu = MenuBar.getMenuBar();
 
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
@@ -59,42 +50,6 @@ public class GamePlayScreen {
     }
 
     private void buildGamePLayScreen() throws IOException {
-        // Settings BUTTON
-        JButton settingsBtn = new JButton("Settings");
-        settingsBtn.addActionListener(e -> settingsMenu.openMenu());
-
-        // Help BUTTON
-        JButton helpBtn = new JButton("Help");
-        helpBtn.setToolTipText("Enter Prompt");
-        helpBtn.addActionListener(e -> helpMenu.openHelpMenu());
-
-        // Save BUTTON
-
-        //TODO: Fix error( throws an exception in line 112 (Building.java))
-        JButton saveBtn = new JButton("Save Game");
-        saveBtn.setToolTipText("Click to save game");
-//        saveBtn.addActionListener(e -> {
-//            try {
-//                building.gameSave();
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        });
-
-        //Quit BUTTON
-
-        JButton quitBtn = new JButton("Quit Game");
-        quitBtn.setToolTipText("Click to quit game");
-        quitBtn.addActionListener(e ->building.quit() );
-
-
-        // SETTINGS BAR
-        settingsBar.setBackground(Color.DARK_GRAY);
-        settingsBar.setBounds(0, 0, 1500, 40);
-        settingsBar.add(settingsBtn);
-        settingsBar.add(helpBtn);
-        settingsBar.add(saveBtn);
-        settingsBar.add(quitBtn);
 
         // GAME MESSAGE
         gameMessage.setFont(new Font("Arial", Font.ITALIC, 25));
@@ -117,16 +72,13 @@ public class GamePlayScreen {
         // gameInfo.setBackground(Color.GRAY);
 
         gameInfoContainer.setBounds(1100, 150, 375, 145);
-
         gameInfoContainer.add(gameInfoText);
-
 
         // GAME INFO BORDER
         // TitledBorder gameInfoBorder = BorderFactory.createTitledBorder("GAME INFORMATION");
         // gameInfoBorder.setTitleJustification(TitledBorder.CENTER);
         Border gameInfoBorder = BorderFactory.createStrokeBorder(new BasicStroke(5.0f));
         gameInfoContainer.setBorder(gameInfoBorder);
-
 
         // Border
         TitledBorder inventoryBorder = BorderFactory.createTitledBorder("INVENTORY");
@@ -140,12 +92,13 @@ public class GamePlayScreen {
         gameScreen.add(inventoryContainer);
         gameScreen.add(gameInfoContainer);
         gameScreen.add(gameTextContainer);
-        gameScreen.add(settingsBar);
+        //gameScreen.add(settingsBar);
+        gameScreen.add(menu);
 
         gameScreen.setLayer(gameTextContainer, 2);
         gameScreen.setLayer(inventoryContainer, 0);
         gameScreen.setLayer(locationContainer, 1);
-        gameScreen.setLayer(settingsBar, 3);
+        gameScreen.setLayer(menu, 3);
 
     }
 
@@ -154,18 +107,17 @@ public class GamePlayScreen {
     }
 
     public void updateGamePlayScreen(String location, List<String> inventory, String message,
-        String[] directions,String removedItem) {
-
+        String[] directions, String removedItem) {
 
         Component[] comp = LOCATION_GUI_PANELS.get(location).getComponents();
 
-        for(int i = 0; i < comp.length; i++){
-            if(comp[i] instanceof JButton && ((JButton) comp[i]).getActionCommand().equals(removedItem)){
+        for (int i = 0; i < comp.length; i++) {
+            if (comp[i] instanceof JButton && ((JButton) comp[i]).getActionCommand()
+                .equals(removedItem)) {
                 LOCATION_GUI_PANELS.get(location).remove(i);
                 break;
             }
         }
-
 
         gameTextContainer.removeAll();
         gameInfoContainer.removeAll();
@@ -192,11 +144,11 @@ public class GamePlayScreen {
         // DIRECTIONAL BUTTONS
         for (int i = 0; i < directions.length; i++) {
             int x = i == 0 ? 10 : i * 125;
-            if( !directions[i].equals("1") &&
-                !directions[i].equals("2")&&
+            if (!directions[i].equals("1") &&
+                !directions[i].equals("2") &&
                 !directions[i].equals("3") &&
-                !directions[i].equals("4")&&
-                !directions[i].equals("5")){
+                !directions[i].equals("4") &&
+                !directions[i].equals("5")) {
 
                 JButton btn = new JButton(directions[i]);
                 btn.addActionListener(e -> {
@@ -235,8 +187,7 @@ public class GamePlayScreen {
         gameScreen.setLayer(gameTextContainer, 2);
         gameScreen.setLayer(inventoryContainer, 0);
         gameScreen.setLayer(locationContainer, 1);
-        gameScreen.setLayer(settingsBar, 3);
-
+        // gameScreen.setLayer(settingsBar, 3);
 
     }
 

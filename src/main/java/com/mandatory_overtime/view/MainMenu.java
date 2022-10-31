@@ -15,20 +15,13 @@ import javax.swing.JProgressBar;
 
 public class MainMenu {
 
-
-
-    private final SettingsMenu settingsMenu = new SettingsMenu();
-
-    private final GameInfo gameInfo = new GameInfo();
+    private final MenuBar menuBar = new MenuBar();
     private static JLayeredPane homeScreen;
-
     private static JLayeredPane loadingScreen;
 
     private static JButton startBtn;
     private static JButton loadBtn;
-
     private static JProgressBar progressBar;
-
     private ImageIcon mainMenu;
     private ImageIcon startButtonImage;
     private ImageIcon loadButtonImage;
@@ -59,21 +52,6 @@ public class MainMenu {
     private void buildMainMenu(){
         homeScreen = new JLayeredPane();
 
-        // Settings BUTTON
-        JButton settingsBtn = new JButton("Settings");
-        settingsBtn.addActionListener(e -> settingsMenu.openMenu());
-
-        // Help BUTTON
-        JButton helpBtn = new JButton("Game Info");
-        helpBtn.setToolTipText("Click for game info");
-        helpBtn.addActionListener(e -> gameInfo.openGameInfoMenu());
-
-        // Settings Bar
-        JPanel settingsBar = new JPanel();
-        settingsBar.setBackground(Color.DARK_GRAY);
-        settingsBar.setBounds(0, 0, 1500, 40);
-        settingsBar.add(settingsBtn);
-        settingsBar.add(helpBtn);
 
         // BackGroundImage
         JLabel imageSection = new JLabel(mainMenu);
@@ -91,7 +69,7 @@ public class MainMenu {
         loadBtn.setFocusPainted(false);
         loadBtn.setContentAreaFilled(false);
 
-        homeScreen.add(settingsBar, Integer.valueOf(1));
+        homeScreen.add(MenuBar.getMenuBar(), Integer.valueOf(1));
         homeScreen.add(imageSection, Integer.valueOf(0));
         homeScreen.add(startBtn, Integer.valueOf(2));
         homeScreen.add(loadBtn, Integer.valueOf(2));

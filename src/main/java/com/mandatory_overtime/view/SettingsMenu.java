@@ -10,12 +10,14 @@ import javax.swing.JPanel;
 
 public class SettingsMenu {
 
-    private JDialog settingsDialog;
+    private static JDialog settingsDialog;
+
+    private static int counter;
 
     public SettingsMenu() {
         buildSettingsMenu();
+        counter ++;
     }
-
 
     public void openMenu() {
         settingsDialog.setVisible(true);
@@ -148,6 +150,10 @@ public class SettingsMenu {
 
     public void turnOnSound() {
 
+    }
+
+    public static JDialog getSettingsDialog(){
+        return settingsDialog;
     }
 
 }

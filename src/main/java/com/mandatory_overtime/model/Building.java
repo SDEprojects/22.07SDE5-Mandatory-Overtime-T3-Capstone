@@ -30,8 +30,7 @@ import java.util.stream.Collectors;
  */
 public class Building {
 
-//  FIELDS
-
+   // FIELDS
     Player player = new Player();
     public GameState gameState;
 

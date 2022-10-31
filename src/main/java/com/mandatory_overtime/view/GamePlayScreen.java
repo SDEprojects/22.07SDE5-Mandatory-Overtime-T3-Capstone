@@ -93,7 +93,6 @@ public class GamePlayScreen {
         gameScreen.add(inventoryContainer);
         gameScreen.add(gameInfoContainer);
         gameScreen.add(gameTextContainer);
-        //gameScreen.add(settingsBar);
         gameScreen.add(menu);
 
         gameScreen.setLayer(gameTextContainer, 2);

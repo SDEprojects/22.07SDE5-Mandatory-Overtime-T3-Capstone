@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  */
 public class Building {
 
-   // FIELDS
+    // FIELDS
     Player player = new Player();
     public GameState gameState;
 
@@ -62,12 +62,12 @@ public class Building {
         items = (HashMap<String, Item>) itemArray.stream()
             .collect(Collectors.toMap(Item::getName, item -> item));
 
-
         npcs = (HashMap<String, Npc>) npcsArray.stream()
             .collect(Collectors.toMap(Npc::getName, npc -> npc));
     }
 
-    public void createGameStructureFromSave() throws IOException, URISyntaxException, NoSavedGame, FileNotFoundException {
+    public void createGameStructureFromSave()
+        throws IOException, URISyntaxException, NoSavedGame, FileNotFoundException {
         Gson gson = new Gson();
         setGameState(GameState.IN_PROGRESS);
         List<Room> rooms = loadSave("RoomStructureSave.json", gson,
@@ -174,7 +174,7 @@ public class Building {
     private <T> T load(String resourceFile, Gson gson, Type type) throws IOException {
 
         try (Reader reader = new InputStreamReader(
-            getClass().getClassLoader().getResourceAsStream (resourceFile))) {
+            getClass().getClassLoader().getResourceAsStream(resourceFile))) {
             return gson.fromJson(reader, type);
         }
     }
@@ -194,14 +194,14 @@ public class Building {
 
         File f = new File(resourceFile);
 
-        if (f.exists()){
-            try{
+        if (f.exists()) {
+            try {
                 Reader reader = new InputStreamReader(new FileInputStream(f));
                 return gson.fromJson(reader, type);
-            }catch (Exception e){
-                throw  new NoSavedGame();
+            } catch (Exception e) {
+                throw new NoSavedGame();
             }
-        }else{
+        } else {
 
             throw new FileNotFoundException();
         }
@@ -245,8 +245,11 @@ public class Building {
 
         boolean validLocation = false;
 
-        if (!directionsList.contains(newLocation)) {
+        if (newLocation == "lose") {
+            player.setCurrentLocation(newLocation);
+        } else if (!directionsList.contains(newLocation)) {
             throw new IllegalMoveException(newLocation);
+
         } else {
             // updates current location
             nextRoomPreReq = building.get(newLocation).getPreReq();
@@ -266,8 +269,10 @@ public class Building {
                 }
             } else {
                 winGameCheck(newLocation);
-                GameMusic.playAccessDeniedSound(newLocation);
-                throw new MissingRequirementException(newLocation, nextRoomPreReq);
+                if (!this.getGameState().equals(GameState.LOSS)) {
+                    GameMusic.playAccessDeniedSound(newLocation);
+                    throw new MissingRequirementException(newLocation, nextRoomPreReq);
+                }
             }
         }
 
@@ -275,7 +280,7 @@ public class Building {
     }
 
 
-    private void winGameCheck(String noun) {
+    private void winGameCheck(String noun) throws InterruptedException {
         boolean wonGame = false;
         String preReqCondition = building.get(noun).getPreReq();
         ArrayList<String> currentItems = (ArrayList<String>) player.getInventory();
@@ -283,13 +288,13 @@ public class Building {
         if (roomFail) {
             if (noun.equals("home") && currentItems.contains(preReqCondition)) {
                 setGameState(GameState.WIN);
-                if (currentItems.contains(preReqCondition)) {
-                    building.get(noun).setFailCondition(false);
-                    building.get(noun).setPreReq(null);
-                } else {
-                    setGameState(GameState.LOSS);
-                    System.out.println("you lose");
-                }
+            } else if (currentItems.contains(preReqCondition)) {
+                building.get(noun).setFailCondition(false);
+                building.get(noun).setPreReq(null);
+            } else {
+                setGameState(GameState.LOSS);
+                moveRooms2("lose");
+                System.out.println("you lose");
             }
         }
     }
@@ -489,12 +494,14 @@ public class Building {
                     npcs.get(npc).getNpcCount();
                 } else if (player.getInventory().contains((npcs.get(npc).getPrereq()))) {
 
-                    response = String.format((npcs.get(npc).getDialogueWithItem()), player.getName());
+                    response = String.format((npcs.get(npc).getDialogueWithItem()),
+                        player.getName());
                     player.removeFromInventory((npcs.get(npc).getPrereq()));
                     player.addToInventory((npcs.get(npc).getItems()));
                     npcs.get(npc).setItems(null);
                 } else if ((npcs.get(npc).getItems()) == null) {
-                    response = String.format((npcs.get(npc).getDialogueQuestDone()), player.getName());
+                    response = String.format((npcs.get(npc).getDialogueQuestDone()),
+                        player.getName());
                 } else if (!player.getInventory().contains((npcs.get(npc).getPrereq()))
                     && npcs.get(npc).getNpcCount() >= 1) {
                     response = String.format(npcs.get(npc).getDialogueNoItem(), player.getName());
@@ -512,7 +519,7 @@ public class Building {
         return player.getName();
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return player;
     }
 
@@ -520,13 +527,14 @@ public class Building {
         return building;
     }
 
-    public HashMap<String, Item> getGameItems(){
+    public HashMap<String, Item> getGameItems() {
         return items;
     }
 
     public class CantGetItemException extends Throwable {
 
     }
+
 }
 
 

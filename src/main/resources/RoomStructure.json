@@ -287,5 +287,15 @@
     "fail": true,
     "description": "Congratulations, you have successfully avoided your boss.",
     "image": "home.png"
+  },
+  {
+    "RoomName": "lose",
+    "directions": null,
+    "items": null,
+    "NPC": null,
+    "preReq": null,
+    "fail": false,
+    "description": "Oh no, Scott found you. You've been assigned mandatory overtime!",
+    "image": "lose.png"
   }
 ]

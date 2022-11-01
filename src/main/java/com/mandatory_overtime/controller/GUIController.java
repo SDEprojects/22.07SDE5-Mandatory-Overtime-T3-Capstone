@@ -3,6 +3,7 @@ package com.mandatory_overtime.controller;
 
 import com.mandatory_overtime.model.Building;
 import com.mandatory_overtime.model.Building.CantGetItemException;
+import com.mandatory_overtime.model.GameState;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
 import com.mandatory_overtime.view.MapDialog;
@@ -17,27 +18,25 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 
-
 public class GUIController {
 
-    private GuiView view;
+    private final GuiView view;
 
     private final JButton startBtn;
 
     private final JButton loadBtn;
-    private Building building = new Building();
+    private final Building building = new Building();
 
     private String message = "";
 
     private String removedItem;
 
-    private UserView stringMessages = new UserView();
-    private MapDialog map;
+    private final UserView stringMessages = new UserView();
 
-    private boolean godMode = false;
+    private final boolean godMode = false;
 
     public GUIController() throws IOException {
-        UIManager.put("OptionPane.minimumSize", new Dimension(200,150));
+        UIManager.put("OptionPane.minimumSize", new Dimension(200, 150));
         view = new GuiView();
         view.presentMainMenu();
         loadBtn = view.getLoadGameButton();
@@ -48,12 +47,12 @@ public class GUIController {
     public void startNewGame() throws IOException {
         // Create New Building
         building.createGameStructureFromNew();
-        String playerName =  JOptionPane.showInputDialog("What is you name? ");
+        String playerName = JOptionPane.showInputDialog("What is you name? ");
 
-        if(playerName == null){
+        if (playerName == null) {
             return;
         } else if (playerName.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Please enter a valid name to start game");
+            JOptionPane.showMessageDialog(null, "Please enter a valid name to start game");
             return;
         }
         building.setName(playerName);
@@ -66,13 +65,14 @@ public class GUIController {
             building.createGameStructureFromSave();
             message = "Game Loaded";
         } catch (IOException | URISyntaxException e) {
-            JOptionPane.showMessageDialog(null,"No saved game found. Starting a new game");
+            JOptionPane.showMessageDialog(null, "No saved game found. Starting a new game");
             startNewGame();
 
-        }finally {
+        } finally {
             setUpGamePlayHandlers();
         }
     }
+
     public void updateGameView() {
         String currentLocation = building.getPlayer().getCurrentLocation();
         String[] directions = building.getBuilding().get(currentLocation).getDirections();
@@ -99,7 +99,7 @@ public class GUIController {
     }
 
     public void setUpGamePlayHandlers() throws IOException {
-        map = new MapDialog(building.getPlayer().getCurrentLocation());
+        MapDialog map = new MapDialog(building.getPlayer().getCurrentLocation());
         // Set up Game Screen
         view.setUpGamePlay(building.getBuilding(), building.getGameItems());
         String currentLocationStart = building.getPlayer().getCurrentLocation();
@@ -112,7 +112,7 @@ public class GUIController {
                 String currentLocation = building.getPlayer().getCurrentLocation();
                 String description = building.getBuilding().get(currentLocation).getDescription();
                 String item = building.getBuilding().get(currentLocation).getItem();
-                message = stringMessages.gameStatus(currentLocation,description,item );
+                message = stringMessages.gameStatus(currentLocation, description, item);
                 updateGameView();
             } catch (MissingRequirementException | InterruptedException e) {
                 message = e.getMessage();
@@ -130,10 +130,10 @@ public class GUIController {
                     updateGameView();
                 } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);
-                } catch (MissingRequirementException | CantGetItemException e){
+                } catch (MissingRequirementException | CantGetItemException e) {
                     message = e.getMessage();
                 }
-            });
+        });
 
         view.getGamePlayScreen().getLocationGUIPanel().setNpcListener(npcName -> {
                 message = building.interactWithNpc(npcName);
@@ -143,9 +143,15 @@ public class GUIController {
 
         view.setSaveListener(() -> {
             try {
-                building.gameSave();
-                message = "Game Saved";
+                if (!building.getPlayer().getCurrentLocation().equals("home")
+                    && !building.getPlayer().getCurrentLocation().equals("lose")) {
+                    building.gameSave();
+                    message = "Game Saved";
+                } else {
+                    message = "Game Save not available here";
+                }
                 updateGameView();
+
             } catch (IOException e) {
                 message = "An error occurred trying to save the game";
                 updateGameView();
@@ -158,23 +164,23 @@ public class GUIController {
         });
 
         view.setQuitListener(() -> {
-            try {
-                building.gameSave();
-                JOptionPane.showMessageDialog(null,"Game Saved!...Closing Window");
-                System.exit(0);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+                try {
+                    if (!building.getPlayer().getCurrentLocation().equals("home")
+                        && !building.getPlayer().getCurrentLocation().equals("lose")) {
+                        building.gameSave();
+                        JOptionPane.showMessageDialog(null, "Game Saved!...Closing Window");
+                        System.exit(0);
+                    } else {
+                        System.exit(0);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+
+                }
         });
 
-
-        // Set Message TO Intro Story
-       // message = "Starting in the Office";
-
-        // Update View
         updateGameView();
 
-        // Present View
         view.presentGameScreen();
     }
 }

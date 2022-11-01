@@ -20,14 +20,19 @@ public final class MenuBar extends JMenuBar {
     private final JButton help = new JButton("   Help   ");
     private static final JButton quit = new JButton("Quit   ");
     private static final JMenu spacer = new JMenu("|");
+    private static final JMenu spacer2 = new JMenu("|");
     private static final JButton save = new JButton("Save");
 
     private static final JButton map = new JButton("Map");
     private final JButton gameInfo = new JButton("Game Info");
 
+    private static JButton godMode = new JButton("God Mode");
+
     private Runnable saveAction;
 
     private Runnable quitAction;
+
+    private Runnable godModeAction;
 
     public MenuBar() {
 
@@ -78,6 +83,17 @@ public final class MenuBar extends JMenuBar {
             saveAction.run();
         });
 
+        godMode.setBorderPainted(false);
+        godMode.setContentAreaFilled(false);
+        godMode.setFocusPainted(false);
+        godMode.setOpaque(false);
+        godMode.setFont(new Font("arial narrow", Font.BOLD, 17));
+        //sets font color
+        godMode.setForeground(Color.white);
+        godMode.addActionListener(e -> {
+            godModeAction.run();
+        });
+
         quit.setBorderPainted(false);
         quit.setContentAreaFilled(false);
         quit.setFocusPainted(false);
@@ -103,6 +119,8 @@ public final class MenuBar extends JMenuBar {
         MENU_BAR.add(map);
         MENU_BAR.add(spacer).setEnabled(false);
         MENU_BAR.add(save);
+        MENU_BAR.add(spacer2).setEnabled(false);
+        MENU_BAR.add(godMode);
         MENU_BAR.add(Box.createHorizontalGlue());
         MENU_BAR.add(quit);
 
@@ -121,11 +139,17 @@ public final class MenuBar extends JMenuBar {
         quitAction = runnable;
     }
 
+    public void setGodModeAction(Runnable godModeAction) {
+        this.godModeAction = godModeAction;
+    }
+
     public static void hideGameBtns(){
         save.setVisible(false);
         quit.setVisible(false);
         map.setVisible(false);
         spacer.setVisible(false);
+        godMode.setVisible(false);
+        spacer2.setVisible(false);
     }
     public static void showGameBtn(){
         save.setVisible(true);
@@ -134,4 +158,17 @@ public final class MenuBar extends JMenuBar {
         spacer.setVisible(true);
     }
 
+    public static void showGodeModeBtn(){
+        godMode.setVisible(true);
+        spacer2.setVisible(true);
+    }
+
+    public static void hideGodeModeBtn(){
+        godMode.setVisible(false);
+        spacer2.setVisible(false);
+    }
+
+    public SettingsMenu getSettingsDialog() {
+        return settingsDialog;
+    }
 }

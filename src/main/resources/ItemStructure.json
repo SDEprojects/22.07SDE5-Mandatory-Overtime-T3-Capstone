@@ -121,7 +121,7 @@
     "purpose": "Can't leave without grabbing my phone and turning it off. You can't miss a call-in if you don't get a call-in.",
     "npc": false,
     "preReq": null,
-    "challenge": true,
+    "challenge": false,
     "challenge prompt" : "Passcode Hint: What rattles when it walks?",
     "challenge answer": "skeleton",
     "acquired": false,

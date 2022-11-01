@@ -3,28 +3,29 @@ package com.mandatory_overtime.view;
 import com.mandatory_overtime.model.GameMusic;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class SettingsMenu {
 
     private static JDialog settingsDialog;
-
-    private static int counter;
+    private JCheckBox toggleCheatCheckbox;
 
     public SettingsMenu() {
         buildSettingsMenu();
-        counter ++;
     }
 
     public void openMenu() {
         settingsDialog.setVisible(true);
     }
 
-
-    public JDialog getMenu() {
+    public static JDialog getMenu() {
         return settingsDialog;
     }
 
@@ -34,12 +35,13 @@ public class SettingsMenu {
         settingsDialog.setBounds(500, 100, 400, 300);
 
         // MUSIC CONTROL BUTTONS
-        JPanel settingsMenu = new JPanel(new GridLayout(2, 3));
+        JPanel settingsMenu = new JPanel(new GridLayout(3, 3));
 
         JLabel musicControlLabel = new JLabel("  Music Control");
         JLabel soundControlLabel = new JLabel("  FX Control");
         JLabel musicVolLabel = new JLabel("  Music Volume");
         JLabel soundVolLabel = new JLabel("  FX Volume");
+        JLabel toggleCheatLabel = new JLabel("  Cheats");
 
         JButton musicOffBtn = new JButton("off");
         JButton musicOnBtn = new JButton("on");
@@ -50,6 +52,9 @@ public class SettingsMenu {
         JButton decreaseMusicBtn = new JButton("-");
         JButton increaseSoundBtn = new JButton("+");
         JButton decreaseSoundBtn = new JButton("-");
+
+        toggleCheatCheckbox = new JCheckBox();
+        toggleCheatCheckbox.setEnabled(false);
 
         // SET BUTTON FONT SIZE
         decreaseMusicBtn.setFont(new Font("Arial", Font.BOLD, 25));
@@ -90,6 +95,14 @@ public class SettingsMenu {
             turnOffSound();
         });
 
+        toggleCheatCheckbox.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {//checkbox has been selected
+                MenuBar.showGodeModeBtn();
+            } else {//checkbox has been deselected
+                MenuBar.hideGodeModeBtn();
+            }
+        });
+
         settingsMenu.add(musicControlLabel);
         settingsMenu.add(musicOnBtn);
         settingsMenu.add(musicOffBtn);
@@ -97,6 +110,9 @@ public class SettingsMenu {
         settingsMenu.add(musicVolLabel);
         settingsMenu.add(decreaseMusicBtn);
         settingsMenu.add(increaseMusicBtn);
+
+        settingsMenu.add(toggleCheatLabel);
+        settingsMenu.add(toggleCheatCheckbox);
 
         // SOUND EFFECTS BUTTONS
 //        settingsMenu.add(soundControlLabel);
@@ -152,8 +168,11 @@ public class SettingsMenu {
 
     }
 
-    public static JDialog getSettingsDialog(){
+    public static JDialog getSettingsDialog() {
         return settingsDialog;
     }
 
+    public JCheckBox getToggleCheatCheckbox() {
+        return toggleCheatCheckbox;
+    }
 }

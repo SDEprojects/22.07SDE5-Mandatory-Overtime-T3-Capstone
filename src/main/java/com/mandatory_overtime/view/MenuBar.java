@@ -47,6 +47,7 @@ public final class MenuBar extends JMenuBar {
         help.setFont(new Font("arial narrow", Font.BOLD, 17));
         //sets font color
         help.setForeground(Color.white);
+
         help.addActionListener(e -> helpDialog.openHelpMenu());
 
         gameInfo.setBorderPainted(false);

@@ -177,6 +177,7 @@ public class GUIController {
                     throw new RuntimeException(e);
 
                 }
+
         });
 
         updateGameView();

@@ -70,6 +70,7 @@ public class GamePlayScreen {
         // gameInfo.setBackground(Color.GRAY);
 
         gameInfoContainer.setBounds(1100, 150, 375, 145);
+
         gameInfoContainer.add(gameInfoText);
 
         // GAME INFO BORDER

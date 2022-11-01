@@ -32,16 +32,17 @@ public class UserView {
   public String showHelp() {
     String help =
 
-        "\t\tGame Commands\n\n"
-            + "                                    Go [location]\texample: 'Go Elevator' \n\n"
-            + "                                    Get [item]\texample: 'Get Phone'   \n\n"
-            + "                                    Interact [NPC]\texample: 'Interact Roy'\n\n"
-            + "                                    Inspect [item]\texample:'Inspect Sweater'\n\n"
-            + "                                    Volume [0-10]\texample:'Volume 3'\n\n"
-            + "                                   'Music On'\t[turns music on] \n\n"
-            + "                                   'Music Off'\t[turns music off]\n\n"
-            + "                                   'Look Around'\t[display room description]\n\n"
-            + "                                   'Quit'\t[to quit the game at any time]";
+              "\t\n\n"
+            + "\tTurn music off/on in the settings menu\n"
+            + "\tUse the slider in the settings menu to settings\n"
+                  + "\t  to adjust background music volume\n"
+            + "\tBe on the lookout for items in locations\n"
+            + "\tTo add an item to your inventory, click on it's image\n"
+            + "\tGame play dialogue will appear on the black screen\n"
+
+            + "\tHover over an item to see a description of the item\n"
+
+            + "\tUse the save button to save the game at any time";
     return help;
   }
 

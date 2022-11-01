@@ -3,6 +3,9 @@ package com.mandatory_overtime.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -35,7 +38,7 @@ public class HelpMenu {
 
     helpDialog = new JDialog(new JFrame(), true);
     helpDialog.setTitle("Help");
-    helpDialog.setBounds(500, 100, 500, 400);
+    helpDialog.setBounds(500, 100, 580, 500);
 
     JPanel helpMenu= new JPanel(new GridLayout(1, 0));
 
@@ -43,15 +46,22 @@ public class HelpMenu {
     gameCommandLabel = new JTextAreaPlus();
 
     //grabs text from UserView class and sets it to a TextArea
-    gameCommandLabel.setBackground(Color.cyan);
-    ImageIcon icon = new ImageIcon("C:\\Users\\gajibad\\Desktop\\Dailogue\\src\\main\\resources\\images\\brenda.png");
-    gameCommandLabel.setImage(icon);
+    //gameCommandLabel.setBackground(Color.cyan);
+    ImageIcon icon;
+    try (InputStream helpMenuImage = getClass().getResourceAsStream("/images/help3.png")) {
+      icon = new ImageIcon(ImageIO.read(helpMenuImage));
 
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    gameCommandLabel.setImage(icon);
     gameCommandLabel.setText(helpView.showHelp());
     //prevents the TextArea from being editable
     gameCommandLabel.setEditable(false);
 
     gameCommandLabel.setFont(new Font("Serif", Font.ITALIC, 18));
+
+    gameCommandLabel.setForeground(Color.lightGray);
     gameCommandLabel.setLineWrap(true);
     gameCommandLabel.setWrapStyleWord(true);
 

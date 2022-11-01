@@ -61,8 +61,8 @@ public class GameInfo {
     gameInfoLabel.setText(gameInfoView.startUpInfo(""));
     //prevents the TextArea from being editable
     gameInfoLabel.setEditable(false);
-    gameInfoLabel.setFont(new Font("Serif", Font.ITALIC, 18));
-    gameInfoLabel.setForeground(Color.lightGray);
+    gameInfoLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+    gameInfoLabel.setForeground(Color.white);
     gameInfoLabel.setLineWrap(true);
     gameInfoLabel.setWrapStyleWord(true);
 

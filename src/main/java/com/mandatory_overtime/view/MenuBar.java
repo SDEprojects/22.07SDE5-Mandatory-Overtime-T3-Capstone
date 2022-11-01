@@ -93,6 +93,8 @@ public final class MenuBar extends JMenuBar {
         godMode.setForeground(Color.white);
         godMode.addActionListener(e -> {
             godModeAction.run();
+            godMode.setEnabled(false);
+            godMode.setBackground(Color.cyan);
         });
 
         quit.setBorderPainted(false);

@@ -56,23 +56,17 @@ public class HelpMenu {
     }
     gameCommandLabel.setImage(icon);
     gameCommandLabel.setText(helpView.showHelp());
+
     //prevents the TextArea from being editable
     gameCommandLabel.setEditable(false);
 
-    gameCommandLabel.setFont(new Font("Serif", Font.ITALIC, 18));
+    gameCommandLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
-    gameCommandLabel.setForeground(Color.lightGray);
+    gameCommandLabel.setForeground(Color.white);
     gameCommandLabel.setLineWrap(true);
     gameCommandLabel.setWrapStyleWord(true);
 
-
-
-
-
-
     helpMenu.add(gameCommandLabel);
-
-
 
     helpDialog.add(helpMenu);
 

@@ -6,6 +6,7 @@ import com.mandatory_overtime.model.Building.CantGetItemException;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
 import com.mandatory_overtime.view.MapDialog;
+import com.mandatory_overtime.view.SettingsMenu;
 import com.mandatory_overtime.view.UserView;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -33,6 +34,8 @@ public class GUIController {
     private UserView stringMessages = new UserView();
     private MapDialog map;
 
+    private boolean godMode = false;
+
     public GUIController() throws IOException {
         UIManager.put("OptionPane.minimumSize", new Dimension(200,150));
         view = new GuiView();
@@ -55,6 +58,7 @@ public class GUIController {
         }
         building.setName(playerName);
         setUpGamePlayHandlers();
+        view.getMenuBar().getSettingsDialog().getToggleCheatCheckbox().setEnabled(true);
     }
 
     public void loadGame() throws IOException {
@@ -137,30 +141,29 @@ public class GUIController {
             }
         );
 
-        view.setSaveListener(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    building.gameSave();
-                    message = "Game Saved";
-                    updateGameView();
-                } catch (IOException e) {
-                    message = "An error occurred trying to save the game";
-                    updateGameView();
-                }
+        view.setSaveListener(() -> {
+            try {
+                building.gameSave();
+                message = "Game Saved";
+                updateGameView();
+            } catch (IOException e) {
+                message = "An error occurred trying to save the game";
+                updateGameView();
             }
         });
 
-        view.setQuitListener(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    building.gameSave();
-                    JOptionPane.showMessageDialog(null,"Game Saved!...Closing Window");
-                    System.exit(0);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        view.getMenuBar().setGodModeAction(() -> {
+            building.getAllItems("mode");
+            updateGameView();
+        });
+
+        view.setQuitListener(() -> {
+            try {
+                building.gameSave();
+                JOptionPane.showMessageDialog(null,"Game Saved!...Closing Window");
+                System.exit(0);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
 

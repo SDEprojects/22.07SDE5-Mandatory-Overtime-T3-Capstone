@@ -102,4 +102,7 @@ public class GuiView {
         menuBar.setQuitListener(runnable);
     }
 
+    public MenuBar getMenuBar() {
+        return menuBar;
+    }
 }

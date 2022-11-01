@@ -77,7 +77,8 @@ HELP.md
 # - metadata
 .DS_Store
 
-
+# Save files
+*Save.json
 ### Embedded database ###
 
 # If your application uses an embedded database (e.g. Apache Derby, H2, HSQLDB),

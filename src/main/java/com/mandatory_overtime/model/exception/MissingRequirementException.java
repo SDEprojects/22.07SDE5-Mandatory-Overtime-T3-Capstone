@@ -2,8 +2,15 @@ package com.mandatory_overtime.model.exception;
 
 public class MissingRequirementException extends IllegalArgumentException {
 
-  public MissingRequirementException(String noun){
-    System.out.println("Looks like you're missing something in inventory. You won't be able to proceed to " + noun.toUpperCase() + " until you do.");
+  private String roomString;
+  private String nextRoomPreReq;
+
+  public MissingRequirementException(String noun, String nextRoomPreReq){
+    this.roomString = noun;
+    this.nextRoomPreReq = nextRoomPreReq;
   }
 
+  public String getMessage(){
+    return "You need " + nextRoomPreReq.toUpperCase() + " in your inventory to proceed to " + roomString.toUpperCase();
+  }
 }

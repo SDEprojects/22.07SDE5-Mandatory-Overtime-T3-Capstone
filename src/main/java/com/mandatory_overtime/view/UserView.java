@@ -7,14 +7,14 @@ public class UserView {
     String gameInfo =
 
         "Hello " + name + ", \n"
-            + "You are a developer for Amazon and it's Halloween night\n"
-            + "You have had a long week at the office, but you are diving head first into the weekend\n"
+            + "You are a developer for Amazon and it's Halloween night"
+            + "You have had a long week at the office, but you are diving head first into the weekend"
             + "because there's a rooftop Halloween Party tonight!\n\n"
-            + "You wake up from slobbering on your desk. You wipe off the cheetos dust from your cheek.\n"
-            + "While you're looking at the same error in your code from the last 2 weeks,\n"
+            + "You wake up from slobbering on your desk. You wipe off the cheetos dust from your cheek."
+            + "While you're looking at the same error in your code from the last 2 weeks,"
             + "your coworker Pete tells you that he has been hearing rumors of Mandatory Overtime.\n\n"
-            + "You know that it's your turn to be On-Call this weekend.\n"
-            + "Finish your work and escape the building with your things\n"
+            + "You know that it's your turn to be On-Call this weekend."
+            + "Finish your work and escape the building with your things"
             + "before your manager, Scott, finds you and you miss the party tonight.";
 
     return gameInfo;
@@ -32,16 +32,14 @@ public class UserView {
   public String showHelp() {
     String help =
 
-        "\t\tGame Commands\n\n"
-            + "                                    Go [location]\texample: 'Go Elevator' \n\n"
-            + "                                    Get [item]\texample: 'Get Phone'   \n\n"
-            + "                                    Interact [NPC]\texample: 'Interact Roy'\n\n"
-            + "                                    Inspect [item]\texample:'Inspect Sweater'\n\n"
-            + "                                    Volume [0-10]\texample:'Volume 3'\n\n"
-            + "                                   'Music On'\t[turns music on] \n\n"
-            + "                                   'Music Off'\t[turns music off]\n\n"
-            + "                                   'Look Around'\t[display room description]\n\n"
-            + "                                   'Quit'\t[to quit the game at any time]";
+          "\t\n\n"
+        + " Turn music off/on in the settings menu\n"
+        + " Use the slider in the settings menu to settings to adjust background music volume\n"
+        + " Be on the lookout for items in locations\n"
+        + " To add an item to your inventory, click on it's image\n"
+        + " Game play dialogue will appear on the black screen\n"
+        + " Hover over an item to see a description of the item\n"
+        + " Use the SAVE button to save the game at any time";
     return help;
   }
 
@@ -123,11 +121,15 @@ public class UserView {
         + "███████╗██║░╚███║╚█████╔╝╚█████╔╝░░░██║░░░  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║░░░██║░░░██║██║░╚═╝░██║███████╗\n"
         + "╚══════╝╚═╝░░╚══╝░╚════╝░░╚════╝░░░░╚═╝░░░  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝╚══════╝";
 
-
-
     return skull + message + message2;
+  }
 
+//  public String missingSomethingFromInventory(String location){
+//    return String.format("Looks like you're missing something in inventory. You won't be able to proceed to %s until you do", location);
+//  }
 
+  public String gameStatus(String locationDescription, String roomDescription, String item){
+    return roomDescription;
   }
 
 }

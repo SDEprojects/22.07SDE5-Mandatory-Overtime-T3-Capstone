@@ -1,34 +1,32 @@
 package com.mandatory_overtime.view;
 
+import com.mandatory_overtime.model.Building;
 import com.mandatory_overtime.view.SettingsMenu;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class MainMenu {
 
-
-
-    private final SettingsMenu settingsMenu = new SettingsMenu();
-
-    private final GameInfo gameInfo = new GameInfo();
+    private static final JMenuBar menuBar = MenuBar.getMenuBar();
     private static JLayeredPane homeScreen;
-
     private static JLayeredPane loadingScreen;
 
     private static JButton startBtn;
     private static JButton loadBtn;
-
     private static JProgressBar progressBar;
-
     private ImageIcon mainMenu;
     private ImageIcon startButtonImage;
     private ImageIcon loadButtonImage;
@@ -58,22 +56,7 @@ public class MainMenu {
     }
     private void buildMainMenu(){
         homeScreen = new JLayeredPane();
-
-        // Settings BUTTON
-        JButton settingsBtn = new JButton("Settings");
-        settingsBtn.addActionListener(e -> settingsMenu.openMenu());
-
-        // Help BUTTON
-        JButton helpBtn = new JButton("Game Info");
-        helpBtn.setToolTipText("Click for game info");
-        helpBtn.addActionListener(e -> gameInfo.openGameInfoMenu());
-
-        // Settings Bar
-        JPanel settingsBar = new JPanel();
-        settingsBar.setBackground(Color.DARK_GRAY);
-        settingsBar.setBounds(0, 0, 1500, 40);
-        settingsBar.add(settingsBtn);
-        settingsBar.add(helpBtn);
+        MenuBar.hideGameBtns();
 
         // BackGroundImage
         JLabel imageSection = new JLabel(mainMenu);
@@ -91,7 +74,7 @@ public class MainMenu {
         loadBtn.setFocusPainted(false);
         loadBtn.setContentAreaFilled(false);
 
-        homeScreen.add(settingsBar, Integer.valueOf(1));
+        homeScreen.add(MenuBar.getMenuBar(), Integer.valueOf(1));
         homeScreen.add(imageSection, Integer.valueOf(0));
         homeScreen.add(startBtn, Integer.valueOf(2));
         homeScreen.add(loadBtn, Integer.valueOf(2));
@@ -117,6 +100,9 @@ public class MainMenu {
     }
 
     public static JLayeredPane getHomeScreen() {
+        homeScreen.add(menuBar);
+        homeScreen.setLayer(menuBar, 2);
+        MenuBar.hideGameBtns();
         return homeScreen;
     }
 
@@ -145,6 +131,7 @@ public class MainMenu {
             counter += 1;
         }
     }
+
 
 
 }

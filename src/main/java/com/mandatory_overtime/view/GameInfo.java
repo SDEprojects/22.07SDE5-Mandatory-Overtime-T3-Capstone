@@ -1,7 +1,14 @@
 package com.mandatory_overtime.view;
 
+import static javax.imageio.ImageIO.read;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,14 +30,14 @@ public class GameInfo {
 
   }
 
-  private JTextArea gameInfoLabel;
+  private JTextAreaPlus gameInfoLabel;
 
 
   private void buildGameInfomenu() {
 
     gameInfoDialog = new JDialog(new JFrame(), true);
     gameInfoDialog.setTitle("Game Information");
-    gameInfoDialog.setBounds(500, 100, 600, 500);
+    gameInfoDialog.setBounds(500, 100, 580, 500);
 
     JPanel gameInfoMenu= new JPanel(new GridLayout(1, 0));
 
@@ -40,12 +47,22 @@ public class GameInfo {
 
 
 
-    gameInfoLabel = new JTextArea();
+    gameInfoLabel = new JTextAreaPlus();
+
+    ImageIcon icon;
+    try (InputStream gameInfoMenuImage = getClass().getResourceAsStream("/images/help3.png")) {
+      icon = new ImageIcon(read(gameInfoMenuImage));
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    gameInfoLabel.setImage(icon);
     //grabs text from UserView class and sets it to a TextArea
     gameInfoLabel.setText(gameInfoView.startUpInfo(""));
     //prevents the TextArea from being editable
     gameInfoLabel.setEditable(false);
-    gameInfoLabel.setFont(new Font("Serif", Font.ITALIC, 18));
+    gameInfoLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+    gameInfoLabel.setForeground(Color.white);
     gameInfoLabel.setLineWrap(true);
     gameInfoLabel.setWrapStyleWord(true);
 

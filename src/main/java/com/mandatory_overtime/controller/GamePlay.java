@@ -8,8 +8,10 @@ import com.mandatory_overtime.model.GameState;
 
 import com.mandatory_overtime.model.exception.IllegalMoveException;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
+import com.mandatory_overtime.model.exception.NoSavedGame;
 import com.mandatory_overtime.view.UserView;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
@@ -130,12 +132,16 @@ public class GamePlay {
      */
     public void startGameFromSaved() throws IOException, URISyntaxException {
         building = new Building();
-        building.createGameStructureFromSave();
-        //run printRoomDescription() here to show current room.
-        building.startingRoomDescription();
-        System.out.printf("Welcome back %s \n>", building.getName());
-        //start game loop
-        gamePlayCommands();
+        try{
+            building.createGameStructureFromSave();
+            //run printRoomDescription() here to show current room.
+            building.startingRoomDescription();
+            System.out.printf("Welcome back %s \n>", building.getName());
+            //start game loop
+            gamePlayCommands();
+        }catch (FileNotFoundException e){
+            startGameFromNew();
+        }
     }
 
     /**

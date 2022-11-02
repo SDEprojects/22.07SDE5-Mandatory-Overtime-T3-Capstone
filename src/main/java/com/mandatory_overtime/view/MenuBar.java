@@ -18,7 +18,7 @@ public final class MenuBar extends JMenuBar {
     private final HelpMenu helpDialog = new HelpMenu();
     private static final JButton settings = new JButton("Settings");
     private final JButton help = new JButton("   Help   ");
-    private static final JButton quit = new JButton("Quit   ");
+    private static final JButton quit = new JButton("Quit To Main  ");
     private static final JMenu spacer = new JMenu("|");
     private static final JMenu spacer2 = new JMenu("|");
     private static final JButton save = new JButton("Save");

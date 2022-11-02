@@ -25,7 +25,7 @@ public class GUIController {
     private final JButton startBtn;
 
     private final JButton loadBtn;
-    private final Building building = new Building();
+    private Building building = new Building();
 
     private String message = "";
 
@@ -46,6 +46,7 @@ public class GUIController {
 
     public void startNewGame() throws IOException {
         // Create New Building
+        building = new Building();
         building.createGameStructureFromNew();
         String playerName = JOptionPane.showInputDialog("What is you name? ");
 
@@ -62,6 +63,7 @@ public class GUIController {
 
     public void loadGame() throws IOException {
         try {
+            building = new Building();
             building.createGameStructureFromSave();
             message = "Game Loaded";
         } catch (IOException | URISyntaxException e) {
@@ -128,6 +130,7 @@ public class GUIController {
                     removedItem = itemName;
                     message = "You picked up " + itemName;
                     updateGameView();
+                    removedItem = null;
                 } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);
                 } catch (MissingRequirementException | CantGetItemException e) {
@@ -168,10 +171,14 @@ public class GUIController {
                     if (!building.getPlayer().getCurrentLocation().equals("home")
                         && !building.getPlayer().getCurrentLocation().equals("lose")) {
                         building.gameSave();
-                        JOptionPane.showMessageDialog(null, "Game Saved!...Closing Window");
-                        System.exit(0);
+                        JOptionPane.showConfirmDialog(null, "Would you like to save the game before quiting?","Save Progress", JOptionPane.YES_NO_OPTION);
+                        if(JOptionPane.YES_NO_OPTION == JOptionPane.YES_OPTION){
+                            building.gameSave();
+                            JOptionPane.showMessageDialog(null, "Game Saved");
+                        }
+                        view.presentMainMenu();
                     } else {
-                        System.exit(0);
+                        view.presentMainMenu();
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);

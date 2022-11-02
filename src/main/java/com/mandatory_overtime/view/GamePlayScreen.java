@@ -142,7 +142,7 @@ public class GamePlayScreen {
         locationContainer.repaint();
 
         // UPDATE GAME INFO SECTION
-        gameInfoText.setText("Current Location:\t    " + location.toUpperCase());
+        gameInfoText.setText("EXITS");
         gameInfoContainer.add(gameInfoText);
         gameInfoContainer.revalidate();
         gameInfoContainer.repaint();
@@ -196,7 +196,6 @@ public class GamePlayScreen {
         gameScreen.setLayer(gameTextContainer, 2);
         gameScreen.setLayer(inventoryContainer, 0);
         gameScreen.setLayer(locationContainer, 1);
-        // gameScreen.setLayer(settingsBar, 3);
 
     }
 

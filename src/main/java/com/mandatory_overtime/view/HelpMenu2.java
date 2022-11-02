@@ -31,18 +31,18 @@ public class HelpMenu2 {
     public void buildHelpMenu() {
         helpDialog = new JDialog(new javax.swing.JFrame(), true);
         helpDialog.setTitle("Help");
-        helpDialog.setBounds(500, 100, 600, 500);
+        helpDialog.setBounds(500, 100, 700, 525);
 
         try {
             InputStream stream = getClass().getResourceAsStream("/images/helpMenu.png");
             ImageIcon img = new ImageIcon(ImageIO.read(stream));
             imgBackground = new JLabel(img);
-            imgBackground.setSize(600, 500);
+            imgBackground.setSize(700, 500);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
             helpText.setText("<html>"+helpView.showHelp2()+"</html>");
-            helpText.setBounds(50, 0, 575,475);
+            helpText.setBounds(30, 30, 650,500);
             helpText.setFont(new Font("Serif", Font.PLAIN, 18));
             helpText.setForeground(Color.WHITE);
 

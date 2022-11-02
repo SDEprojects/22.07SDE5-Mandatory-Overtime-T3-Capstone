@@ -46,13 +46,14 @@ public class UserView {
     String help =
 
         "\t\n\n"
-            + "  <span style='color:#025fc2'>MUSIC</span>         &emsp -  &emsp Open the settings menu and select on/off.<br><br>"
-            + "  <span style='color:#025fc2'>VOLUME</span>        &emsp -  &emsp Open the settings menu adjust slider.<br><br>"
-            + "  <span style='color:#025fc2'>GRAB</span>          &emsp -  &emsp During gameplay click the item on screen.<br><br>"
-            + "  <span style='color:#025fc2'>INSPECT</span>       &emsp -  &emsp During gameplay hover over the item.<br><br>"
-            + "  <span style='color:#025fc2'>SAVE</span>          &emsp -  &emsp Select save game on the menu at any time.<br><br>"
-            + "  <span style='color:#025fc2'>QUIT</span>          &emsp -  &emsp Select Quit To Main to return to the main menu.<br><br>"
-            + "  <span style='color:#025fc2'>NPCs</span>          &emsp -  &emsp During gameplay click on NPC to interact.<br><br>";
+            + "  <span style='color:#025fc2'>CONTROL MUSIC </span>         &emsp -  &emsp Open Settings and select music on/off.<br><br>"
+            + "  <span style='color:#025fc2'>ADJUST VOLUME </span>        &emsp -  &emsp Open Settings and adjust slider.<br><br>"
+            + "  <span style='color:#025fc2'>GRAB ITEM </span>          &emsp -  &emsp During gameplay click the item on screen.<br><br>"
+            + "  <span style='color:#025fc2'>INSPECT ITEM </span>       &emsp -  &emsp During gameplay hover over the item.<br><br>"
+            + "  <span style='color:#025fc2'>SAVE  </span>          &emsp -  &emsp Select Save game on the menu at any time.<br><br>"
+            + "  <span style='color:#025fc2'>QUIT </span>          &emsp -  &emsp Select Quit To Main to return to the main menu.<br><br>"
+            + "  <span style='color:#025fc2'>NPCs </span>          &emsp -  &emsp During gameplay click on NPC to interact.<br><br>"
+            + "  <span style='color:#025fc2'>CHEAT </span>        &emsp -  &emsp During gameplay, open Settings, then God Mode on the top navbar.<br><br>";
     return help;
   }
   public String incorrectInput() {

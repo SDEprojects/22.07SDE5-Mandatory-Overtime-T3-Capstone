@@ -19,7 +19,23 @@ public class UserView {
 
     return gameInfo;
   }
+  public String startUpInfo2(String name) {
 
+    String gameInfo =
+
+        "Hello " + name + ", <br>"
+            + "You are a developer for Amazon and it's Halloween night. "
+            + "You have had a long week at the office, but you are diving head first into the weekend "
+            + "because there's a rooftop Halloween Party tonight! <br>"
+            + "You wake up from slobbering on your desk. You wipe off the cheetos dust from your cheek.<br><br>"
+            + "While you're looking at the same error in your code from the last 2 weeks, "
+            + "your coworker Pete tells you that he has been hearing rumors of Mandatory Overtime. "
+            + "You know that it's your turn to be On-Call this weekend.<br><br>"
+            + "Finish your work and escape the building with your things "
+            + "before your manager, Scott, finds you and you miss the party tonight.<br>";
+
+    return gameInfo;
+  }
 
 
   public String startUpTitle() {

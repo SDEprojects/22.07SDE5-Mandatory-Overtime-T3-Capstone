@@ -42,10 +42,6 @@ public class SettingsMenu {
         settingsDialog.setVisible(true);
     }
 
-    public static JDialog getMenu() {
-        return settingsDialog;
-    }
-
     public void buildSettingsMenu() {
         settingsDialog = new JDialog(new javax.swing.JFrame(), true);
         settingsDialog.setTitle("Settings");
@@ -59,21 +55,19 @@ public class SettingsMenu {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            musicControlLabel.setBounds(50,100, 200, 100);
+            musicControlLabel.setBounds(50, 100, 200, 100);
             musicControlLabel.setForeground(Color.WHITE);
-            musicControlLabel.setFont(new Font("Serif",Font.BOLD, 22));
+            musicControlLabel.setFont(new Font("Serif", Font.BOLD, 22));
 
-            musicVolLabel.setBounds(50,200, 200, 100);
+            musicVolLabel.setBounds(50, 200, 200, 100);
             musicVolLabel.setForeground(Color.WHITE);
-            musicVolLabel.setFont(new Font("Serif",Font.BOLD, 22));
+            musicVolLabel.setFont(new Font("Serif", Font.BOLD, 22));
 
-            musicOnBtn.setBounds(300,135, 100, 40);
+            musicOnBtn.setBounds(300, 135, 100, 40);
             musicOnBtn.addActionListener(e -> GameMusic.musicOnOff("on"));
 
-
-            musicOffBtn.setBounds(425,135, 100, 40);
+            musicOffBtn.setBounds(425, 135, 100, 40);
             musicOffBtn.addActionListener(e -> GameMusic.musicOnOff("off"));
-
 
             volumeSlider.setMinorTickSpacing(1);
             volumeSlider.setMajorTickSpacing(5);
@@ -85,13 +79,13 @@ public class SettingsMenu {
             volumeSlider.setValue(4);
             volumeSlider.setBounds(300, 225, 230, 60);
             volumeSlider.addChangeListener(e -> {
-                int vol = ((JSlider)e.getSource()).getValue();
+                int vol = ((JSlider) e.getSource()).getValue();
                 GameMusic.volumeUpDown(String.valueOf(vol));
             });
 
-            toggleCheatLabel.setBounds(50, 300,200,100);
+            toggleCheatLabel.setBounds(50, 300, 200, 100);
             toggleCheatLabel.setForeground(Color.WHITE);
-            toggleCheatLabel.setFont(new Font("Serif",Font.BOLD, 22));
+            toggleCheatLabel.setFont(new Font("Serif", Font.BOLD, 22));
 
             toggleCheatCheckbox = new JCheckBox();
             toggleCheatCheckbox.setBounds(300, 340, 20, 20);
@@ -115,16 +109,12 @@ public class SettingsMenu {
 
             settingsMenu.setLayer(settingsBackground, 0);
 
-
             settingsDialog.add(settingsMenu);
         }
 
 
     }
 
-    public static JDialog getSettingsDialog() {
-        return settingsDialog;
-    }
 
     public JCheckBox getToggleCheatCheckbox() {
         return toggleCheatCheckbox;

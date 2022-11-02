@@ -13,6 +13,7 @@
     "sound3": "Elevator_Door.wav",
     "preReq": null,
     "fail": false,
+    "description": "You are in the elevator.",
     "image": "elevator.png"
   },
 
@@ -27,6 +28,7 @@
     ],
     "preReq": null,
     "fail": false,
+    "description": "Floor 1",
     "sound1": "Elevator_Button.wav",
     "sound2": "Level1.wav",
     "sound3": "Elevator_Door.wav",
@@ -43,6 +45,7 @@
     ],
     "preReq": null,
     "fail": false,
+    "description": "Floor 2",
     "sound1": "Elevator_Button.wav",
     "sound2": "Level2.wav",
     "sound3": "Elevator_Door.wav",
@@ -59,6 +62,7 @@
     ],
     "preReq": null,
     "fail": false,
+    "description": "Floor 3",
     "sound1": "Elevator_Button.wav",
     "sound2": "Level3.wav",
     "sound3": "Elevator_Door.wav",
@@ -75,6 +79,7 @@
     ],
     "preReq": null,
     "fail": false,
+    "description": "Floor 4",
     "sound1": "Elevator_Button.wav",
     "sound2": "Level4.wav",
     "sound3": "Elevator_Door.wav",
@@ -91,6 +96,7 @@
     ],
     "preReq": null,
     "fail": false,
+    "description": "Floor 5",
     "sound1": "Elevator_Button.wav",
     "sound2": "Level5.wav",
     "sound3": "Elevator_Door.wav",
@@ -281,5 +287,15 @@
     "fail": true,
     "description": "Congratulations, you have successfully avoided your boss.",
     "image": "home.png"
+  },
+  {
+    "RoomName": "lose",
+    "directions": null,
+    "items": null,
+    "NPC": null,
+    "preReq": null,
+    "fail": false,
+    "description": "Oh no, Scott found you. You've been assigned mandatory overtime!",
+    "image": "lose.png"
   }
 ]

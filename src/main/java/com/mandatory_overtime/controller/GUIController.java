@@ -33,7 +33,7 @@ public class GUIController {
 
     private final boolean godMode = false;
 
-    private String gameLevel;
+    private String gameLevel = "easy";
 
     public GUIController() throws IOException {
         UIManager.put("OptionPane.minimumSize", new Dimension(400, 250));
@@ -56,10 +56,11 @@ public class GUIController {
                 JOptionPane.showMessageDialog(null, "Please enter a valid name to start game");
                 return;
             }
-            building.createGameStructureFromNew();
+            building.createGameStructureFromNew(gameLevel);
             building.setName("playerName");
             setUpGamePlayHandlers();
             view.getMenuBar().getSettingsDialog().getToggleCheatCheckbox().setEnabled(true);
+            view.getNameTextField().setText(null);
         }
     }
 

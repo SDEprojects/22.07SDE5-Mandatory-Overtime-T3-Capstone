@@ -44,11 +44,20 @@ public class Building {
 
     }
 
-    public void createGameStructureFromNew() throws IOException {
+    public void createGameStructureFromNew(String difficulty) throws IOException {
         Gson gson = new Gson();
+        List<Room> rooms;
         setGameState(GameState.IN_PROGRESS);
-        List<Room> rooms = load("RoomStructure.json", gson, new TypeToken<ArrayList<Room>>() {
-        }.getType());
+        if(difficulty.equals("hard")){
+            rooms = load("RoomStructure_Hard.json", gson, new TypeToken<ArrayList<Room>>() {
+            }.getType());
+
+            System.out.println("loading hard game....");
+        }else{
+            rooms = load("RoomStructure.json", gson, new TypeToken<ArrayList<Room>>() {
+            }.getType());
+        }
+
 
         List<Item> itemArray = load("ItemStructure.json", gson, new TypeToken<ArrayList<Item>>() {
         }.getType());

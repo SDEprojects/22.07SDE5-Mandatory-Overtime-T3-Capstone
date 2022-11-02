@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 public class GuiView {
@@ -108,5 +109,13 @@ public class GuiView {
 
     public JPanel getGameStartPanel(){
         return gameStartPanel.getLevelSelection();
+    }
+
+    public String getSelectedButton(){
+        return gameStartPanel.getSelectedButton();
+    }
+
+    public JTextField getNameTextField(){
+        return gameStartPanel.getNameInput();
     }
 }

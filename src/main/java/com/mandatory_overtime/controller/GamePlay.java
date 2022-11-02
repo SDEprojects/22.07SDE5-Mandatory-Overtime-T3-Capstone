@@ -94,7 +94,7 @@ public class GamePlay {
      */
     public void startGameFromNew() throws IOException {
         building = new Building();
-        building.createGameStructureFromNew();
+        building.createGameStructureFromNew("easy");
         try {
             //Ask if user wants to start new game, continue from previous game
 

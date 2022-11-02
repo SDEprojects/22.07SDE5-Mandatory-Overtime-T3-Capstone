@@ -26,28 +26,48 @@ public class LevelSelectionPanel {
     private final JLabel nameLabel = new JLabel("Enter Your Name");
     private final JLabel difficultyLabel = new JLabel("Select Your Difficulty");
 
+    private JTextField nameTextField;
+
+
+    private String selectedButton = "easy";
+
     public LevelSelectionPanel() {
         buildMenu();
     }
 
     public void buildMenu() {
-
-        levelSelection.setLayout(null);
-        levelSelection.setBounds(0,0,300, 500);
-
-        nameLabel.setBounds(0,0 , 200, 100);
+        nameTextField = new JTextField();
         ButtonGroup group = new ButtonGroup();
 
+        levelSelection.setLayout(null);
+        levelSelection.setBounds(0,0,800, 700);
+
+
+        nameLabel.setBounds(0,25, 100, 50);
+        nameTextField.setBounds(0, 65, 300,25);
+
+        difficultyLabel.setBounds(0,100, 300, 50);
+
         JRadioButton easyBtn = new JRadioButton("Easy");
-        JRadioButton hardBtn = new JRadioButton("hard");
+        easyBtn.setBounds(10 ,140,200, 25 );
+        easyBtn.setActionCommand("easy");
         easyBtn.setSelected(true);
+        easyBtn.addActionListener(e ->{
+            selectedButton = e.getActionCommand();
+        });
+
+        JRadioButton hardBtn = new JRadioButton("Hard");
+        hardBtn.setBounds(10 ,170,200, 25 );
+        hardBtn.setActionCommand("hard");
+        hardBtn.addActionListener(e ->{
+            selectedButton = e.getActionCommand();
+        });
+
         group.add(easyBtn);
         group.add(hardBtn);
 
         levelSelection.add(nameLabel);
-        levelSelection.add(new JTextField(10));
-        levelSelection.add(new JLabel());
-
+        levelSelection.add(nameTextField);
         levelSelection.add(difficultyLabel);
         levelSelection.add(easyBtn);
         levelSelection.add(hardBtn);
@@ -57,5 +77,16 @@ public class LevelSelectionPanel {
     public JPanel getLevelSelection() {
         return levelSelection;
     }
+
+    public JTextField getNameInput(){
+        return nameTextField;
+    }
+
+    public String getSelectedButton() {
+        return selectedButton;
+    }
+
+
+
 
 }

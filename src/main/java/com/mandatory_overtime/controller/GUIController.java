@@ -3,11 +3,9 @@ package com.mandatory_overtime.controller;
 
 import com.mandatory_overtime.model.Building;
 import com.mandatory_overtime.model.Building.CantGetItemException;
-import com.mandatory_overtime.model.GameState;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.view.GuiView;
 import com.mandatory_overtime.view.MapDialog;
-import com.mandatory_overtime.view.SettingsMenu;
 import com.mandatory_overtime.view.UserView;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -35,8 +33,10 @@ public class GUIController {
 
     private final boolean godMode = false;
 
+    private String gameLevel = "easy";
+
     public GUIController() throws IOException {
-        UIManager.put("OptionPane.minimumSize", new Dimension(200, 150));
+        UIManager.put("OptionPane.minimumSize", new Dimension(400, 250));
         view = new GuiView();
         view.presentMainMenu();
         loadBtn = view.getLoadGameButton();
@@ -47,18 +47,21 @@ public class GUIController {
     public void startNewGame() throws IOException {
         // Create New Building
         building = new Building();
-        building.createGameStructureFromNew();
-        String playerName = JOptionPane.showInputDialog("What is you name? ");
-        JOptionPane.showConfirmDialog(null,view.getGameStartPanel(),"", JOptionPane.OK_CANCEL_OPTION);
-        if (playerName == null) {
-            return;
-        } else if (playerName.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid name to start game");
-            return;
+      //  String playerName = JOptionPane.showInputDialog("What is you name? ");
+        int result = JOptionPane.showConfirmDialog(null,view.getGameStartPanel(),"Starting A New Game", JOptionPane.OK_CANCEL_OPTION);
+        if(result == JOptionPane.OK_OPTION){
+            String name = view.getNameTextField().getText();
+            gameLevel = view.getSelectedButton();
+            if(name.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Please enter a valid name to start game");
+                return;
+            }
+            building.createGameStructureFromNew(gameLevel);
+            building.setName("playerName");
+            setUpGamePlayHandlers();
+            view.getMenuBar().getSettingsDialog().getToggleCheatCheckbox().setEnabled(true);
+            view.getNameTextField().setText(null);
         }
-        building.setName(playerName);
-        setUpGamePlayHandlers();
-        view.getMenuBar().getSettingsDialog().getToggleCheatCheckbox().setEnabled(true);
     }
 
     public void loadGame() throws IOException {
@@ -171,8 +174,8 @@ public class GUIController {
                     if (!building.getPlayer().getCurrentLocation().equals("home")
                         && !building.getPlayer().getCurrentLocation().equals("lose")) {
                         building.gameSave();
-                        JOptionPane.showConfirmDialog(null, "Would you like to save the game before quiting?","Save Progress", JOptionPane.YES_NO_OPTION);
-                        if(JOptionPane.YES_NO_OPTION == JOptionPane.YES_OPTION){
+                        int saveGame = JOptionPane.showConfirmDialog(null, "Would you like to save the game before quiting?","Save Progress", JOptionPane.YES_NO_OPTION);
+                        if(saveGame == JOptionPane.YES_OPTION){
                             building.gameSave();
                             JOptionPane.showMessageDialog(null, "Game Saved");
                         }

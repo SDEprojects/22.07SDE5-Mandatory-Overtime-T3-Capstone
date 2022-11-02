@@ -19,7 +19,6 @@ public class HelpMenu {
   //Creates and instance of the UserView class.
   UserView helpView = new UserView();
 
-
   private JDialog helpDialog;
 
   public HelpMenu() {

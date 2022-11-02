@@ -42,7 +42,19 @@ public class UserView {
         + " Use the SAVE button to save the game at any time";
     return help;
   }
+  public String showHelp2() {
+    String help =
 
+        "\t\n\n"
+            + "  <span style='color:#025fc2'>MUSIC</span>         &emsp -  &emsp Open the settings menu and select on/off.<br><br>"
+            + "  <span style='color:#025fc2'>VOLUME</span>        &emsp -  &emsp Open the settings menu adjust slider.<br><br>"
+            + "  <span style='color:#025fc2'>GRAB</span>          &emsp -  &emsp During gameplay click the item on screen.<br><br>"
+            + "  <span style='color:#025fc2'>INSPECT</span>       &emsp -  &emsp During gameplay hover over the item.<br><br>"
+            + "  <span style='color:#025fc2'>SAVE</span>          &emsp -  &emsp Select save game on the menu at any time.<br><br>"
+            + "  <span style='color:#025fc2'>QUIT</span>          &emsp -  &emsp Select Quit To Main to return to the main menu.<br><br>"
+            + "  <span style='color:#025fc2'>NPCs</span>          &emsp -  &emsp During gameplay click on NPC to interact.<br><br>";
+    return help;
+  }
   public String incorrectInput() {
     return "\nWe don't recognize this command. Please review the game commands for valid inputs. (type 'help')\n";
   }

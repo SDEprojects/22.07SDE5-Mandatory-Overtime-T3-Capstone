@@ -25,7 +25,7 @@ public class GuiView {
     private final MainMenu mainMenu = new MainMenu();
     private GamePlayScreen gamePlayScreen;
 
-    private JPanel panel = new JPanel();
+    private final LevelSelectionPanel gameStartPanel = new LevelSelectionPanel();
 
 
     public GuiView(){
@@ -104,5 +104,9 @@ public class GuiView {
 
     public MenuBar getMenuBar() {
         return menuBar;
+    }
+
+    public JPanel getGameStartPanel(){
+        return gameStartPanel.getLevelSelection();
     }
 }

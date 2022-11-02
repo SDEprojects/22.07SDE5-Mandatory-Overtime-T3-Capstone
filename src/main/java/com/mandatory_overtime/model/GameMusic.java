@@ -62,7 +62,6 @@ public class GameMusic {
             clip.stop();
         }
         if (noun.equals("on")) {
-            System.out.println("turning on music");
             clip.start();
         }
     }

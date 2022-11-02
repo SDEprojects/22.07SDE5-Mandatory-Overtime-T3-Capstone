@@ -11,67 +11,59 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class GameInfo {
 
-  //Creates and instance of the UserView class.
-  UserView gameInfoView = new UserView();
-  private JDialog gameInfoDialog;
+    //Creates and instance of the UserView class.
+    UserView gameInfoView = new UserView();
+    private JDialog gameInfoDialog;
 
 
-  public GameInfo() {
-    buildGameInfomenu();
-  }
-
-  public void openGameInfoMenu() {
-    gameInfoDialog.setVisible(true);
-
-  }
-
-  private JTextAreaPlus gameInfoLabel;
-
-
-  private void buildGameInfomenu() {
-
-    gameInfoDialog = new JDialog(new JFrame(), true);
-    gameInfoDialog.setTitle("Game Information");
-    gameInfoDialog.setBounds(500, 100, 580, 500);
-
-    JPanel gameInfoMenu= new JPanel(new GridLayout(1, 0));
-
-
-//    JButton gameCommandsBtn = new JButton("Game Commands");
-//    JButton gameInstructionsBtn = new JButton("Instructions");
-
-
-
-    gameInfoLabel = new JTextAreaPlus();
-
-    ImageIcon icon;
-    try (InputStream gameInfoMenuImage = getClass().getResourceAsStream("/images/help3.png")) {
-      icon = new ImageIcon(read(gameInfoMenuImage));
-
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    public GameInfo() {
+        buildGameInfomenu();
     }
-    gameInfoLabel.setImage(icon);
-    //grabs text from UserView class and sets it to a TextArea
-    gameInfoLabel.setText(gameInfoView.startUpInfo(""));
-    //prevents the TextArea from being editable
-    gameInfoLabel.setEditable(false);
-    gameInfoLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-    gameInfoLabel.setForeground(Color.white);
-    gameInfoLabel.setLineWrap(true);
-    gameInfoLabel.setWrapStyleWord(true);
+
+    public void openGameInfoMenu() {
+        gameInfoDialog.setVisible(true);
+
+    }
+
+    private void buildGameInfomenu() {
+
+        gameInfoDialog = new JDialog(new JFrame(), true);
+        gameInfoDialog.setTitle("Game Information");
+        gameInfoDialog.setBounds(500, 100, 580, 500);
+
+        JPanel gameInfoMenu = new JPanel(new GridLayout(1, 0));
+
+        JTextAreaPlus gameInfoLabel = new JTextAreaPlus();
+
+        ImageIcon icon;
+        try (InputStream gameInfoMenuImage = getClass().getResourceAsStream("/images/help3.png")) {
+            icon = new ImageIcon(read(gameInfoMenuImage));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        gameInfoLabel.setImage(icon);
+        //grabs text from UserView class and sets it to a TextArea
+        gameInfoLabel.setText(gameInfoView.startUpInfo(""));
+        //prevents the TextArea from being editable
+        gameInfoLabel.setEditable(false);
+        gameInfoLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        gameInfoLabel.setForeground(Color.white);
+        gameInfoLabel.setLineWrap(true);
+        gameInfoLabel.setWrapStyleWord(true);
+
+        gameInfoMenu.add(gameInfoLabel);
+
+        gameInfoDialog.add(gameInfoMenu);
 
 
-    gameInfoMenu.add(gameInfoLabel);
-
-    gameInfoDialog.add(gameInfoMenu);
-
-
-  }
+    }
 
 }

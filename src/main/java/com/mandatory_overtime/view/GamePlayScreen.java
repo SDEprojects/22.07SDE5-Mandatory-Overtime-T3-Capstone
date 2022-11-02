@@ -109,11 +109,13 @@ public class GamePlayScreen {
 
         Component[] comp = LOCATION_GUI_PANELS.get(location).getComponents();
 
-        for (int i = 0; i < comp.length; i++) {
-            if (comp[i] instanceof JButton && ((JButton) comp[i]).getActionCommand()
-                .equals(removedItem)) {
-                LOCATION_GUI_PANELS.get(location).remove(i);
-                break;
+        if (removedItem != null) {
+            for (int i = 0; i < comp.length; i++) {
+                if (comp[i] instanceof JButton && ((JButton) comp[i]).getActionCommand()
+                    .equals(removedItem)) {
+                    LOCATION_GUI_PANELS.get(location).remove(i);
+                    break;
+                }
             }
         }
 
@@ -201,13 +203,15 @@ public class GamePlayScreen {
 
     public void buildLocationGUI(HashMap locations, HashMap items) {
         locationGUIPanel = new LocationGUIPanel(locations, items);
-        LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels();
+        LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels() ;
+
     }
 
 
     public LocationGUIPanel getLocationGUIPanel() {
         return locationGUIPanel;
     }
+
 
     public void setMoveListener(Consumer<String> listener) {
         moveListener = listener;

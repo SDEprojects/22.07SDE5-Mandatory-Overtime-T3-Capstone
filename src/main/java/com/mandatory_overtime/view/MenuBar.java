@@ -14,11 +14,11 @@ public final class MenuBar extends JMenuBar {
 
 
     private final SettingsMenu settingsDialog = new SettingsMenu();
-    private final GameInfo gameInfoDialog = new GameInfo();
-    private final HelpMenu helpDialog = new HelpMenu();
+    private final GameInfo2 gameInfoDialog = new GameInfo2();
+    private final HelpMenu2 helpDialog = new HelpMenu2();
     private static final JButton settings = new JButton("Settings");
     private final JButton help = new JButton("   Help   ");
-    private static final JButton quit = new JButton("Quit   ");
+    private static final JButton quit = new JButton("Quit To Main  ");
     private static final JMenu spacer = new JMenu("|");
     private static final JMenu spacer2 = new JMenu("|");
     private static final JButton save = new JButton("Save");

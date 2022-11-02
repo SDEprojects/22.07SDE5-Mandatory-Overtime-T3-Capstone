@@ -171,8 +171,8 @@ public class GUIController {
                     if (!building.getPlayer().getCurrentLocation().equals("home")
                         && !building.getPlayer().getCurrentLocation().equals("lose")) {
                         building.gameSave();
-                        JOptionPane.showConfirmDialog(null, "Would you like to save the game before quiting?","Save Progress", JOptionPane.YES_NO_OPTION);
-                        if(JOptionPane.YES_NO_OPTION == JOptionPane.YES_OPTION){
+                        int saveGame = JOptionPane.showConfirmDialog(null, "Would you like to save the game before quiting?","Save Progress", JOptionPane.YES_NO_OPTION);
+                        if(saveGame == JOptionPane.YES_OPTION){
                             building.gameSave();
                             JOptionPane.showMessageDialog(null, "Game Saved");
                         }

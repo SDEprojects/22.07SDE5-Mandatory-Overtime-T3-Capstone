@@ -49,7 +49,7 @@ public class GUIController {
         building = new Building();
         building.createGameStructureFromNew();
         String playerName = JOptionPane.showInputDialog("What is you name? ");
-
+        JOptionPane.showConfirmDialog(null,view.getGameStartPanel(),"", JOptionPane.OK_CANCEL_OPTION);
         if (playerName == null) {
             return;
         } else if (playerName.isEmpty()) {

@@ -21,8 +21,10 @@ public class GameMusic {
     static Building building;
     private static Clip soundClip;
     private static FloatControl gainControlSoundFX;
-
     private static FloatControl gainControlNPC;
+
+    private static float soundFxVolume = (-4.0f);
+    private static float tempFxVolume = (-4.0f);
 
     static {
         try {
@@ -46,7 +48,7 @@ public class GameMusic {
 
             // Set default sound FX volume
             gainControlSoundFX = (FloatControl) soundClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControlSoundFX.setValue(-4.0f);
+            gainControlSoundFX.setValue(soundFxVolume);
             soundClip.start();
         } catch (UnsupportedAudioFileException e) {
         } catch (Exception e) {
@@ -75,15 +77,16 @@ public class GameMusic {
         }
     }
 
-    public static void soundFXOnOff(String noun){
+    public static void soundFXOnOff(String noun) {
         if (noun.equals("off")) {
-            gainControlSoundFX.setValue(gainControlSoundFX.getMinimum());
-            gainControlNPC.setValue(gainControlNPC.getMinimum());
+            if(npcAudioClip != null){
+                npcAudioClip.stop();
+            }
+            tempFxVolume = soundFxVolume;
+            soundFxVolume = -80.0f;
         }
         if (noun.equals("on")) {
-            gainControlSoundFX.setValue(-4.0f);
-            gainControlNPC.setValue(-4.0f);
-
+           soundFxVolume = tempFxVolume;
         }
     }
 
@@ -175,7 +178,7 @@ public class GameMusic {
         }
     }
 
-    public static void playNPCSound(String npcSound){
+    public static void playNPCSound(String npcSound) {
 
         try {
             URL audio = GameMusic.class.getResource("/" + npcSound);
@@ -183,22 +186,21 @@ public class GameMusic {
             if (audio != null) {
                 audioInput = AudioSystem.getAudioInputStream(audio);
             }
-         //   npcAudioClip.stop();
+            //   npcAudioClip.stop();
             npcAudioClip = AudioSystem.getClip();
             npcAudioClip.open(audioInput);
             npcAudioClip.stop();
 
             // Set default sound FX volume
-           gainControlNPC =
+            gainControlNPC =
                 (FloatControl) npcAudioClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControlNPC.setValue(-4.0f);
+            gainControlNPC.setValue(soundFxVolume);
             npcAudioClip.start();
         } catch (Exception e) {
             //ignore
         }
 
     }
-
 
 
     public static void playMoveSound(String noun) throws InterruptedException {
@@ -262,6 +264,7 @@ public class GameMusic {
     public static void setVolume(String vol) {
         volume = vol;
     }
+
     public static Clip getNpcAudioClip() {
         return npcAudioClip;
     }

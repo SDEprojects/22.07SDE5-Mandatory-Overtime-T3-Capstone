@@ -47,7 +47,6 @@ public class GUIController {
     public void startNewGame() throws IOException {
         // Create New Building
         building = new Building();
-      //  String playerName = JOptionPane.showInputDialog("What is you name? ");
         int result = JOptionPane.showConfirmDialog(null,view.getGameStartPanel(),"Starting A New Game", JOptionPane.OK_CANCEL_OPTION);
         if(result == JOptionPane.OK_OPTION){
             String name = view.getNameTextField().getText();
@@ -57,7 +56,7 @@ public class GUIController {
                 return;
             }
             building.createGameStructureFromNew(gameLevel);
-            building.setName("playerName");
+            building.setName(name);
             setUpGamePlayHandlers();
             view.getMenuBar().getSettingsDialog().getToggleCheatCheckbox().setEnabled(true);
             view.getNameTextField().setText(null);

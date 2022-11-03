@@ -153,7 +153,5 @@ public class MapDialog extends JDialog {
     public static void displayMap(){
         map.setVisible(true);
     }
-    public static JDialog getMapDialog(){
-        return map;
-    }
+
 }

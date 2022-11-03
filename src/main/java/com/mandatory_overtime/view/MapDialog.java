@@ -20,6 +20,9 @@ public class MapDialog extends JDialog {
     private static ImageIcon table;
     private static ImageIcon lobby;
     private static ImageIcon vending;
+
+    private static ImageIcon home;
+    private static ImageIcon lose;
     private static JDialog map;
     private static JLabel imageContainer = new JLabel();
 
@@ -70,6 +73,12 @@ public class MapDialog extends JDialog {
 
             InputStream stream12 = getClass().getResourceAsStream("/images/map/elevator.png");
             elevator = new ImageIcon(ImageIO.read(stream12));
+
+            InputStream stream13 = getClass().getResourceAsStream("/images/map/home.png");
+            home = new ImageIcon(ImageIO.read(stream13));
+
+            InputStream stream14 = getClass().getResourceAsStream("/images/map/lose.png");
+            lose = new ImageIcon(ImageIO.read(stream14));
         }catch(IOException e){
             e.printStackTrace();
             throw new RuntimeException();
@@ -121,6 +130,14 @@ public class MapDialog extends JDialog {
             }
             case "vending machine":{
                 imageContainer.setIcon(vending);
+                break;
+            }
+            case "home":{
+                imageContainer.setIcon(home);
+                break;
+            }
+            case "lose":{
+                imageContainer.setIcon(lose);
                 break;
             }
 

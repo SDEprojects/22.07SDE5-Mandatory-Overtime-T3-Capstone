@@ -90,6 +90,7 @@ public class GameMusic {
         }
     }
 
+
     public static void startBackgroundAudio() throws InterruptedException {
         clip.start();
         clip.loop(Clip.LOOP_CONTINUOUSLY);

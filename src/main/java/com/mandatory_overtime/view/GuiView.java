@@ -5,6 +5,7 @@ import com.mandatory_overtime.model.Room;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 
 public class GuiView {
@@ -30,6 +32,7 @@ public class GuiView {
 
 
     public GuiView(){
+
         JFrame frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

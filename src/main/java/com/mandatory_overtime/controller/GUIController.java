@@ -8,6 +8,7 @@ import com.mandatory_overtime.view.GuiView;
 import com.mandatory_overtime.view.MapDialog;
 import com.mandatory_overtime.view.UserView;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -37,6 +38,7 @@ public class GUIController {
 
     public GUIController() throws IOException {
         UIManager.put("OptionPane.minimumSize", new Dimension(400, 250));
+        UIManager.put("ToolTip.font", new Font("Arial", Font.BOLD, 20));
         view = new GuiView();
         view.presentMainMenu();
         loadBtn = view.getLoadGameButton();

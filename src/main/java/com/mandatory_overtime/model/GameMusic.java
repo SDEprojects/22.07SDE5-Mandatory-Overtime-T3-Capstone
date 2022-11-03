@@ -38,6 +38,11 @@ public class GameMusic {
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(audio);
             Clip soundClip = AudioSystem.getClip();
             soundClip.open(audioInput);
+
+            // Set default sound FX volume
+            FloatControl gainControl =
+                (FloatControl) soundClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-4.0f);
             soundClip.start();
         } catch (UnsupportedAudioFileException e) {
         } catch (Exception e) {
@@ -76,7 +81,7 @@ public class GameMusic {
         playAudioMusic("Spooky_Music.wav");
         FloatControl gainControl =
             (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-9.0f);
+        gainControl.setValue(-15.0f);
     }
 
     public static void volumeUpDown(String noun) {

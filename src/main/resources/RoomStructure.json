@@ -11,9 +11,10 @@
     "sound1": "Elevator_Ding.wav",
     "sound2": "Elevator_Door.wav",
     "sound3": "Elevator_Door.wav",
-    "preReq": null,
+    "preReq": "laptop",
     "fail": false,
     "description": "You are in the elevator.",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "image": "elevator.png"
   },
 
@@ -130,6 +131,7 @@
     "fail": false,
     "description": "You're at your messy desk.",
     "inventorySound": "Inventory_Stash_Item.wav",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "drawerOpenSound": "Drawer_Open_Close.wav",
     "footstepSound": "Footsteps.wav",
     "image": "desk.png"
@@ -165,6 +167,7 @@
     "fail": false,
     "description": "You're at the the Dev Floor. A wave of pressure washes over you as you see the professionals at work.",
     "inventorySound": "Inventory_Stash_Item.wav",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "footstepSound": "Footsteps.wav",
     "image": "devroom.png"
   },
@@ -197,6 +200,7 @@
     "fail": false,
     "description": "You're at the break room full of rickety tables and chairs.",
     "inventorySound": "Inventory_Stash_Item.wav",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "footstepSound": "Footsteps.wav",
     "image": "breakroom.png",
     "npcImage": "roy.png",
@@ -212,6 +216,7 @@
     "preReq": "sweater",
     "fail": false,
     "description": "You're in the kitchen. The smell of stale popcorn wafts through the air.",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "inventorySound": "Inventory_Stash_Item.wav",
     "footstepSound": "Footsteps.wav",
     "image": "kitchen.png"
@@ -228,6 +233,7 @@
     "fail": false,
     "description": "You're at the Party floor. People are crowded at the snack table.",
     "inventorySound": "Inventory_Stash_Item.wav",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "footstepSound": "Footsteps.wav",
     "image": "partyroom.png",
     "npcImage": "brenda.png",
@@ -243,6 +249,7 @@
     "preReq": null,
     "fail": false,
     "description": "You're at the table. It looks picked clean.",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "inventorySound": "Inventory_Stash_Item.wav",
     "footstepSound": "Footsteps.wav",
     "image": "table.png"
@@ -259,6 +266,7 @@
     "preReq": null,
     "fail": false,
     "description": "You're in the lobby. Freedom is so close.",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "inventorySound": "Inventory_Stash_Item.wav",
     "footstepSound": "Footsteps.wav",
     "image": "lobby.png"
@@ -274,6 +282,7 @@
     "fail": false,
     "description": "You're at the vending machine. Its half empty already.",
     "inventorySound": "Inventory_Stash_Item.wav",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "vendingMachineSound": "Vending_Machine.wav",
     "footstepSound": "Footsteps.wav",
     "image": "vending.png"
@@ -286,6 +295,7 @@
     "preReq": "phone",
     "fail": false,
     "description": "Congratulations, you have successfully avoided your boss.",
+    "accessDeniedSound": "Access_Denied_Beep.wav",
     "image": "home.png"
   },
   {

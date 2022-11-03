@@ -13,6 +13,19 @@ public class Npc {
   private String dialogueNoItem;
   @SerializedName("dialogueWithItem")
   private String dialogueWithItem;
+
+  @SerializedName("initialAudio")
+  private String initialAudio;
+
+  @SerializedName("audioNoItem")
+  private String audioNoItem;
+
+  @SerializedName("audioWithItem")
+  private String audioWithItem;
+
+  @SerializedName("audioQuestDone")
+  private String audioQuestDone;
+
   @SerializedName("itemsDropped")
   private String items;
   @SerializedName("NpcName")
@@ -21,10 +34,8 @@ public class Npc {
   @SerializedName("dialogueQuestDone")
   private String dialogueQuestDone;
 
-
   @SerializedName("prereq")
   private String prereq;
-
 
   @SerializedName("interactionCount")
   private Integer npcCount;
@@ -103,4 +114,35 @@ public class Npc {
     this.npcCount = npcCount;
   }
 
+  public String getInitialAudio() {
+    return initialAudio;
+  }
+
+  public void setInitialAudio(String initialAudio) {
+    this.initialAudio = initialAudio;
+  }
+
+  public String getAudioNoItem() {
+    return audioNoItem;
+  }
+
+  public void setAudioNoItem(String audioNoItem) {
+    this.audioNoItem = audioNoItem;
+  }
+
+  public String getAudioWithItem() {
+    return audioWithItem;
+  }
+
+  public void setAudioWithItem(String audioWithItem) {
+    this.audioWithItem = audioWithItem;
+  }
+
+  public String getAudioQuestDone() {
+    return audioQuestDone;
+  }
+
+  public void setAudioQuestDone(String audioQuestDone) {
+    this.audioQuestDone = audioQuestDone;
+  }
 }

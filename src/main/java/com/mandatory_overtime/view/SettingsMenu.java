@@ -25,6 +25,11 @@ public class SettingsMenu {
     private static JDialog settingsDialog;
     private JCheckBox toggleCheatCheckbox;
     private final JLayeredPane settingsMenu = new JLayeredPane();
+
+    private final JLabel FXControlLabel = new JLabel("  Sound FX Control");
+
+    private final JButton FXOffBtn = new JButton("off");
+    private final JButton FXOnBtn = new JButton("on");
     private final JLabel musicControlLabel = new JLabel("  Music Control");
     private final JLabel musicVolLabel = new JLabel("  Music Volume");
     private final JLabel toggleCheatLabel = new JLabel("  Enable Cheats");
@@ -55,6 +60,10 @@ public class SettingsMenu {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
+            FXControlLabel.setBounds(50, 35, 200, 100);
+            FXControlLabel.setForeground(Color.WHITE);
+            FXControlLabel.setFont(new Font("Serif", Font.BOLD, 22));
+
             musicControlLabel.setBounds(50, 100, 200, 100);
             musicControlLabel.setForeground(Color.WHITE);
             musicControlLabel.setFont(new Font("Serif", Font.BOLD, 22));
@@ -62,6 +71,12 @@ public class SettingsMenu {
             musicVolLabel.setBounds(50, 200, 200, 100);
             musicVolLabel.setForeground(Color.WHITE);
             musicVolLabel.setFont(new Font("Serif", Font.BOLD, 22));
+
+            FXOnBtn.setBounds(300, 75, 100, 40);
+            FXOnBtn.addActionListener(e -> GameMusic.soundFXOnOff("on"));
+
+            FXOffBtn.setBounds(425, 75, 100, 40);
+            FXOffBtn.addActionListener(e -> GameMusic.soundFXOnOff("off"));
 
             musicOnBtn.setBounds(300, 135, 100, 40);
             musicOnBtn.addActionListener(e -> GameMusic.musicOnOff("on"));
@@ -99,6 +114,9 @@ public class SettingsMenu {
             });
 
             settingsMenu.add(settingsBackground);
+            settingsMenu.add(FXControlLabel);
+            settingsMenu.add(FXOnBtn);
+            settingsMenu.add(FXOffBtn);
             settingsMenu.add(musicControlLabel);
             settingsMenu.add(musicOnBtn);
             settingsMenu.add(musicOffBtn);

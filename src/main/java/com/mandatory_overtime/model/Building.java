@@ -254,6 +254,9 @@ public class Building {
 
         boolean validLocation = false;
 
+        if(GameMusic.getNpcAudioClip() != null){
+            GameMusic.getNpcAudioClip().stop();
+        }
         if (newLocation == "lose") {
             player.setCurrentLocation(newLocation);
         } else if (!directionsList.contains(newLocation)) {
@@ -493,6 +496,9 @@ public class Building {
     }
 
     public String interactWithNpc(String npcName) {
+        if(GameMusic.getNpcAudioClip() != null){
+            GameMusic.getNpcAudioClip().stop();
+        }
         String response = null;
         for (String npc : npcs.keySet()) {
             if (npc.equals(npcName) && player.getCurrentLocation()
@@ -500,20 +506,32 @@ public class Building {
                 if (!player.getInventory().contains(npcs.get(npc).getPrereq())
                     && npcs.get(npc).getNpcCount() == 0) {
                     response = String.format(npcs.get(npc).getInitialDialogue(), player.getName());
+                    // Play initial sound
+                    GameMusic.playNPCSound(npcs.get(npc).getInitialAudio());
                     npcs.get(npc).getNpcCount();
+                    break;
                 } else if (player.getInventory().contains((npcs.get(npc).getPrereq()))) {
 
                     response = String.format((npcs.get(npc).getDialogueWithItem()),
                         player.getName());
                     player.removeFromInventory((npcs.get(npc).getPrereq()));
                     player.addToInventory((npcs.get(npc).getItems()));
+                    // Play audio with item
+                    GameMusic.playNPCSound(npcs.get(npc).getAudioWithItem());
                     npcs.get(npc).setItems(null);
+                    break;
                 } else if ((npcs.get(npc).getItems()) == null) {
                     response = String.format((npcs.get(npc).getDialogueQuestDone()),
                         player.getName());
+                    // Play audio with quest completed
+                    GameMusic.playNPCSound(npcs.get(npc).getAudioQuestDone());
+                    break;
                 } else if (!player.getInventory().contains((npcs.get(npc).getPrereq()))
                     && npcs.get(npc).getNpcCount() >= 1) {
+                    // Play audio no item
                     response = String.format(npcs.get(npc).getDialogueNoItem(), player.getName());
+                    GameMusic.playNPCSound(npcs.get(npc).getAudioNoItem());
+                    break;
                 }
             }
         }

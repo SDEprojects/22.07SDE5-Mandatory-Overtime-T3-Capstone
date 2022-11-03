@@ -1,4 +1,4 @@
-package com.mandatory_overtime.view;
+package com.mandatory_overtime.model;
 
 import static org.junit.Assert.*;;
 import org.junit.Assert;

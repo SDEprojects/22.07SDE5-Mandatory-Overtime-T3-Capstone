@@ -2,7 +2,6 @@ package com.mandatory_overtime.model;
 
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -13,11 +12,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class GameMusic {
 
     private static Clip clip;
+
+    private static Clip npcAudioClip;
     static Player player = new Player();
 
     private static String volume = "5";
 
     static Building building;
+    private static Clip soundClip;
+    private static FloatControl gainControlSoundFX;
+
+    private static FloatControl gainControlNPC;
 
     static {
         try {
@@ -36,13 +41,12 @@ public class GameMusic {
         try {
             URL audio = GameMusic.class.getResource("/" + soundFile);
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(audio);
-            Clip soundClip = AudioSystem.getClip();
+            soundClip = AudioSystem.getClip();
             soundClip.open(audioInput);
 
             // Set default sound FX volume
-            FloatControl gainControl =
-                (FloatControl) soundClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-4.0f);
+            gainControlSoundFX = (FloatControl) soundClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControlSoundFX.setValue(-4.0f);
             soundClip.start();
         } catch (UnsupportedAudioFileException e) {
         } catch (Exception e) {
@@ -68,6 +72,18 @@ public class GameMusic {
         }
         if (noun.equals("on")) {
             clip.start();
+        }
+    }
+
+    public static void soundFXOnOff(String noun){
+        if (noun.equals("off")) {
+            gainControlSoundFX.setValue(gainControlSoundFX.getMinimum());
+            gainControlNPC.setValue(gainControlNPC.getMinimum());
+        }
+        if (noun.equals("on")) {
+            gainControlSoundFX.setValue(-4.0f);
+            gainControlNPC.setValue(-4.0f);
+
         }
     }
 
@@ -159,6 +175,32 @@ public class GameMusic {
         }
     }
 
+    public static void playNPCSound(String npcSound){
+
+        try {
+            URL audio = GameMusic.class.getResource("/" + npcSound);
+            AudioInputStream audioInput = null;
+            if (audio != null) {
+                audioInput = AudioSystem.getAudioInputStream(audio);
+            }
+         //   npcAudioClip.stop();
+            npcAudioClip = AudioSystem.getClip();
+            npcAudioClip.open(audioInput);
+            npcAudioClip.stop();
+
+            // Set default sound FX volume
+           gainControlNPC =
+                (FloatControl) npcAudioClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControlNPC.setValue(-4.0f);
+            npcAudioClip.start();
+        } catch (Exception e) {
+            //ignore
+        }
+
+    }
+
+
+
     public static void playMoveSound(String noun) throws InterruptedException {
         playAudioFX(building.getBuilding().get(noun).getFootstepAudio());
 //    Thread.sleep(250);
@@ -219,5 +261,8 @@ public class GameMusic {
 
     public static void setVolume(String vol) {
         volume = vol;
+    }
+    public static Clip getNpcAudioClip() {
+        return npcAudioClip;
     }
 }

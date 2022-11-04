@@ -233,4 +233,5 @@ public class GUIController {
         MenuBar.getTimerLabel().setVisible(true);
         timer.start();
     }
+
 }

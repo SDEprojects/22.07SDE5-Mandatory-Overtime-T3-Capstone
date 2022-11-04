@@ -425,6 +425,7 @@ public class Building {
                 items.get(item).setChallenge(false);
                 GameMusic.playPhoneUnlockingSound();
                 GameMusic.playItemSound();
+                //
 //                System.out.println(items.get(item).getPurpose());
 //                System.out.println(player.getInventory().toString());
             }

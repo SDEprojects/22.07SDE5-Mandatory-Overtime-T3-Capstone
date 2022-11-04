@@ -425,7 +425,7 @@ public class Building {
                 items.get(item).setChallenge(false);
                 GameMusic.playPhoneUnlockingSound();
                 GameMusic.playItemSound();
-                //
+
 //                System.out.println(items.get(item).getPurpose());
 //                System.out.println(player.getInventory().toString());
             }
@@ -434,8 +434,6 @@ public class Building {
                 //String responseAfterFail = JOptionPane.showInputDialog("Would you like to try again? Enter 'yes' or 'no'.");
                 int response = JOptionPane.showConfirmDialog(null,"Would you like to try again?","Confrim",JOptionPane.YES_NO_OPTION);
                 //String userAnswer1 = inputParser.readLine().toLowerCase().trim();
-
-
 
                 if (response == JOptionPane.YES_OPTION){
                     runItemChallenge(item);

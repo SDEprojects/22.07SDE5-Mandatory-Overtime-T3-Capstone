@@ -14,7 +14,6 @@ import java.awt.Font;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;

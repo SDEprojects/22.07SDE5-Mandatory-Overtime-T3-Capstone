@@ -121,9 +121,9 @@
     "purpose": "Can't leave without grabbing my phone and turning it off. You can't miss a call-in if you don't get a call-in.",
     "npc": false,
     "preReq": null,
-    "challenge": false,
-    "challenge prompt" : "Passcode Hint: What rattles when it walks?",
-    "challenge answer": "skeleton",
+    "challenge": true,
+    "challenge prompt" : "Passcode Hint: What rattles when it walks? (enter a letter)\na. Shadow \nb. Skeleton \nc. Mummy \nd. Witch",
+    "challenge answer": "b",
     "acquired": false,
     "image": "phone.png",
     "imgCord": [325,400,175,225]

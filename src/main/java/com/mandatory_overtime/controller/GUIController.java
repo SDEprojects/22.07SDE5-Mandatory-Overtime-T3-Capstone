@@ -130,9 +130,11 @@ public class GUIController {
         view.getGamePlayScreen().getLocationGUIPanel().setItemPickupListener(
             itemName -> {
                 try {
-                    building.getItem(itemName);
-                    removedItem = itemName;
-                    message = "You picked up " + itemName;
+                    boolean playerPickedUpItem = building.getItem(itemName);
+                    if (playerPickedUpItem){
+                        removedItem = itemName;
+                        message = "You picked up " + itemName;
+                    }
                     updateGameView();
                     removedItem = null;
                 } catch (IOException | InterruptedException e) {

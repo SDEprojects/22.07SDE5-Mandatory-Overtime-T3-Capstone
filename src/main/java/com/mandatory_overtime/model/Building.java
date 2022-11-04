@@ -315,7 +315,7 @@ public class Building {
 
     public boolean getItem(String item)
         throws IOException, InterruptedException, CantGetItemException {
-        getRoomDescriptionInfo();
+//        getRoomDescriptionInfo();
         String playerCurrentLocation = player.getCurrentLocation();
         boolean startChallenge = false;
 
@@ -358,7 +358,7 @@ public class Building {
             throw new CantGetItemException();
         }
 
-        return startChallenge;
+        return player.getInventory().contains(item);
     }
 
     /**
@@ -414,12 +414,12 @@ public class Building {
             //System.out.println(items.get(item).getChallengePrompt());
             GameMusic.playTypingSound();
             GameMusic.playPhoneTyping();
-            String userAnswer = JOptionPane.showInputDialog(items.get(item).getChallengePrompt()).trim();
+            String userAnswer = JOptionPane.showInputDialog(items.get(item).getChallengePrompt());
             //if user answer correct, add to inventory. Set item challenge to false. Set acquired to true.
-            if(userAnswer.isEmpty()){
+            if(userAnswer == null){
                 return;
             }
-            if (items.get(item).getChallengeAnswer().equalsIgnoreCase(userAnswer)) {
+            if (items.get(item).getChallengeAnswer().equalsIgnoreCase(userAnswer.trim())) {
                 player.addToInventory(item);
                 items.get(item).setAcquired(true);
                 items.get(item).setChallenge(false);

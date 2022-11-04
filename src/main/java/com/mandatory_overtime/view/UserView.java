@@ -153,9 +153,7 @@ public class UserView {
     return skull + message + message2;
   }
 
-//  public String missingSomethingFromInventory(String location){
-//    return String.format("Looks like you're missing something in inventory. You won't be able to proceed to %s until you do", location);
-//  }
+
 
   public String gameStatus(String locationDescription, String roomDescription, String item){
     return roomDescription;

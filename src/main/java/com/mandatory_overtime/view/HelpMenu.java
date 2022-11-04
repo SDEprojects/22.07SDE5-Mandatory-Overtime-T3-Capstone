@@ -13,9 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 
-public class HelpMenu2 {
+public class HelpMenu {
 
-    UserView helpView = new UserView();
+    final UserView helpView = new UserView();
     private static JDialog helpDialog = new JDialog();
 
     private final JLayeredPane helpMenu = new JLayeredPane();
@@ -24,7 +24,7 @@ public class HelpMenu2 {
 
     private final JLabel helpText = new JLabel();
 
-    public HelpMenu2() {
+    public HelpMenu() {
         buildHelpMenu();
     }
 

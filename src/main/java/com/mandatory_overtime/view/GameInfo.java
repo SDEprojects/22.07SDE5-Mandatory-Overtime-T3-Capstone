@@ -10,9 +10,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-public class GameInfo2 {
+public class GameInfo {
 
-    UserView gameInfoView = new UserView();
+    final UserView gameInfoView = new UserView();
     private static JDialog gameInfoDialog = new JDialog();
 
     private final JLayeredPane gameInfoMenu = new JLayeredPane();
@@ -21,13 +21,13 @@ public class GameInfo2 {
 
     private final JLabel gameInfoText = new JLabel();
 
-    public GameInfo2() {
+    public GameInfo() {
         buildMenu();
     }
 
     public void buildMenu() {
         gameInfoDialog = new JDialog(new javax.swing.JFrame(), true);
-        gameInfoDialog.setTitle("Help");
+        gameInfoDialog.setTitle("Game Information");
         gameInfoDialog.setBounds(500, 100, 700, 525);
 
         try {
@@ -38,16 +38,15 @@ public class GameInfo2 {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            gameInfoText.setText("<html>"+gameInfoView.startUpInfo2("")+"</html>");
-            gameInfoText.setBounds(80, 0, 500,525);
+            gameInfoText.setText("<html>" + gameInfoView.startUpInfo2("") + "</html>");
+            gameInfoText.setBounds(80, 0, 500, 525);
             gameInfoText.setFont(new Font("Serif", Font.PLAIN, 18));
             gameInfoText.setForeground(Color.WHITE);
 
             gameInfoMenu.add(imgBackground);
             gameInfoMenu.add(gameInfoText);
 
-            gameInfoMenu.setLayer(imgBackground,0);
-
+            gameInfoMenu.setLayer(imgBackground, 0);
 
             gameInfoDialog.add(gameInfoMenu);
         }

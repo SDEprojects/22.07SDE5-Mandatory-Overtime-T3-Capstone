@@ -48,13 +48,6 @@ public class Player {
     this.failCount = failCount;
   }
 
-//  public Timer getTimer() {
-//    return timer;
-//  }
-//
-//  public void setTimer(Timer timer) {
-//    this.timer = timer;
-//  }
 
   /**
    * Adds to inventory for Player

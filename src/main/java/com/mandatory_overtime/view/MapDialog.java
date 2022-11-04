@@ -24,7 +24,7 @@ public class MapDialog extends JDialog {
     private static ImageIcon home;
     private static ImageIcon lose;
     private static JDialog map;
-    private static JLabel imageContainer = new JLabel();
+    private static final JLabel imageContainer = new JLabel();
 
     public MapDialog(String currentLocation){
         loadImages();

@@ -174,4 +174,9 @@ public final class MenuBar extends JMenuBar {
     public SettingsMenu getSettingsDialog() {
         return settingsDialog;
     }
+
+    public void presentGameInfo(){
+        gameInfoDialog.openGameInfoMenu();
+    }
+
 }

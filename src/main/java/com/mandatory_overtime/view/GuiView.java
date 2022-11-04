@@ -121,4 +121,8 @@ public class GuiView {
     public JTextField getNameTextField(){
         return gameStartPanel.getNameInput();
     }
+
+    public void presentGameInfo(){
+        menuBar.presentGameInfo();
+    }
 }

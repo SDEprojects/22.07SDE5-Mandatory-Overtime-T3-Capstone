@@ -224,6 +224,7 @@ public class LocationGUIPanel {
             itemButton.setActionCommand(item.getName());
             itemButton.setFocusPainted(false);
             itemButton.setContentAreaFilled(false);
+            itemButton.setBorderPainted(false);
             itemButton.setBounds(cords[0], cords[1], cords[2], cords[3]);
             itemButton.setToolTipText(item.getPurpose());
             itemButton.addActionListener(e -> {
@@ -259,6 +260,7 @@ public class LocationGUIPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        btn.setBorderPainted(false);
         return btn;
     }
 

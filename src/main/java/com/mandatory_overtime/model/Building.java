@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 
 /**
  * Building class that creates gameboard to track and update state
@@ -52,7 +53,7 @@ public class Building {
             rooms = load("RoomStructure_Hard.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
 
-            System.out.println("loading hard game....");
+//            System.out.println("loading hard game....");
         }else{
             rooms = load("RoomStructure.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
@@ -275,7 +276,7 @@ public class Building {
                         GameMusic.playMoveSound(newLocation);
                         GameMusic.playRoomSound(newLocation);
                         // TODO: DELETE THIS METHOD
-                        getRoomDescriptionInfo();
+                        //getRoomDescriptionInfo();
                         break;
                     }
                 }
@@ -306,7 +307,7 @@ public class Building {
             } else {
                 setGameState(GameState.LOSS);
                 moveRooms2("lose");
-                System.out.println("you lose");
+//                System.out.println("you lose");
             }
         }
     }
@@ -334,9 +335,13 @@ public class Building {
                 if (items.get(item).getPreReq() == null) {
 
                     //conditional to check for challenge
-                    if (items.get(item).getChallenge() == true) {
+                    if (items.get(item).getChallenge()) {
                         startChallenge = true;
                         runItemChallenge(item);
+                        if(items.get(item).getAcquired()){
+                            building.get(playerCurrentLocation).setItem(null);
+                        }
+
                     } else {
                         player.addToInventory(item);
                         GameMusic.playItemSound();
@@ -376,7 +381,7 @@ public class Building {
             String[] newNoun = noun.split(" ", 2);
             String loc = newNoun[newNoun.length - 1];
             player.setCurrentLocation(loc);
-            getRoomDescriptionInfo();
+            //getRoomDescriptionInfo();
         }
 
     }
@@ -392,10 +397,10 @@ public class Building {
             player.removeFromInventory(
                 items.get(item).getPreReq()); //removes prereq from player inventory
 
-            System.out.println("Added to inventory " + player.getInventory().toString());
+           // System.out.println("Added to inventory " + player.getInventory().toString());
 
         } else {
-            System.out.println("You need " + items.get(item).getPreReq() + " to get this item.\n>");
+           // System.out.println("You need " + items.get(item).getPreReq() + " to get this item.\n>");
 
 
         }
@@ -404,37 +409,51 @@ public class Building {
     private void runItemChallenge(String item) throws IOException, InterruptedException {
         while (!player.getInventory().contains(item)) {
             //reads input
-            BufferedReader inputParser = new BufferedReader(new InputStreamReader(System.in));
+            //BufferedReader inputParser = new BufferedReader(new InputStreamReader(System.in));
             //print prompt
-            System.out.println(items.get(item).getChallengePrompt());
+            //System.out.println(items.get(item).getChallengePrompt());
             GameMusic.playTypingSound();
             GameMusic.playPhoneTyping();
-            String userAnswer = inputParser.readLine().toLowerCase().trim();
+            String userAnswer = JOptionPane.showInputDialog(items.get(item).getChallengePrompt()).trim();
             //if user answer correct, add to inventory. Set item challenge to false. Set acquired to true.
-            if (items.get(item).getChallengeAnswer().equals(userAnswer)) {
+            if(userAnswer.isEmpty()){
+                return;
+            }
+            if (items.get(item).getChallengeAnswer().equalsIgnoreCase(userAnswer)) {
                 player.addToInventory(item);
                 items.get(item).setAcquired(true);
                 items.get(item).setChallenge(false);
                 GameMusic.playPhoneUnlockingSound();
                 GameMusic.playItemSound();
-                System.out.println(items.get(item).getPurpose());
-                System.out.println(player.getInventory().toString());
 
-            } else {
-                System.out.println("Would you like to try again? Enter 'yes' or 'no'.");
-                String userAnswer1 = inputParser.readLine().toLowerCase().trim();
-                while (true) {
-                    if (userAnswer1.equals("yes")) {
+//                System.out.println(items.get(item).getPurpose());
+//                System.out.println(player.getInventory().toString());
+            }
+            else {
+                //System.out.println("Would you like to try again? Enter 'yes' or 'no'.");
+                //String responseAfterFail = JOptionPane.showInputDialog("Would you like to try again? Enter 'yes' or 'no'.");
+                int response = JOptionPane.showConfirmDialog(null,"Would you like to try again?","Confrim",JOptionPane.YES_NO_OPTION);
+                //String userAnswer1 = inputParser.readLine().toLowerCase().trim();
 
-                        runItemChallenge(item);
-                        break;
-                    } else if (userAnswer1.equals("no")) {
-                        return;
-                    } else {
-                        System.out.println("Please enter 'Yes' or 'No'");
-                        userAnswer1 = inputParser.readLine().toLowerCase().trim();
-                    }
-                }
+                if (response == JOptionPane.YES_OPTION){
+                    runItemChallenge(item);
+
+                }else return;
+
+//                while (true) {
+//                    if (responseAfterFail.equals("yes")) {
+//
+//                        runItemChallenge(item);
+//                        break;
+//                    } else if (responseAfterFail.equals("no")) {
+//                        return;
+//                    } else {
+//                        JOptionPane.showInputDialog(
+//                            "Please enter 'Yes' or 'No'");
+//                        //System.out.println("Please enter 'Yes' or 'No'");
+//                        //responseAfterFail = inputParser.readLine().toLowerCase().trim();
+//                    }
+//                }
             }
         }
     }

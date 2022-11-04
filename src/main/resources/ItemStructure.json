@@ -5,7 +5,7 @@
     "purpose": "Phew, I couldn't leave the office without my laptop",
     "npc": false,
     "preReq": null,
-    "challenge": false,
+    "challenge": true,
     "challenge prompt" : "Which of these types of candy is the most popular in the USA during Halloween? (enter a letter)\na. M&Ms \nb. Milk Duds \nc. Reese’s \nd. Snickers",
     "challenge answer": "c",
     "acquired": false,

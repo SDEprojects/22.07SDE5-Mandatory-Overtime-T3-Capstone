@@ -32,9 +32,6 @@ public class GUIController {
 
     private final UserView stringMessages = new UserView();
 
-    private final boolean godMode = false;
-
-    private String gameLevel = "easy";
 
     public GUIController() throws IOException {
         UIManager.put("OptionPane.minimumSize", new Dimension(400, 250));
@@ -52,7 +49,7 @@ public class GUIController {
         int result = JOptionPane.showConfirmDialog(null,view.getGameStartPanel(),"Starting A New Game", JOptionPane.OK_CANCEL_OPTION);
         if(result == JOptionPane.OK_OPTION){
             String name = view.getNameTextField().getText();
-            gameLevel = view.getSelectedButton();
+            String gameLevel = view.getSelectedButton();
             if(name.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Please enter a valid name to start game");
                 return;

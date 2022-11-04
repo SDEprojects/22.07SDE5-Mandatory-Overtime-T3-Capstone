@@ -21,15 +21,14 @@ import javax.swing.JTextField;
 public class LevelSelectionPanel {
 
 
+    public static final String ENTER_YOUR_NAME = "Enter Your Name";
+    public static final String SELECT_YOUR_DIFFICULTY = "Select Your Difficulty";
+    public static final String EASY = "easy";
     private final JPanel levelSelection = new JPanel();
-
-    private final JLabel nameLabel = new JLabel("Enter Your Name");
-    private final JLabel difficultyLabel = new JLabel("Select Your Difficulty");
-
+    private final JLabel nameLabel = new JLabel(ENTER_YOUR_NAME);
+    private final JLabel difficultyLabel = new JLabel(SELECT_YOUR_DIFFICULTY);
     private JTextField nameTextField;
-
-
-    private String selectedButton = "easy";
+    private String selectedButton = EASY;
 
     public LevelSelectionPanel() {
         buildMenu();
@@ -40,26 +39,25 @@ public class LevelSelectionPanel {
         ButtonGroup group = new ButtonGroup();
 
         levelSelection.setLayout(null);
-        levelSelection.setBounds(0,0,800, 700);
+        levelSelection.setBounds(0, 0, 800, 700);
 
+        nameLabel.setBounds(0, 25, 100, 50);
+        nameTextField.setBounds(0, 65, 300, 25);
 
-        nameLabel.setBounds(0,25, 100, 50);
-        nameTextField.setBounds(0, 65, 300,25);
-
-        difficultyLabel.setBounds(0,100, 300, 50);
+        difficultyLabel.setBounds(0, 100, 300, 50);
 
         JRadioButton easyBtn = new JRadioButton("Easy");
-        easyBtn.setBounds(10 ,140,200, 25 );
+        easyBtn.setBounds(10, 140, 200, 25);
         easyBtn.setActionCommand("easy");
         easyBtn.setSelected(true);
-        easyBtn.addActionListener(e ->{
+        easyBtn.addActionListener(e -> {
             selectedButton = e.getActionCommand();
         });
 
         JRadioButton hardBtn = new JRadioButton("Hard");
-        hardBtn.setBounds(10 ,170,200, 25 );
+        hardBtn.setBounds(10, 170, 200, 25);
         hardBtn.setActionCommand("hard");
-        hardBtn.addActionListener(e ->{
+        hardBtn.addActionListener(e -> {
             selectedButton = e.getActionCommand();
         });
 
@@ -78,15 +76,13 @@ public class LevelSelectionPanel {
         return levelSelection;
     }
 
-    public JTextField getNameInput(){
+    public JTextField getNameInput() {
         return nameTextField;
     }
 
     public String getSelectedButton() {
         return selectedButton;
     }
-
-
 
 
 }

@@ -77,7 +77,7 @@ public class Building {
     }
 
     public void createGameStructureFromSave()
-        throws IOException, URISyntaxException, NoSavedGame, FileNotFoundException {
+        throws IOException, URISyntaxException {
         Gson gson = new Gson();
         setGameState(GameState.IN_PROGRESS);
         List<Room> rooms = loadSave("RoomStructureSave.json", gson,
@@ -200,7 +200,7 @@ public class Building {
      * @throws IOException
      */
     private <T> T loadSave(String resourceFile, Gson gson, Type type)
-        throws IOException, URISyntaxException, NoSavedGame, FileNotFoundException {
+        throws IOException, URISyntaxException {
 
         File f = new File(resourceFile);
 
@@ -216,19 +216,6 @@ public class Building {
             throw new FileNotFoundException();
         }
 
-//        try {
-//            if (f.exists()) {
-//                Reader reader = new InputStreamReader(new FileInputStream(f));
-//                return gson.fromJson(reader, type);
-//            } else {
-//                //  new GamePlay().startGameFromNew();
-//                throw new NoSavedGame();
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//        }
-
-//        return null; //Start new game method here?
     }
 
 //  BUSINESS METHODS
@@ -397,25 +384,12 @@ public class Building {
             player.removeFromInventory(
                 items.get(item).getPreReq()); //removes prereq from player inventory
 
-           // System.out.println("Added to inventory " + player.getInventory().toString());
-
-        } else {
-           // System.out.println("You need " + items.get(item).getPreReq() + " to get this item.\n>");
-
-
         }
     }
 
     private void runItemChallenge(String item) throws IOException, InterruptedException {
         while (!player.getInventory().contains(item)) {
-            //reads input
-            //BufferedReader inputParser = new BufferedReader(new InputStreamReader(System.in));
-            //print prompt
-            //System.out.println(items.get(item).getChallengePrompt());
-            GameMusic.playTypingSound();
-            GameMusic.playPhoneTyping();
             String userAnswer = JOptionPane.showInputDialog(items.get(item).getChallengePrompt());
-            //if user answer correct, add to inventory. Set item challenge to false. Set acquired to true.
             if(userAnswer == null){
                 return;
             }
@@ -425,35 +399,15 @@ public class Building {
                 items.get(item).setChallenge(false);
                 GameMusic.playPhoneUnlockingSound();
                 GameMusic.playItemSound();
-
-//                System.out.println(items.get(item).getPurpose());
-//                System.out.println(player.getInventory().toString());
             }
             else {
-                //System.out.println("Would you like to try again? Enter 'yes' or 'no'.");
-                //String responseAfterFail = JOptionPane.showInputDialog("Would you like to try again? Enter 'yes' or 'no'.");
                 int response = JOptionPane.showConfirmDialog(null,"Would you like to try again?","Confrim",JOptionPane.YES_NO_OPTION);
-                //String userAnswer1 = inputParser.readLine().toLowerCase().trim();
 
                 if (response == JOptionPane.YES_OPTION){
                     runItemChallenge(item);
 
                 }else return;
 
-//                while (true) {
-//                    if (responseAfterFail.equals("yes")) {
-//
-//                        runItemChallenge(item);
-//                        break;
-//                    } else if (responseAfterFail.equals("no")) {
-//                        return;
-//                    } else {
-//                        JOptionPane.showInputDialog(
-//                            "Please enter 'Yes' or 'No'");
-//                        //System.out.println("Please enter 'Yes' or 'No'");
-//                        //responseAfterFail = inputParser.readLine().toLowerCase().trim();
-//                    }
-//                }
             }
         }
     }

@@ -91,7 +91,7 @@ public class GuiView {
     }
 
     public void setMoveConsumer(Consumer<String> listener) {
-        gamePlayScreen.setMoveListener(roomName -> listener.accept(roomName));
+        gamePlayScreen.setMoveListener(listener);
     }
 
     public GamePlayScreen getGamePlayScreen() {

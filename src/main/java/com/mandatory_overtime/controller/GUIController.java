@@ -59,6 +59,7 @@ public class GUIController {
             }
             building.createGameStructureFromNew(gameLevel);
             building.setName(name);
+            view.presentGameInfo();
             setUpGamePlayHandlers();
             view.getMenuBar().getSettingsDialog().getToggleCheatCheckbox().setEnabled(true);
             view.getNameTextField().setText(null);

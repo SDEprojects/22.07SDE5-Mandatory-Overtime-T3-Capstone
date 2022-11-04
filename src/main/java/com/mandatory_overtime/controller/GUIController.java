@@ -114,12 +114,13 @@ public class GUIController {
 
     public void setUpGamePlayHandlers() throws IOException {
         MapDialog map = new MapDialog(building.getPlayer().getCurrentLocation());
-        // Set up Game Screen
+
+        // BUILD GAME SCREEN
         view.setUpGamePlay(building.getBuilding(), building.getGameItems());
         String currentLocationStart = building.getPlayer().getCurrentLocation();
         message = building.getBuilding().get(currentLocationStart).getDescription();
 
-        // Set up Move Consumers for Game
+        // MOVE LOCATION
         view.setMoveConsumer(roomName -> {
             try {
                 building.moveRooms2(roomName);
@@ -134,7 +135,7 @@ public class GUIController {
             }
         });
 
-        //Set up Item pickup consumer
+        // PICK UP ITEMS
         view.getGamePlayScreen().getLocationGUIPanel().setItemPickupListener(
             itemName -> {
                 try {
@@ -152,12 +153,14 @@ public class GUIController {
                 }
         });
 
+        // INTERACT WITH NPC
         view.getGamePlayScreen().getLocationGUIPanel().setNpcListener(npcName -> {
                 message = building.interactWithNpc(npcName);
                 updateGameView();
             }
         );
 
+        // SAVE GAME
         view.setSaveListener(() -> {
             try {
                 if (!building.getPlayer().getCurrentLocation().equals("home")
@@ -177,11 +180,13 @@ public class GUIController {
             }
         });
 
+        // GOD MODE
         view.getMenuBar().setGodModeAction(() -> {
             building.getAllItems("mode");
             updateGameView();
         });
 
+        // QUIT
         view.setQuitListener(() -> {
                 try {
                     if (!building.getPlayer().getCurrentLocation().equals("home")
@@ -208,6 +213,7 @@ public class GUIController {
 
         });
 
+        // TIMER LOSE ACTION
         timer.setLoseAction(() -> {
             try {
                 // PLAYER RAN OUT OF TIME
@@ -223,7 +229,6 @@ public class GUIController {
         });
 
         updateGameView();
-
         view.presentGameScreen();
         MenuBar.getTimerLabel().setVisible(true);
         timer.start();

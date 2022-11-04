@@ -3,11 +3,9 @@ package com.mandatory_overtime.model;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
-import com.mandatory_overtime.controller.GamePlay;
 import com.mandatory_overtime.model.exception.IllegalMoveException;
 import com.mandatory_overtime.model.exception.MissingRequirementException;
 import com.mandatory_overtime.model.exception.NoSavedGame;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,7 +16,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -559,6 +556,7 @@ public class Building {
 
     public void setName(String name) {
         player.setName(name);
+
     }
 
     public String getName() {

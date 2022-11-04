@@ -32,4 +32,7 @@ public class PlayerTest {
         assertFalse(testPlayer.getInventory().contains("test item 1"));
         assertEquals(0, testPlayer.getInventory().size());
     }
+
+//    @Test
+//    public void testRemoveNull
 }

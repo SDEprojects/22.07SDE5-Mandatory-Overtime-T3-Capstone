@@ -11,13 +11,8 @@ import java.net.URISyntaxException;
 public class Main {
 
     public static void main(String[] args)
-        throws IOException, URISyntaxException {
+        throws IOException{
         GameMusic.startBackgroundMusic();
-
         GUIController gui = new GUIController();
-//       GamePlay gamePlay = new GamePlay();
-
-
-
     }
 }

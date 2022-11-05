@@ -5,6 +5,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -26,6 +27,7 @@ public final class MenuBar extends JMenuBar {
 
     private static final JButton godMode = new JButton("God Mode");
 
+    private static final JLabel timerLabel = new JLabel();
     private Runnable saveAction;
 
     private Runnable quitAction;
@@ -42,6 +44,11 @@ public final class MenuBar extends JMenuBar {
         //sets font color
         settings.setForeground(Color.white);
         settings.addActionListener(e -> settingsDialog.openMenu());
+
+        timerLabel.setForeground(Color.ORANGE);
+        timerLabel.setFont(new Font("arial narrow", Font.BOLD, 15));
+        timerLabel.setBounds(60, 0, 100, 100);
+
 
         JButton help = new JButton("   Help   ");
         help.setBorderPainted(false);
@@ -125,6 +132,8 @@ public final class MenuBar extends JMenuBar {
         MENU_BAR.add(spacer2).setEnabled(false);
         MENU_BAR.add(godMode);
         MENU_BAR.add(Box.createHorizontalGlue());
+        MENU_BAR.add(timerLabel);
+        MENU_BAR.add(Box.createHorizontalGlue());
         MENU_BAR.add(quit);
 
     }
@@ -177,6 +186,10 @@ public final class MenuBar extends JMenuBar {
 
     public void presentGameInfo(){
         gameInfoDialog.openGameInfoMenu();
+    }
+
+    public static JLabel getTimerLabel(){
+        return timerLabel;
     }
 
 }

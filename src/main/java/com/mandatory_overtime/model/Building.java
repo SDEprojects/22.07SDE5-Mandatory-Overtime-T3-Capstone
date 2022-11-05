@@ -50,7 +50,6 @@ public class Building {
             rooms = load("RoomStructure_Hard.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
 
-//            System.out.println("loading hard game....");
         }else{
             rooms = load("RoomStructure.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
@@ -167,7 +166,7 @@ public class Building {
         }
     }
 
-//  GETTERS/SETTERS
+   //  GETTERS/SETTERS
 
     public GameState getGameState() {
         return gameState;
@@ -291,7 +290,6 @@ public class Building {
             } else {
                 setGameState(GameState.LOSS);
                 moveRooms2("lose");
-//                System.out.println("you lose");
             }
         }
     }
@@ -299,16 +297,11 @@ public class Building {
 
     public boolean getItem(String item)
         throws IOException, InterruptedException, CantGetItemException {
-//        getRoomDescriptionInfo();
+
         String playerCurrentLocation = player.getCurrentLocation();
-        boolean startChallenge = false;
 
         boolean isValidItem = items.containsKey(item);
 
-        //conditional to check if item is in array //check if location correct // check if npc doesn't have it
-//        items.containsKey(item) && !items.get(item).getAcquired() && items.get(item)
-//            .getLocation().equals(playerCurrentLocation)
-//            && !items.get(item).isNpc()
         if (isValidItem) {
             boolean itemAlreadyAcquired = items.get(item).getAcquired();
             boolean itemIsAtTheLocation = items.get(item).getLocation()
@@ -320,7 +313,7 @@ public class Building {
 
                     //conditional to check for challenge
                     if (items.get(item).getChallenge()) {
-                        startChallenge = true;
+
                         runItemChallenge(item);
                         if(items.get(item).getAcquired()){
                             building.get(playerCurrentLocation).setItem(null);
@@ -365,7 +358,6 @@ public class Building {
             String[] newNoun = noun.split(" ", 2);
             String loc = newNoun[newNoun.length - 1];
             player.setCurrentLocation(loc);
-            //getRoomDescriptionInfo();
         }
 
     }
@@ -384,7 +376,7 @@ public class Building {
         }
     }
 
-    private void runItemChallenge(String item) throws IOException, InterruptedException {
+    private void runItemChallenge(String item) throws InterruptedException {
         while (!player.getInventory().contains(item)) {
             String userAnswer = JOptionPane.showInputDialog(items.get(item).getChallengePrompt());
             if(userAnswer == null){
@@ -398,7 +390,7 @@ public class Building {
                 GameMusic.playItemSound();
             }
             else {
-                int response = JOptionPane.showConfirmDialog(null,"Would you like to try again?","Confrim",JOptionPane.YES_NO_OPTION);
+                int response = JOptionPane.showConfirmDialog(null,"Would you like to try again?","Confirm",JOptionPane.YES_NO_OPTION);
 
                 if (response == JOptionPane.YES_OPTION){
                     runItemChallenge(item);

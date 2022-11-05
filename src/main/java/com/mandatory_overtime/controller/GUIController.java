@@ -127,6 +127,9 @@ public class GUIController {
                 String description = building.getBuilding().get(currentLocation).getDescription();
                 String item = building.getBuilding().get(currentLocation).getItem();
                 message = stringMessages.gameStatus(currentLocation, description, item);
+                if(currentLocation.equals("home")){
+                    timer.stop();
+                }
                 updateGameView();
             } catch (MissingRequirementException | InterruptedException e) {
                 message = e.getMessage();

@@ -46,15 +46,14 @@ public class Building {
         Gson gson = new Gson();
         List<Room> rooms;
         setGameState(GameState.IN_PROGRESS);
-        if(difficulty.equals("hard")){
+        if (difficulty.equals("hard")) {
             rooms = load("RoomStructure_Hard.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
 
-        }else{
+        } else {
             rooms = load("RoomStructure.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
         }
-
 
         List<Item> itemArray = load("ItemStructure.json", gson, new TypeToken<ArrayList<Item>>() {
         }.getType());
@@ -166,7 +165,7 @@ public class Building {
         }
     }
 
-   //  GETTERS/SETTERS
+    //  GETTERS/SETTERS
 
     public GameState getGameState() {
         return gameState;
@@ -238,7 +237,7 @@ public class Building {
 
         boolean validLocation = false;
 
-        if(GameMusic.getNpcAudioClip() != null){
+        if (GameMusic.getNpcAudioClip() != null) {
             GameMusic.getNpcAudioClip().stop();
         }
         if (newLocation == "lose") {
@@ -300,36 +299,27 @@ public class Building {
 
         String playerCurrentLocation = player.getCurrentLocation();
 
-        boolean isValidItem = items.containsKey(item);
+        boolean itemAlreadyAcquired = items.get(item).getAcquired();
+        boolean itemIsAtTheLocation = items.get(item).getLocation()
+            .equals(playerCurrentLocation);
+        boolean npcHasItem = items.get(item).isNpc();
 
-        if (isValidItem) {
-            boolean itemAlreadyAcquired = items.get(item).getAcquired();
-            boolean itemIsAtTheLocation = items.get(item).getLocation()
-                .equals(playerCurrentLocation);
-            boolean npcHasItem = items.get(item).isNpc();
-            if (!itemAlreadyAcquired && itemIsAtTheLocation && !npcHasItem) {
-                //conditionals to check it item has prerequisite
-                if (items.get(item).getPreReq() == null) {
+        if (!itemAlreadyAcquired && itemIsAtTheLocation && !npcHasItem) {
+            //conditionals to check it item has prerequisite
+            if (items.get(item).getPreReq() == null) {
 
-                    //conditional to check for challenge
-                    if (items.get(item).getChallenge()) {
+                //conditional to check for challenge
+                if (items.get(item).getChallenge()) {
+                    runItemChallenge(item);
 
-                        runItemChallenge(item);
-                        if(items.get(item).getAcquired()){
-                            building.get(playerCurrentLocation).setItem(null);
-                        }
-
-                    } else {
-                        player.addToInventory(item);
-                        GameMusic.playItemSound();
-                        items.get(item).setAcquired(true);
-                        building.get(playerCurrentLocation).setItem(null);
-                    }
                 } else {
-                    checkItemPreReqIsFulfilled(item);
+                    player.addToInventory(item);
+                    GameMusic.playItemSound();
+                    items.get(item).setAcquired(true);
+                    building.get(playerCurrentLocation).setItem(null);
                 }
             } else {
-                throw new CantGetItemException();
+                checkItemPreReqIsFulfilled(item);
             }
         } else {
             throw new CantGetItemException();
@@ -377,28 +367,29 @@ public class Building {
     }
 
     private void runItemChallenge(String item) throws InterruptedException {
-        while (!player.getInventory().contains(item)) {
-            String userAnswer = JOptionPane.showInputDialog(items.get(item).getChallengePrompt());
-            if(userAnswer == null){
-                return;
-            }
-            if (items.get(item).getChallengeAnswer().equalsIgnoreCase(userAnswer.trim())) {
-                player.addToInventory(item);
-                items.get(item).setAcquired(true);
-                items.get(item).setChallenge(false);
-                GameMusic.playPhoneUnlockingSound();
-                GameMusic.playItemSound();
-            }
-            else {
-                int response = JOptionPane.showConfirmDialog(null,"Would you like to try again?","Confirm",JOptionPane.YES_NO_OPTION);
 
-                if (response == JOptionPane.YES_OPTION){
-                    runItemChallenge(item);
-
-                }else return;
-
-            }
+        String userAnswer = JOptionPane.showInputDialog(items.get(item).getChallengePrompt());
+        if (userAnswer == null) {
+            return;
         }
+        if (items.get(item).getChallengeAnswer().equalsIgnoreCase(userAnswer.trim())) {
+            player.addToInventory(item);
+            items.get(item).setAcquired(true);
+            items.get(item).setChallenge(false);
+            GameMusic.playPhoneUnlockingSound();
+            GameMusic.playItemSound();
+        } else {
+            int response = JOptionPane.showConfirmDialog(null,
+                "Wrong answer, would you like to try again?",
+                "Confirm", JOptionPane.YES_NO_OPTION);
+
+            if (response == JOptionPane.YES_OPTION) {
+                runItemChallenge(item);
+
+            }
+
+        }
+        
     }
 
 
@@ -458,7 +449,7 @@ public class Building {
     }
 
     public String interactWithNpc(String npcName) {
-        if(GameMusic.getNpcAudioClip() != null){
+        if (GameMusic.getNpcAudioClip() != null) {
             GameMusic.getNpcAudioClip().stop();
         }
         String response = null;

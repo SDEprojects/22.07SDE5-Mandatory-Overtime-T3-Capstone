@@ -8,7 +8,12 @@
     "itemsDropped": "keyfob",
     "prereq" : "raisinets",
     "dialogueQuestDone" : "\nGo away youngin... I'm busy and have no more business with you!\n",
-    "interactionCount" : 0
+    "interactionCount" : 0,
+    "initialAudio": "roy1.wav",
+    "audioNoItem": "roy2.wav",
+    "audioWithItem": "roy3.wav",
+    "audioQuestDone": "roy4.wav"
+
   },
   {
     "NpcName": "brenda",
@@ -19,7 +24,11 @@
     "itemsDropped": "code",
     "prereq" : "cake",
     "dialogueQuestDone" : "\nThanks for the bringing the cake again, I only meant a little bit of what I said earlier, these parties can be stressful to organize sometimes. Have a nice rest of your day!\n",
-    "interactionCount" : 0
+    "interactionCount" : 0,
+    "initialAudio": "brenda1.wav",
+    "audioNoItem": "brenda2.wav",
+    "audioWithItem": "brenda3.wav",
+    "audioQuestDone": "brenda4.wav"
   },
   {
     "NpcName": "danny",

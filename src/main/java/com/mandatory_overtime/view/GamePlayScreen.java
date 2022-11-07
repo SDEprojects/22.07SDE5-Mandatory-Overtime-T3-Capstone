@@ -1,8 +1,5 @@
 package com.mandatory_overtime.view;
 
-
-
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -21,26 +18,22 @@ import javax.swing.JLayeredPane;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class GamePlayScreen {
-
     private static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
     private LocationGUIPanel locationGUIPanel;
-
     private Consumer<String> moveListener;
     private final JLayeredPane gameScreen = new JLayeredPane();
     private final JPanel gameTextContainer = new JPanel();
-
     private final JPanel locationContainer = new JPanel();
     private final JPanel gameInfoContainer = new JPanel();
     private final JPanel inventoryContainer = new JPanel();
-
     private final JMenuBar menu = MenuBar.getMenuBar();
 
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
-
 
     public GamePlayScreen(HashMap locations, HashMap items) throws IOException {
         buildLocationGUI(locations, items);
@@ -67,23 +60,24 @@ public class GamePlayScreen {
         gameInfoText.setBounds(10, 20, 400, 20);
         JPanel buttonPanel = new JPanel();
         gameInfoContainer.setLayout(null);
-        // gameInfo.setBackground(Color.GRAY);
 
         gameInfoContainer.setBounds(1100, 150, 375, 145);
 
         gameInfoContainer.add(gameInfoText);
-
+        Border blackBorder = new LineBorder(Color.BLACK, 3);
         // GAME INFO BORDER
-        // TitledBorder gameInfoBorder = BorderFactory.createTitledBorder("GAME INFORMATION");
-        // gameInfoBorder.setTitleJustification(TitledBorder.CENTER);
-        Border gameInfoBorder = BorderFactory.createStrokeBorder(new BasicStroke(5.0f));
+         TitledBorder gameInfoBorder = BorderFactory.createTitledBorder(blackBorder, "   EXITS   ");
+         gameInfoBorder.setTitleJustification(TitledBorder.CENTER);
+         gameInfoBorder.setTitleColor(Color.BLACK);
+         // Border gameInfoBorder = BorderFactory.createStrokeBorder(new BasicStroke(5.0f));
         gameInfoContainer.setBorder(gameInfoBorder);
 
         // Border
-        TitledBorder inventoryBorder = BorderFactory.createTitledBorder("INVENTORY");
+
+        TitledBorder inventoryBorder = BorderFactory.createTitledBorder(blackBorder ,"  INVENTORY  ");
         inventoryBorder.setTitleJustification(TitledBorder.CENTER);
         inventoryContainer.setBorder(inventoryBorder);
-        inventoryContainer.setBackground(Color.LIGHT_GRAY);
+        //inventoryContainer.setBackground(Color.LIGHT_GRAY);
         inventoryContainer.setBounds(1100, 300, 375, 450);
 
         // ADD ALL TO GAMESCREEN
@@ -97,7 +91,6 @@ public class GamePlayScreen {
         gameScreen.setLayer(inventoryContainer, 0);
         gameScreen.setLayer(locationContainer, 1);
         gameScreen.setLayer(menu, 3);
-
     }
 
     public JLayeredPane getGameScreen() {
@@ -109,11 +102,13 @@ public class GamePlayScreen {
 
         Component[] comp = LOCATION_GUI_PANELS.get(location).getComponents();
 
-        for (int i = 0; i < comp.length; i++) {
-            if (comp[i] instanceof JButton && ((JButton) comp[i]).getActionCommand()
-                .equals(removedItem)) {
-                LOCATION_GUI_PANELS.get(location).remove(i);
-                break;
+        if (removedItem != null) {
+            for (int i = 0; i < comp.length; i++) {
+                if (comp[i] instanceof JButton && ((JButton) comp[i]).getActionCommand()
+                    .equals(removedItem)) {
+                    LOCATION_GUI_PANELS.get(location).remove(i);
+                    break;
+                }
             }
         }
 
@@ -140,7 +135,7 @@ public class GamePlayScreen {
         locationContainer.repaint();
 
         // UPDATE GAME INFO SECTION
-        gameInfoText.setText("Current Location:\t    " + location.toUpperCase());
+      //  gameInfoText.setText("EXITS");
         gameInfoContainer.add(gameInfoText);
         gameInfoContainer.revalidate();
         gameInfoContainer.repaint();
@@ -164,7 +159,6 @@ public class GamePlayScreen {
                     btn.setBounds(x, 50, 100, 30);
                     gameInfoContainer.add(btn);
                 }
-
             }
         }
         gameInfoContainer.revalidate();
@@ -194,20 +188,19 @@ public class GamePlayScreen {
         gameScreen.setLayer(gameTextContainer, 2);
         gameScreen.setLayer(inventoryContainer, 0);
         gameScreen.setLayer(locationContainer, 1);
-        // gameScreen.setLayer(settingsBar, 3);
-
     }
 
 
     public void buildLocationGUI(HashMap locations, HashMap items) {
         locationGUIPanel = new LocationGUIPanel(locations, items);
-        LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels();
+        LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels() ;
     }
 
 
     public LocationGUIPanel getLocationGUIPanel() {
         return locationGUIPanel;
     }
+
 
     public void setMoveListener(Consumer<String> listener) {
         moveListener = listener;

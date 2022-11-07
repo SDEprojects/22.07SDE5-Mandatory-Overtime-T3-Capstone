@@ -5,6 +5,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -17,17 +18,16 @@ public final class MenuBar extends JMenuBar {
     private final GameInfo gameInfoDialog = new GameInfo();
     private final HelpMenu helpDialog = new HelpMenu();
     private static final JButton settings = new JButton("Settings");
-    private final JButton help = new JButton("   Help   ");
-    private static final JButton quit = new JButton("Quit   ");
+    private static final JButton quit = new JButton("Quit To Main  ");
     private static final JMenu spacer = new JMenu("|");
     private static final JMenu spacer2 = new JMenu("|");
     private static final JButton save = new JButton("Save");
 
     private static final JButton map = new JButton("Map");
-    private final JButton gameInfo = new JButton("Game Info");
 
-    private static JButton godMode = new JButton("God Mode");
+    private static final JButton godMode = new JButton("God Mode");
 
+    private static final JLabel timerLabel = new JLabel();
     private Runnable saveAction;
 
     private Runnable quitAction;
@@ -45,6 +45,12 @@ public final class MenuBar extends JMenuBar {
         settings.setForeground(Color.white);
         settings.addActionListener(e -> settingsDialog.openMenu());
 
+        timerLabel.setForeground(Color.ORANGE);
+        timerLabel.setFont(new Font("arial narrow", Font.BOLD, 15));
+        timerLabel.setBounds(60, 0, 100, 100);
+
+
+        JButton help = new JButton("   Help   ");
         help.setBorderPainted(false);
         help.setContentAreaFilled(false);
         help.setFocusPainted(false);
@@ -55,6 +61,7 @@ public final class MenuBar extends JMenuBar {
 
         help.addActionListener(e -> helpDialog.openHelpMenu());
 
+        JButton gameInfo = new JButton("Game Info");
         gameInfo.setBorderPainted(false);
         gameInfo.setContentAreaFilled(false);
         gameInfo.setFocusPainted(false);
@@ -125,6 +132,8 @@ public final class MenuBar extends JMenuBar {
         MENU_BAR.add(spacer2).setEnabled(false);
         MENU_BAR.add(godMode);
         MENU_BAR.add(Box.createHorizontalGlue());
+        MENU_BAR.add(timerLabel);
+        MENU_BAR.add(Box.createHorizontalGlue());
         MENU_BAR.add(quit);
 
     }
@@ -174,4 +183,13 @@ public final class MenuBar extends JMenuBar {
     public SettingsMenu getSettingsDialog() {
         return settingsDialog;
     }
+
+    public void presentGameInfo(){
+        gameInfoDialog.openGameInfoMenu();
+    }
+
+    public static JLabel getTimerLabel(){
+        return timerLabel;
+    }
+
 }

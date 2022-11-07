@@ -5,6 +5,7 @@ import com.mandatory_overtime.model.Room;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 
 public class GuiView {
@@ -25,10 +28,11 @@ public class GuiView {
     private final MainMenu mainMenu = new MainMenu();
     private GamePlayScreen gamePlayScreen;
 
-    private JPanel panel = new JPanel();
+    private final LevelSelectionPanel gameStartPanel = new LevelSelectionPanel();
 
 
     public GuiView(){
+
         JFrame frame = new JFrame("Mandatory Overtime");
         frame.setPreferredSize(new Dimension(1500, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,13 +44,11 @@ public class GuiView {
 
     public void presentGameScreen(){
      //   presentLoadingScreen();
-
         JLayeredPane screen = gamePlayScreen.getGameScreen();
         container.removeAll();
         container.add(screen);
         container.repaint();
         container.revalidate();
-
     }
 
     public void presentMainMenu(){
@@ -64,12 +66,10 @@ public class GuiView {
         container.repaint();
         container.revalidate();
         MainMenu.loadProgressBar();
-
     }
 
     public void setUpGamePlay(HashMap locations, HashMap items) throws IOException {
         gamePlayScreen =new GamePlayScreen(locations, items);
-
     }
 
     public JButton getNewGameButton(){
@@ -80,14 +80,13 @@ public class GuiView {
         return MainMenu.getLoadBtn();
     }
 
-
     public void updateGameScreen(String location, List<String> inventory,String message, String[] directions,
          String removedItem){
         gamePlayScreen.updateGamePlayScreen(location, inventory,message,directions, removedItem);
     }
 
     public void setMoveConsumer(Consumer<String> listener) {
-        gamePlayScreen.setMoveListener(roomName -> listener.accept(roomName));
+        gamePlayScreen.setMoveListener(listener);
     }
 
     public GamePlayScreen getGamePlayScreen() {
@@ -104,5 +103,21 @@ public class GuiView {
 
     public MenuBar getMenuBar() {
         return menuBar;
+    }
+
+    public JPanel getGameStartPanel(){
+        return gameStartPanel.getLevelSelection();
+    }
+
+    public String getSelectedButton(){
+        return gameStartPanel.getSelectedButton();
+    }
+
+    public JTextField getNameTextField(){
+        return gameStartPanel.getNameInput();
+    }
+
+    public void presentGameInfo(){
+        menuBar.presentGameInfo();
     }
 }

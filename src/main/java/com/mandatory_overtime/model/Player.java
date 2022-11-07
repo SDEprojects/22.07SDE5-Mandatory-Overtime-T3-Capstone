@@ -12,9 +12,10 @@ public class Player {
   private String name;
   private String currentLocation = "office";
   private int failCount;
-//  private Timer timer = new Timer();
 
+  private int secondsRemaining;
 
+  private int minutesRemaining;
 
   public List<String> getInventory() {
     return inventory;
@@ -48,13 +49,21 @@ public class Player {
     this.failCount = failCount;
   }
 
-//  public Timer getTimer() {
-//    return timer;
-//  }
-//
-//  public void setTimer(Timer timer) {
-//    this.timer = timer;
-//  }
+  public int getSecondsRemaining() {
+    return secondsRemaining;
+  }
+
+  public void setSecondsRemaining(int secondsRemaining) {
+    this.secondsRemaining = secondsRemaining;
+  }
+
+  public int getMinutesRemaining() {
+    return minutesRemaining;
+  }
+
+  public void setMinutesRemaining(int minutesRemaining) {
+    this.minutesRemaining = minutesRemaining;
+  }
 
   /**
    * Adds to inventory for Player
@@ -73,6 +82,4 @@ public class Player {
   public void removeFromInventory(String item){
     inventory.remove(item);
   }
-
-
 }

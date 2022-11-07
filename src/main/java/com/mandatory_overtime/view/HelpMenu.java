@@ -2,78 +2,57 @@ package com.mandatory_overtime.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 public class HelpMenu {
 
+    final UserView helpView = new UserView();
+    private static JDialog helpDialog = new JDialog();
 
-  //Creates and instance of the UserView class.
-  UserView helpView = new UserView();
+    private final JLayeredPane helpMenu = new JLayeredPane();
 
+    private JLabel imgBackground;
 
-  private JDialog helpDialog;
+    private final JLabel helpText = new JLabel();
 
-  public HelpMenu() {
-    buidlHelpmenu();
-  }
-
-  public void openHelpMenu() {
-    helpDialog.setVisible(true);
-
-  }
-
-  private JTextAreaPlus gameCommandLabel;
-  // private JTextArea gameInstructionsLabel;
-
-  private void buidlHelpmenu() {
-
-    helpDialog = new JDialog(new JFrame(), true);
-    helpDialog.setTitle("Help");
-    helpDialog.setBounds(500, 100, 580, 500);
-
-    JPanel helpMenu= new JPanel(new GridLayout(1, 0));
-
-
-    gameCommandLabel = new JTextAreaPlus();
-
-    //grabs text from UserView class and sets it to a TextArea
-    //gameCommandLabel.setBackground(Color.cyan);
-    ImageIcon icon;
-    try (InputStream helpMenuImage = getClass().getResourceAsStream("/images/help3.png")) {
-      icon = new ImageIcon(ImageIO.read(helpMenuImage));
-
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    public HelpMenu() {
+        buildHelpMenu();
     }
-    gameCommandLabel.setImage(icon);
-    gameCommandLabel.setText(helpView.showHelp());
 
-    //prevents the TextArea from being editable
-    gameCommandLabel.setEditable(false);
+    public void buildHelpMenu() {
+        helpDialog = new JDialog(new javax.swing.JFrame(), true);
+        helpDialog.setTitle("Help");
+        helpDialog.setBounds(500, 100, 700, 525);
 
-    gameCommandLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        try {
+            InputStream stream = getClass().getResourceAsStream("/images/helpMenu.png");
+            ImageIcon img = new ImageIcon(ImageIO.read(stream));
+            imgBackground = new JLabel(img);
+            imgBackground.setSize(700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            helpText.setText("<html>"+helpView.showHelp2()+"</html>");
+            helpText.setBounds(30, 30, 650,500);
+            helpText.setFont(new Font("Serif", Font.PLAIN, 18));
+            helpText.setForeground(Color.WHITE);
 
-    gameCommandLabel.setForeground(Color.white);
-    gameCommandLabel.setLineWrap(true);
-    gameCommandLabel.setWrapStyleWord(true);
+            helpMenu.add(imgBackground);
+            helpMenu.add(helpText);
 
-    helpMenu.add(gameCommandLabel);
+            helpMenu.setLayer(imgBackground,0);
 
-    helpDialog.add(helpMenu);
+            helpDialog.add(helpMenu);
+        }
+    }
 
-
-
-  }
-
-
-
+    public void openHelpMenu() {
+        helpDialog.setVisible(true);
+    }
 }

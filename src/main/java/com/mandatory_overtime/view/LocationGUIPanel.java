@@ -2,6 +2,7 @@ package com.mandatory_overtime.view;
 
 import com.mandatory_overtime.model.Item;
 import com.mandatory_overtime.model.Room;
+import java.awt.Cursor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -67,7 +68,7 @@ public class LocationGUIPanel {
             locationImage.setSize(1100, 700);
 
             // ADDS LOCATION ITEM BUTTON
-            if (gameItems.get(itemName) != null) {
+            if (gameItems.get(itemName) != null && !gameItems.get(itemName).getAcquired()) {
                 JButton itemButton = createItemButton(gameItems.get(itemName));
                 pane.add(itemButton);
             }
@@ -140,6 +141,7 @@ public class LocationGUIPanel {
             elevatorBtn_1.setFocusPainted(false);
             elevatorBtn_1.setContentAreaFilled(false);
             elevatorBtn_1.setBorder(null);
+            elevatorBtn_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             elevatorBtn_1.setToolTipText("Click to go To level 1");
             elevatorBtn_1.addActionListener(e -> {
                 moveLocationListener.accept(buttonSelection);
@@ -152,6 +154,7 @@ public class LocationGUIPanel {
             elevatorBtn_2.setFocusPainted(false);
             elevatorBtn_2.setContentAreaFilled(false);
             elevatorBtn_2.setBorder(null);
+            elevatorBtn_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             elevatorBtn_2.setToolTipText("Click to go To level 2");
             elevatorBtn_2.addActionListener(e -> {
                 moveLocationListener.accept(buttonSelection);
@@ -164,6 +167,7 @@ public class LocationGUIPanel {
             elevatorBtn_3.setFocusPainted(false);
             elevatorBtn_3.setContentAreaFilled(false);
             elevatorBtn_3.setBorder(null);
+            elevatorBtn_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             elevatorBtn_3.setToolTipText("Click to go To level 3");
             elevatorBtn_3.addActionListener(e -> {
                 moveLocationListener.accept(buttonSelection);
@@ -176,6 +180,7 @@ public class LocationGUIPanel {
             elevatorBtn_4.setFocusPainted(false);
             elevatorBtn_4.setContentAreaFilled(false);
             elevatorBtn_4.setBorder(null);
+            elevatorBtn_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             elevatorBtn_4.setToolTipText("Click to go To level 4");
             elevatorBtn_4.addActionListener(e -> {
                 moveLocationListener.accept(buttonSelection);
@@ -188,6 +193,7 @@ public class LocationGUIPanel {
             elevatorBtn_5.setFocusPainted(false);
             elevatorBtn_5.setContentAreaFilled(false);
             elevatorBtn_5.setBorder(null);
+            elevatorBtn_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             elevatorBtn_5.setToolTipText("Click to go To level 5");
             elevatorBtn_5.addActionListener(e -> {
                 moveLocationListener.accept(buttonSelection);
@@ -224,6 +230,8 @@ public class LocationGUIPanel {
             itemButton.setActionCommand(item.getName());
             itemButton.setFocusPainted(false);
             itemButton.setContentAreaFilled(false);
+            itemButton.setBorderPainted(false);
+            itemButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             itemButton.setBounds(cords[0], cords[1], cords[2], cords[3]);
             itemButton.setToolTipText(item.getPurpose());
             itemButton.addActionListener(e -> {
@@ -250,6 +258,7 @@ public class LocationGUIPanel {
             btn.setContentAreaFilled(false);
             btn.setBounds(coords[0], coords[1], coords[2], coords[3]);
             btn.setToolTipText(room.getNPC());
+            btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             btn.addActionListener(e -> {
                 npcListener.accept(room.getNPC());
 
@@ -259,6 +268,7 @@ public class LocationGUIPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        btn.setBorderPainted(false);
         return btn;
     }
 

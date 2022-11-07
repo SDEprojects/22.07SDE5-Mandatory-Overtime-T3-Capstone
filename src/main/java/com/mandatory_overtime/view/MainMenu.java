@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class MainMenu {
-
     private static final JMenuBar menuBar = MenuBar.getMenuBar();
     private static JLayeredPane homeScreen;
     private static JLayeredPane loadingScreen;
@@ -67,12 +66,14 @@ public class MainMenu {
         startBtn.setBounds(500, 575, 225, 75);
         startBtn.setFocusPainted(false);
         startBtn.setContentAreaFilled(false);
+        startBtn.setBorderPainted(false);
 
         // Load Game Button
         loadBtn = new JButton(loadButtonImage);
         loadBtn.setBounds(825, 575, 225, 75);
         loadBtn.setFocusPainted(false);
         loadBtn.setContentAreaFilled(false);
+        loadBtn.setBorderPainted(false);
 
         homeScreen.add(MenuBar.getMenuBar(), Integer.valueOf(1));
         homeScreen.add(imageSection, Integer.valueOf(0));
@@ -131,7 +132,4 @@ public class MainMenu {
             counter += 1;
         }
     }
-
-
-
 }

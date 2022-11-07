@@ -131,7 +131,7 @@ public class GUIController {
                 String description = building.getBuilding().get(currentLocation).getDescription();
                 String item = building.getBuilding().get(currentLocation).getItem();
                 message = stringMessages.gameStatus(currentLocation, description, item);
-                if (currentLocation.equals("home")) {
+                if (currentLocation.equals("home") || currentLocation.equals("lose")) {
                     timer.stop();
                 }
                 updateGameView();

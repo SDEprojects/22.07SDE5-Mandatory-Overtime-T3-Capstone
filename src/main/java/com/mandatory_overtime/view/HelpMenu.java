@@ -1,7 +1,5 @@
 package com.mandatory_overtime.view;
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
@@ -11,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-
 
 public class HelpMenu {
 
@@ -51,16 +48,11 @@ public class HelpMenu {
 
             helpMenu.setLayer(imgBackground,0);
 
-
             helpDialog.add(helpMenu);
         }
-
     }
 
     public void openHelpMenu() {
         helpDialog.setVisible(true);
-
     }
-
-
 }

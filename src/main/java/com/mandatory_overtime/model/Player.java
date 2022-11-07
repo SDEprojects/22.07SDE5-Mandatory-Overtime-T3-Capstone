@@ -17,8 +17,6 @@ public class Player {
 
   private int minutesRemaining;
 
-
-
   public List<String> getInventory() {
     return inventory;
   }
@@ -84,6 +82,4 @@ public class Player {
   public void removeFromInventory(String item){
     inventory.remove(item);
   }
-
-
 }

@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class MainMenu {
-
     private static final JMenuBar menuBar = MenuBar.getMenuBar();
     private static JLayeredPane homeScreen;
     private static JLayeredPane loadingScreen;
@@ -133,7 +132,4 @@ public class MainMenu {
             counter += 1;
         }
     }
-
-
-
 }

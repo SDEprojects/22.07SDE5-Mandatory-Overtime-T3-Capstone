@@ -50,13 +50,9 @@ public class GameInfo {
 
             gameInfoDialog.add(gameInfoMenu);
         }
-
     }
 
     public void openGameInfoMenu() {
         gameInfoDialog.setVisible(true);
-
     }
-
-
 }

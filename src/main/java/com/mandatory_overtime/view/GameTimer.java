@@ -7,7 +7,6 @@ import javax.swing.Timer;
 
 public class GameTimer {
 
-
     Timer timer;
     DecimalFormat format = new DecimalFormat("00");
     private String doubleDigitSeconds;
@@ -41,7 +40,6 @@ public class GameTimer {
                 MenuBar.getTimerLabel().setText(String.format(TIMER_STATUS, doubleDigitMinutes,doubleDigitSeconds));
                 loseAction.run();
             }
-
         });
     }
 
@@ -53,15 +51,12 @@ public class GameTimer {
     public int getSeconds() {
         return seconds;
     }
-
-
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
     public int getMinutes() {
         return minutes;
     }
-
     public boolean getTimeUp(){
         return timeUp;
     }
@@ -71,7 +66,6 @@ public class GameTimer {
     public void stop(){
         timer.stop();
     }
-
 
     public void setLoseAction(Runnable loseAction) {
         this.loseAction = loseAction;

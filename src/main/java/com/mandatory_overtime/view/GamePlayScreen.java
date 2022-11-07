@@ -1,8 +1,5 @@
 package com.mandatory_overtime.view;
 
-
-
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -25,23 +22,18 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class GamePlayScreen {
-
     private static Map<String, JLayeredPane> LOCATION_GUI_PANELS;
     private LocationGUIPanel locationGUIPanel;
-
     private Consumer<String> moveListener;
     private final JLayeredPane gameScreen = new JLayeredPane();
     private final JPanel gameTextContainer = new JPanel();
-
     private final JPanel locationContainer = new JPanel();
     private final JPanel gameInfoContainer = new JPanel();
     private final JPanel inventoryContainer = new JPanel();
-
     private final JMenuBar menu = MenuBar.getMenuBar();
 
     JLabel gameMessage = new JLabel();
     JLabel gameInfoText = new JLabel();
-
 
     public GamePlayScreen(HashMap locations, HashMap items) throws IOException {
         buildLocationGUI(locations, items);
@@ -68,7 +60,6 @@ public class GamePlayScreen {
         gameInfoText.setBounds(10, 20, 400, 20);
         JPanel buttonPanel = new JPanel();
         gameInfoContainer.setLayout(null);
-
 
         gameInfoContainer.setBounds(1100, 150, 375, 145);
 
@@ -100,7 +91,6 @@ public class GamePlayScreen {
         gameScreen.setLayer(inventoryContainer, 0);
         gameScreen.setLayer(locationContainer, 1);
         gameScreen.setLayer(menu, 3);
-
     }
 
     public JLayeredPane getGameScreen() {
@@ -169,7 +159,6 @@ public class GamePlayScreen {
                     btn.setBounds(x, 50, 100, 30);
                     gameInfoContainer.add(btn);
                 }
-
             }
         }
         gameInfoContainer.revalidate();
@@ -199,14 +188,12 @@ public class GamePlayScreen {
         gameScreen.setLayer(gameTextContainer, 2);
         gameScreen.setLayer(inventoryContainer, 0);
         gameScreen.setLayer(locationContainer, 1);
-
     }
 
 
     public void buildLocationGUI(HashMap locations, HashMap items) {
         locationGUIPanel = new LocationGUIPanel(locations, items);
         LOCATION_GUI_PANELS = locationGUIPanel.getLocationsGuiPanels() ;
-
     }
 
 

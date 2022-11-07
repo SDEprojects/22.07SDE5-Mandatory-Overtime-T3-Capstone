@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 
 public class LevelSelectionPanel {
 
-
     public static final String ENTER_YOUR_NAME = "Enter Your Name";
     public static final String SELECT_YOUR_DIFFICULTY = "Select Your Difficulty";
     public static final String EASY = "easy";
@@ -69,7 +68,6 @@ public class LevelSelectionPanel {
         levelSelection.add(difficultyLabel);
         levelSelection.add(easyBtn);
         levelSelection.add(hardBtn);
-
     }
 
     public JPanel getLevelSelection() {
@@ -83,6 +81,4 @@ public class LevelSelectionPanel {
     public String getSelectedButton() {
         return selectedButton;
     }
-
-
 }

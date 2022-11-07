@@ -47,18 +47,18 @@ public class Building {
         List<Room> rooms;
         setGameState(GameState.IN_PROGRESS);
         if (difficulty.equals("hard")) {
-            rooms = load("RoomStructure_Hard.json", gson, new TypeToken<ArrayList<Room>>() {
+            rooms = load("json/RoomStructure_Hard.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
 
         } else {
-            rooms = load("RoomStructure.json", gson, new TypeToken<ArrayList<Room>>() {
+            rooms = load("json/RoomStructure.json", gson, new TypeToken<ArrayList<Room>>() {
             }.getType());
         }
 
-        List<Item> itemArray = load("ItemStructure.json", gson, new TypeToken<ArrayList<Item>>() {
+        List<Item> itemArray = load("json/ItemStructure.json", gson, new TypeToken<ArrayList<Item>>() {
         }.getType());
 
-        List<Npc> npcsArray = load("NPCStructure.json", gson, new TypeToken<ArrayList<Npc>>() {
+        List<Npc> npcsArray = load("json/NPCStructure.json", gson, new TypeToken<ArrayList<Npc>>() {
         }.getType());
 
         building = (HashMap<String, Room>) rooms.stream().collect(

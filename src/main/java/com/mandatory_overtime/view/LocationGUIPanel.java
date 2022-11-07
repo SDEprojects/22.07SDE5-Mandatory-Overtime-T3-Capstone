@@ -68,7 +68,7 @@ public class LocationGUIPanel {
             locationImage.setSize(1100, 700);
 
             // ADDS LOCATION ITEM BUTTON
-            if (gameItems.get(itemName) != null) {
+            if (gameItems.get(itemName) != null && !gameItems.get(itemName).getAcquired()) {
                 JButton itemButton = createItemButton(gameItems.get(itemName));
                 pane.add(itemButton);
             }

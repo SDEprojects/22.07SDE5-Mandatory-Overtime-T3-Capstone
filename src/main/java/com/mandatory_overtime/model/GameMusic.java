@@ -41,7 +41,7 @@ public class GameMusic {
     public static void playAudioFX(String soundFile) {
 
         try {
-            URL audio = GameMusic.class.getResource("/" + soundFile);
+            URL audio = GameMusic.class.getResource("/sound/" + soundFile);
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(audio);
             soundClip = AudioSystem.getClip();
             soundClip.open(audioInput);
@@ -98,7 +98,7 @@ public class GameMusic {
     }
 
     public static void startBackgroundMusic() {
-        playAudioMusic("Spooky_Music.wav");
+        playAudioMusic("sound/Spooky_Music.wav");
         FloatControl gainControl =
             (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(-15.0f);
@@ -182,7 +182,7 @@ public class GameMusic {
     public static void playNPCSound(String npcSound) {
 
         try {
-            URL audio = GameMusic.class.getResource("/" + npcSound);
+            URL audio = GameMusic.class.getResource("/sound/" + npcSound);
             AudioInputStream audioInput = null;
             if (audio != null) {
                 audioInput = AudioSystem.getAudioInputStream(audio);

@@ -51,11 +51,12 @@ public class GUIController {
     public void startNewGame() throws IOException {
         // Create New Building
         building = new Building();
-        int result = JOptionPane.showConfirmDialog(null,view.getGameStartPanel(),"Starting A New Game", JOptionPane.OK_CANCEL_OPTION);
-        if(result == JOptionPane.OK_OPTION){
+        int result = JOptionPane.showConfirmDialog(null, view.getGameStartPanel(),
+            "Starting A New Game", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
             String name = view.getNameTextField().getText();
             String gameLevel = view.getSelectedButton();
-            if(name.isEmpty()){
+            if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please enter a valid name to start game");
                 return;
             }
@@ -127,7 +128,7 @@ public class GUIController {
                 String description = building.getBuilding().get(currentLocation).getDescription();
                 String item = building.getBuilding().get(currentLocation).getItem();
                 message = stringMessages.gameStatus(currentLocation, description, item);
-                if(currentLocation.equals("home")){
+                if (currentLocation.equals("home")) {
                     timer.stop();
                 }
                 updateGameView();
@@ -142,7 +143,7 @@ public class GUIController {
             itemName -> {
                 try {
                     boolean playerPickedUpItem = building.getItem(itemName);
-                    if (playerPickedUpItem){
+                    if (playerPickedUpItem) {
                         removedItem = itemName;
                         message = "You picked up " + itemName;
                     }
@@ -153,7 +154,7 @@ public class GUIController {
                 } catch (MissingRequirementException | CantGetItemException e) {
                     message = e.getMessage();
                 }
-        });
+            });
 
         // INTERACT WITH NPC
         view.getGamePlayScreen().getLocationGUIPanel().setNpcListener(npcName -> {
@@ -190,28 +191,30 @@ public class GUIController {
 
         // QUIT
         view.setQuitListener(() -> {
-                try {
-                    if (!building.getPlayer().getCurrentLocation().equals("home")
-                        && !building.getPlayer().getCurrentLocation().equals("lose")) {
+            try {
+                if (!building.getPlayer().getCurrentLocation().equals("home")
+                    && !building.getPlayer().getCurrentLocation().equals("lose")) {
+                    building.gameSave();
+                    int saveGame = JOptionPane.showConfirmDialog(null,
+                        "Would you like to save the game before quiting?", "Save Progress",
+                        JOptionPane.YES_NO_OPTION);
+                    if (saveGame == JOptionPane.YES_OPTION) {
+                        timer.stop();
+                        building.getPlayer().setMinutesRemaining(timer.getMinutes());
+                        building.getPlayer().setSecondsRemaining(timer.getSeconds());
+
                         building.gameSave();
-                        int saveGame = JOptionPane.showConfirmDialog(null, "Would you like to save the game before quiting?","Save Progress", JOptionPane.YES_NO_OPTION);
-                        if(saveGame == JOptionPane.YES_OPTION){
-                            timer.stop();
-                            building.getPlayer().setMinutesRemaining(timer.getMinutes());
-                            building.getPlayer().setSecondsRemaining(timer.getSeconds());
-
-                            building.gameSave();
-                            JOptionPane.showMessageDialog(null, "Game Saved");
-                        }
-                        MenuBar.getTimerLabel().setVisible(false);
-                        view.presentMainMenu();
-                    } else {
-                        view.presentMainMenu();
+                        JOptionPane.showMessageDialog(null, "Game Saved");
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-
+                    MenuBar.getTimerLabel().setVisible(false);
+                    view.presentMainMenu();
+                } else {
+                    view.presentMainMenu();
                 }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+
+            }
 
         });
 

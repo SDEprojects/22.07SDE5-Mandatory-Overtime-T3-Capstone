@@ -44,13 +44,11 @@ public class GuiView {
 
     public void presentGameScreen(){
      //   presentLoadingScreen();
-
         JLayeredPane screen = gamePlayScreen.getGameScreen();
         container.removeAll();
         container.add(screen);
         container.repaint();
         container.revalidate();
-
     }
 
     public void presentMainMenu(){
@@ -68,12 +66,10 @@ public class GuiView {
         container.repaint();
         container.revalidate();
         MainMenu.loadProgressBar();
-
     }
 
     public void setUpGamePlay(HashMap locations, HashMap items) throws IOException {
         gamePlayScreen =new GamePlayScreen(locations, items);
-
     }
 
     public JButton getNewGameButton(){
@@ -83,7 +79,6 @@ public class GuiView {
     public JButton getLoadGameButton(){
         return MainMenu.getLoadBtn();
     }
-
 
     public void updateGameScreen(String location, List<String> inventory,String message, String[] directions,
          String removedItem){

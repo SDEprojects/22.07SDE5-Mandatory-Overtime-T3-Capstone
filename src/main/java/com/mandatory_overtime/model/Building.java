@@ -123,21 +123,15 @@ public class Building {
 
         //Write Player obj to Json file
         convertSavedPlayerToJson(player, "PlayerSave.json");
-
     }
 
     public void convertSavedPlayerToJson(Player currentPlayer, String filename) throws IOException {
         try {
             File filePath = new File(filename);
-
             Gson gson = new Gson();
-
             Writer writer = new FileWriter(filePath, false);
-
             gson.toJson(currentPlayer, writer);
-
             writer.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JsonIOException e) {
@@ -207,21 +201,11 @@ public class Building {
                 throw new NoSavedGame();
             }
         } else {
-
             throw new FileNotFoundException();
         }
-
     }
 
 //  BUSINESS METHODS
-
-    /**
-     * Ends the game completely
-     */
-    public void quit() {
-        System.exit(0); //Update to utilize state.
-    }
-
 
     public void moveRooms2(String newLocation)
         throws InterruptedException, MissingRequirementException, IllegalMoveException {
@@ -234,8 +218,6 @@ public class Building {
         List<String> inventory = player.getInventory();
 
         String nextRoomPreReq = "";
-
-        boolean validLocation = false;
 
         if (GameMusic.getNpcAudioClip() != null) {
             GameMusic.getNpcAudioClip().stop();
@@ -252,13 +234,10 @@ public class Building {
             if (nextRoomPreReq == null || inventory.contains(nextRoomPreReq)) {
                 for (String direction : directions) {
                     if (newLocation.equals(direction)) {
-                        validLocation = true;
                         player.setCurrentLocation(newLocation);
                         winGameCheck(newLocation);
                         GameMusic.playMoveSound(newLocation);
                         GameMusic.playRoomSound(newLocation);
-                        // TODO: DELETE THIS METHOD
-                        //getRoomDescriptionInfo();
                         break;
                     }
                 }
@@ -270,13 +249,9 @@ public class Building {
                 }
             }
         }
-
-
     }
 
-
     private void winGameCheck(String noun) throws InterruptedException {
-        boolean wonGame = false;
         String preReqCondition = building.get(noun).getPreReq();
         ArrayList<String> currentItems = (ArrayList<String>) player.getInventory();
         Boolean roomFail = building.get(noun).getFailCondition();
@@ -292,7 +267,6 @@ public class Building {
             }
         }
     }
-
 
     public boolean getItem(String item)
         throws IOException, InterruptedException, CantGetItemException {
@@ -341,7 +315,6 @@ public class Building {
                 items.get(itemN).setChallenge(false);
                 items.get(itemN).setNpc(false);
                 items.get(itemN).setPreReq(null);
-
             }
         }
         if (noun.contains("move")) {
@@ -349,7 +322,6 @@ public class Building {
             String loc = newNoun[newNoun.length - 1];
             player.setCurrentLocation(loc);
         }
-
     }
 
     private void checkItemPreReqIsFulfilled(String item) throws InterruptedException {
@@ -362,7 +334,6 @@ public class Building {
             items.get(item).setAcquired(true);
             player.removeFromInventory(
                 items.get(item).getPreReq()); //removes prereq from player inventory
-
         }
     }
 
@@ -385,67 +356,8 @@ public class Building {
 
             if (response == JOptionPane.YES_OPTION) {
                 runItemChallenge(item);
-
             }
-
         }
-        
-    }
-
-
-    public String inspectItem(String item) throws CantGetItemException {
-        //checks if item exists, if location is correct, if item is held by NPC
-
-        if (items.containsKey(item) && items.get(item).getLocation()
-            .equals(player.getCurrentLocation())
-            && !items.get(item).isNpc()) {
-
-            return items.get(item).getPurpose();
-        } else {
-            throw new CantGetItemException();
-        }
-    }
-
-
-    public void getRoomDescriptionInfo() {
-
-        String inventory = player.getInventory().toString();
-        String currentLocation = player.getCurrentLocation();
-        String npc = building.get(currentLocation).getNPC() == null ? "No one is around"
-            : building.get(currentLocation).getNPC();
-        String item = building.get(currentLocation).getItem() == null ? "There are no items"
-            : building.get(currentLocation).getItem();
-        String directions = Arrays.toString(building.get(currentLocation).getDirections());
-        String description = building.get(currentLocation).getDescription() == null ? ""
-            : building.get(currentLocation).getDescription();
-
-        System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-                + "========================================================================================================\n"
-                + "Inventory: %1$s \t\t\t\t\t\t\tCurrent Room: %2$S\n"
-                + "Items in Room: %3$s\n"
-                + "========================================================================================================\n"
-                + "%4$s\n"
-                + "Coworkers in the room: %5$s\n"
-                + "You can go the directions %6$s\n"
-                + "You see the item: %3$s\n"
-                + "========================================================================================================\n",
-            inventory, currentLocation, item, description, npc, directions);
-
-    }
-
-
-    public void startingRoomDescription() {
-        String currentLocation = player.getCurrentLocation();
-        String directions = Arrays.toString(building.get(currentLocation).getDirections());
-        String item = building.get(currentLocation).getItem();
-        System.out.printf(
-            "========================================================================================================\n"
-                + "You are currently at the %1$S\n"
-                + "You see the item, %3$s\n"
-                + "You can go the to %2$s\n"
-                + "========================================================================================================\n",
-            currentLocation, directions, item);
-        System.out.print(">");
     }
 
     public String interactWithNpc(String npcName) {
@@ -493,7 +405,6 @@ public class Building {
 
     public void setName(String name) {
         player.setName(name);
-
     }
 
     public String getName() {

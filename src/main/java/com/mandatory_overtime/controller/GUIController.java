@@ -36,7 +36,7 @@ public class GUIController {
 
     private final UserView stringMessages = new UserView();
 
-    private final GameTimer timer = new GameTimer();
+    private GameTimer timer;
 
     public GUIController() throws IOException {
         UIManager.put("OptionPane.minimumSize", new Dimension(400, 250));
@@ -51,6 +51,7 @@ public class GUIController {
     public void startNewGame() throws IOException {
         // Create New Building
         building = new Building();
+        timer = new GameTimer();
         int result = JOptionPane.showConfirmDialog(null, view.getGameStartPanel(),
             "Starting A New Game", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
@@ -62,6 +63,7 @@ public class GUIController {
             }
             int gameTime = gameLevel.equals("easy") ? EASY_GAME_TIME : HARD_GAME_TIME;
             timer.setMinutes(gameTime);
+            timer.setSeconds(0);
             building.createGameStructureFromNew(gameLevel);
             building.setName(name);
             view.presentGameInfo();
@@ -74,6 +76,7 @@ public class GUIController {
     public void loadGame() throws IOException {
         try {
             building = new Building();
+            timer = new GameTimer();
             building.createGameStructureFromSave();
             timer.setMinutes(building.getPlayer().getMinutesRemaining());
             timer.setSeconds(building.getPlayer().getSecondsRemaining());
@@ -206,6 +209,7 @@ public class GUIController {
                         building.gameSave();
                         JOptionPane.showMessageDialog(null, "Game Saved");
                     }
+                    timer.stop();
                     MenuBar.getTimerLabel().setVisible(false);
                     view.presentMainMenu();
                 } else {

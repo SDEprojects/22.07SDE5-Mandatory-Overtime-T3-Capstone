@@ -20,6 +20,7 @@ public class GameTimer {
     private final static String TIMER_STATUS= "Timer -  %s : %s";
 
     public GameTimer(){
+        MenuBar.getTimerLabel().setText("");
         timer = new Timer(1000, e -> {
             timeUp = false;
             seconds--;
